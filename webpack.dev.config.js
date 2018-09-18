@@ -1,9 +1,13 @@
 const path = require('path');
+const webpack = require("webpack")
 
 module.exports = {
  
     /*入口*/
-    entry: path.join(__dirname, 'src/index.js'),
+    entry:[
+        'react-hot-loader/patch',
+        path.join(__dirname, 'src/index.js')
+    ] ,
     
     /*输出到dist文件夹，输出文件名字为bundle.js*/
     output: {
@@ -21,6 +25,11 @@ module.exports = {
 
     devServer: {
         contentBase: path.join(__dirname, './dist'),
-        historyApiFallback: true
-    }
+        historyApiFallback: true,
+        hot:true
+    },
+
+    plugins:[
+        new webpack.HotModuleReplacementPlugin()
+   ]
 };
