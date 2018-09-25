@@ -2,11 +2,6 @@ const path = require('path');
 const webpack = require("webpack")
 
 var HtmlWebpackPlugin = require('html-webpack-plugin');
-
-const CleanWebpackPlugin = require('clean-webpack-plugin');
-
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
-
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
@@ -14,7 +9,6 @@ module.exports = {
     /*入口*/
     entry:{
         app:[
-            'react-hot-loader/patch',
             path.join(__dirname, 'src/index.js')
         ] ,
         vendor: ['react', 'react-router-dom', 'redux', 'react-dom', 'react-redux']
@@ -24,7 +18,8 @@ module.exports = {
     output: {
         path: path.join(__dirname, './dist'),
         filename: '[name].[chunkhash].js',
-        chunkFilename: '[name].[chunkhash].js'
+        chunkFilename: '[name].[chunkhash].js',
+        publicPath: "/"
     },
 
     module: {
@@ -49,27 +44,16 @@ module.exports = {
     },
 
     plugins:[
-        new CleanWebpackPlugin(['dist']),
         new HtmlWebpackPlugin({
             filename: 'index.html',
             template: path.join(__dirname, 'src/index.html')
         }),
+        new webpack.HashedModuleIdsPlugin(),
         new webpack.optimize.CommonsChunkPlugin({
             name: 'vendor'
         }),
-        new webpack.optimize.UglifyJsPlugin(),
-        new webpack.DefinePlugin({
-            'process.env': {
-                'NODE_ENV': JSON.stringify('production')
-             }
-         }),
-         new webpack.HashedModuleIdsPlugin(),
-         new webpack.optimize.CommonsChunkPlugin({
+        new webpack.optimize.CommonsChunkPlugin({
             name: 'runtime'
-        }),
-        new ExtractTextPlugin({
-            filename: '[name].[contenthash:5].css',
-            allChunks: true
         }),
         new CopyWebpackPlugin([
             { from: './api', to: 'api' }
@@ -85,7 +69,5 @@ module.exports = {
         reducers: path.join(__dirname, 'src/redux/reducers'),
         reduxs: path.join(__dirname, 'src/redux')
        }
-   },
-
-   devtool: 'cheap-module-source-map'
+   }
 };

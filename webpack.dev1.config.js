@@ -2,11 +2,6 @@ const path = require('path');
 const webpack = require("webpack")
 
 var HtmlWebpackPlugin = require('html-webpack-plugin');
-
-const CleanWebpackPlugin = require('clean-webpack-plugin');
-
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
-
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
@@ -23,7 +18,7 @@ module.exports = {
     /*输出到dist文件夹，输出文件名字为bundle.js*/
     output: {
         path: path.join(__dirname, './dist'),
-        filename: '[name].[chunkhash].js',
+        filename: '[name].[hash].js',
         chunkFilename: '[name].[chunkhash].js'
     },
 
@@ -48,28 +43,20 @@ module.exports = {
         }]
     },
 
+    devServer: {
+        contentBase: path.join(__dirname, './dist'),
+        historyApiFallback: true,
+        hot:true
+    },
+
     plugins:[
-        new CleanWebpackPlugin(['dist']),
+        new webpack.HotModuleReplacementPlugin(),
         new HtmlWebpackPlugin({
             filename: 'index.html',
             template: path.join(__dirname, 'src/index.html')
         }),
         new webpack.optimize.CommonsChunkPlugin({
             name: 'vendor'
-        }),
-        new webpack.optimize.UglifyJsPlugin(),
-        new webpack.DefinePlugin({
-            'process.env': {
-                'NODE_ENV': JSON.stringify('production')
-             }
-         }),
-         new webpack.HashedModuleIdsPlugin(),
-         new webpack.optimize.CommonsChunkPlugin({
-            name: 'runtime'
-        }),
-        new ExtractTextPlugin({
-            filename: '[name].[contenthash:5].css',
-            allChunks: true
         }),
         new CopyWebpackPlugin([
             { from: './api', to: 'api' }
@@ -87,5 +74,5 @@ module.exports = {
        }
    },
 
-   devtool: 'cheap-module-source-map'
+   devtool: 'inline-source-map'
 };
