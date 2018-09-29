@@ -30,7 +30,7 @@ const devConfig =  {
         historyApiFallback: {
             disableDotRule: true   
         },
-        hot:true
+        // hot:true
     },
    devtool: 'inline-source-map'
 };
