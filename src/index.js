@@ -1,64 +1,41 @@
-import React from 'react'
-import { render } from 'react-dom'
+import React from 'react';
+import ReactDom from 'react-dom';
+import {AppContainer} from 'react-hot-loader';
+import {Provider} from 'react-redux';
+import store from './redux/store';
 
-const About = React.createClass({
-    render: function() {
-        return (
-            <div>
-                about
-            </div>
-        );
-    }
-})
-const Inbox = React.createClass({render: function() {
-    return (
-        <div>
-            inbox
-        </div>
-    );
-}})
-const Home = React.createClass({render: function() {
-    return (
-        <div>
-            HOme
-        </div>
-    );
-}})
+import {BrowserRouter as Router} from 'react-router-dom';
+import App from 'components/App/App';
 
-const App = React.createClass({
-  getInitialState() {
-    return {
-      route: window.location.hash.substr(1)
-    }
-  },
+/*初始化*/
+renderWithHotReload(App);
 
-  componentDidMount() {
-    window.addEventListener('hashchange', () => {
-      this.setState({
-        route: window.location.hash.substr(1)
-      })
-    })
-  },
+/*热更新*/
+if (module.hot) {
+    module.hot.accept('components/App/App', () => {
+        const NextApp = require('components/App/App').default;
+        renderWithHotReload(NextApp);
+    });
+}
 
-  render() {
-    let Child
-    switch (this.state.route) {
-      case '/about': Child = About; break;
-      case '/inbox': Child = Inbox; break;
-      default:      Child = Home;
-    }
-
-    return (
-      <div>
-        <h1>App</h1>
-        <ul>
-          <li><a href="#/about">About</a></li>
-          <li><a href="#/inbox">Inbox</a></li>
-        </ul>
-        <Child/>
-      </div>
+function renderWithHotReload(RootElement) {
+    ReactDom.render(
+        <AppContainer>
+            <Provider store={store}>
+               <Router>
+                    <RootElement/>
+               </Router>
+            </Provider>
+        </AppContainer>,
+        document.getElementById('app')
     )
-  }
-})
+}
 
-render(<About />, document.getElementById('app'))
+
+
+// if (module.hot) {
+//     module.hot.accept();
+// }
+
+// ReactDom.render(
+//     getRouter(), document.getElementById('app'));
