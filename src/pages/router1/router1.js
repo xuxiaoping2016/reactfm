@@ -1,67 +1,149 @@
-import React,{Component} from 'react'
-import { render } from 'react-dom'
-import { HashRouter as Router, Route, Link ,Switch} from 'react-router-dom'
+import React from "react";
+import ReactDom from "react-dom"
+import { TransitionGroup, CSSTransition } from "react-transition-group";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  Redirect
+} from "react-router-dom";
 
-// import createHistory from 'history/createHashHistory';
-
-// const history = createHistory();
-
-class About extends Component {
-  render(){
-    return <div>about</div>
-  }
+/* you'll need this CSS somewhere
+.fade-enter {
+  opacity: 0;
+  z-index: 1;
 }
 
+.fade-enter.fade-enter-active {
+  opacity: 1;
+  transition: opacity 250ms ease-in;
+}
+*/
 
-const Message = ({ match }) => (
-  <div>
-    <h3>new messages</h3>
-    <h3>{match.params.id}</h3>
+const AnimationExample = () => (
+  <Router>
+    <Route
+      render={({ location }) => (
+        <div style={styles.fill}>
+          <Route
+            exact
+            path="/"
+            render={() => <Redirect to="/hsl/10/90/50" />}
+          />
+
+          <ul style={styles.nav}>
+            <NavLink to="/hsl/10/90/50">Red</NavLink>
+            <NavLink to="/hsl/120/100/40">Green</NavLink>
+            <NavLink to="/rgb/33/150/243">Blue</NavLink>
+            <NavLink to="/rgb/240/98/146">Pink</NavLink>
+          </ul>
+
+          <div style={styles.content}>
+            <TransitionGroup>
+              {/* no different than other usage of
+                CSSTransition, just make sure to pass
+                `location` to `Switch` so it can match
+                the old location as it animates out
+            */}
+              <CSSTransition key={location.key} classNames="fade" timeout={300}>
+                <Switch location={location}>
+                  <Route exact path="/hsl/:h/:s/:l" component={HSL} />
+                  <Route exact path="/rgb/:r/:g/:b" component={RGB} />
+                  {/* Without this `Route`, we would get errors during
+                    the initial transition from `/` to `/hsl/10/90/50`
+                */}
+                  <Route render={() => <div>Not Found</div>} />
+                </Switch>
+              </CSSTransition>
+            </TransitionGroup>
+          </div>
+        </div>
+      )}
+    />
+  </Router>
+);
+
+const NavLink = props => (
+  <li style={styles.navItem}>
+    <Link {...props} style={{ color: "inherit" }} />
+  </li>
+);
+
+const HSL = ({ match: { params } }) => (
+  <div
+    style={{
+      ...styles.fill,
+      ...styles.hsl,
+      background: `hsl(${params.h}, ${params.s}%, ${params.l}%)`
+    }}
+  >
+    hsl({params.h}, {params.s}%, {params.l}%)
   </div>
+);
+
+const RGB = ({ match: { params } }) => (
+  <div
+    style={{
+      ...styles.fill,
+      ...styles.rgb,
+      background: `rgb(${params.r}, ${params.g}, ${params.b})`
+    }}
+  >
+    rgb({params.r}, {params.g}, {params.b})
+  </div>
+);
+
+const styles = {};
+
+styles.fill = {
+  position: "absolute",
+  left: 0,
+  right: 0,
+  top: 0,
+  bottom: 0
+};
+
+styles.content = {
+  ...styles.fill,
+  top: "40px",
+  textAlign: "center"
+};
+
+styles.nav = {
+  padding: 0,
+  margin: 0,
+  position: "absolute",
+  top: 0,
+  height: "40px",
+  width: "100%",
+  display: "flex"
+};
+
+styles.navItem = {
+  textAlign: "center",
+  flex: 1,
+  listStyleType: "none",
+  padding: "10px"
+};
+
+styles.hsl = {
+  ...styles.fill,
+  color: "white",
+  paddingTop: "20px",
+  fontSize: "30px"
+};
+
+styles.rgb = {
+  ...styles.fill,
+  color: "white",
+  paddingTop: "20px",
+  fontSize: "30px"
+};
+
+
+ReactDom.render(
+  <AnimationExample/>,
+  document.getElementById("app")
 )
 
-class Inbox extends Component {
-  render(){
-    const {match } = this.props
-    console.log(match)
-    return <div>
-      <p>Inbox</p>
-      <Route path={`${match.url}/message/:id`} component={Message}/>
-    </div>
-  }
-}
-
-class Home extends Component {
-  render(){
-    return <div>Home</div>
-  }
-}
-
-
-class App extends Component{
-  render() {
-
-    return (
-      <div>
-        <h1>App</h1>
-        <ul>
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/about">About</Link></li>
-          <li><Link to="/inbox">Inbox</Link></li>
-        </ul>
-        {this.props.children}
-      </div>
-    )
-  }
-}
-
-render(
-  (<Router>
-    <App>
-        <Route exact path="/" component={Home} />
-        <Route path="/about" component={About} />
-        <Route path="/inbox" component={Inbox} />
-    </App>
-  </Router>),
-  document.getElementById('app') 
- )
