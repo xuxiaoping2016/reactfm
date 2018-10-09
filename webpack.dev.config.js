@@ -30,6 +30,7 @@ const devConfig =  {
         historyApiFallback: {
             disableDotRule: true   
         },
+        port:8001
         // hot:true
     },
    devtool: 'inline-source-map'
