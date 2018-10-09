@@ -28,7 +28,7 @@ const devConfig =  {
     devServer: {
         contentBase: path.join(__dirname, './dist'),
         historyApiFallback: true,
-        hot:true
+        // hot:true
     },
    devtool: 'inline-source-map'
 };
