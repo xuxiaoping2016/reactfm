@@ -9,6 +9,7 @@ const devConfig =  {
     entry:{
         app:[
             'react-hot-loader/patch',
+            path.join(__dirname, 'mock/index.js'),
             path.join(__dirname, 'src/index.js')
         ]
     },

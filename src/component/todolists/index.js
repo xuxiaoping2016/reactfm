@@ -8,8 +8,6 @@ class ObservableTodoStore{
     constructor(){
         autorun(()=>{
             console.log(this.report);
- 
- 
         })
     }
     @computed get completedTodosCount() {
@@ -37,6 +35,8 @@ class ObservableTodoStore{
 }
 
 
+const store = new ObservableTodoStore();
+
 
 @observer
 class TodoList extends React.Component {
@@ -45,6 +45,8 @@ class TodoList extends React.Component {
     }
     render(){
         const store = this.props.store;
+        // console.log(store)
+        // console.log(store.todos)
         return(
             <div>
                 {store.report}
@@ -100,7 +102,7 @@ export default class App extends Component {
     render() {
       return (
         <div className="App">
-            <TodoList store={ ObservableTodoStore } />
+            <TodoList store={ store} />
         </div>
       );
     }

@@ -1,8 +1,10 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 import {AppContainer} from 'react-hot-loader';
-import {Provider} from 'react-redux';
-import store from './redux/store';
+import {Provider} from 'mobx-react';
+import AppStore from './store/AppStore'
+
+const storebox = new AppStore();
 
 import getRouter from 'router/router'
 
@@ -20,7 +22,7 @@ if (module.hot) {
 function renderWithHotReload(RootElement) {
     ReactDom.render(
         <AppContainer>
-            <Provider store={store}>
+            <Provider storebox = {storebox}>
                 {RootElement}
             </Provider>
         </AppContainer>,

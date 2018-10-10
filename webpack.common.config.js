@@ -24,13 +24,14 @@ module.exports = {
 
     module: {
         rules: [{
-            test: /\.js$/,
+            test: /\.(js|jsx)$/,
             use: ['babel-loader?cacheDirectory=true'],
             include: path.join(__dirname, 'src')
         },
         {
-            test: /\.css$/,
-            use: ['style-loader', 'css-loader']
+            test: /\.(css|less)$/,
+            use: ['style-loader', 'css-loader',"less-loader"],
+            exclude: [path.resolve(__dirname, 'node_modules')]
          },
          {
             test: /\.(png|jpg|gif)$/,
@@ -61,6 +62,7 @@ module.exports = {
    ],
 
    resolve:{
+    extensions:['.js','.jsx','.json'],
        alias:{
         pages: path.join(__dirname, 'src/pages'),
         component: path.join(__dirname, 'src/component'),
