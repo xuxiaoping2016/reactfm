@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { observer, inject } from 'mobx-react';
 import { Button, Input, Popconfirm } from 'antd';
-// import '../../styles/todo.less';
+import '../../styles/todo.less';
 
 @inject('storebox')
 @observer

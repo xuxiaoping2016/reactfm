@@ -16,11 +16,23 @@ class Bundle extends Component {
         }
     }
 
+    // componentDidlMount() {
+    //     this.load(this.props)
+    // }
+
+    // componentWillReceiveProps(nextProps) {
+    //     if (nextProps.load !== this.props.load) {
+    //         this.load(nextProps)
+    //     }
+    // }
+
     load(props) {
         this.setState({
             mod: null
         });
+        console.log(props)
         props.load((mod) => {
+            console.log(mod)
             this.setState({
                 // handle both es imports and cjs
                 mod: mod.default ? mod.default : mod
