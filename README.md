@@ -8,3 +8,10 @@ https://github.com/ant-design/ant-design/issues/5155
 
 2\How to fix this violation of this ‘react/no-unescaped-entitie’ of eslint rule?
 http://lonelycoding.com/how-to-fix-this-violation-of-this-react-no-unescaped-entitie-of-eslint-rule/
+
+3\深入浅出React高阶组件
+https://segmentfault.com/a/1190000010371752#articleHeader6
+
+
+阅读
+https://segmentfault.com/u/xuchaobei/articles?page=1&sort=vote

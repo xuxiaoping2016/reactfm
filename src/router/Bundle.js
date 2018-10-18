@@ -7,6 +7,7 @@ class Bundle extends Component {
     };
 
     componentWillMount() {
+        console.log(this.props)
         this.load(this.props)
     }
 
@@ -30,9 +31,9 @@ class Bundle extends Component {
         this.setState({
             mod: null
         });
-        // console.log(props)
+        console.log(props.load)
         props.load((mod) => {
-            // console.log(mod)
+            console.log("MOD", mod.default)
             this.setState({
                 // handle both es imports and cjs
                 mod: mod.default ? mod.default : mod

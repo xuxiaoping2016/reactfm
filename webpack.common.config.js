@@ -34,6 +34,14 @@ module.exports = {
             exclude: [path.resolve(__dirname, 'node_modules')]
          },
          {
+            test: /\.scss$/,
+            use: [
+                "style-loader", // creates style nodes from JS strings
+                "css-loader", // translates CSS into CommonJS
+                "sass-loader" // compiles Sass to CSS, using Node Sass by default
+            ]
+        },
+         {
             test: /\.(png|jpg|gif)$/,
             use: [{
                 loader: 'url-loader',
