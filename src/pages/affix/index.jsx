@@ -1,6 +1,10 @@
 import React, {Component} from 'react';
 import { Affix, Button } from 'antd';
+import Calculator from './Calculator'
+import NameForm from './NameForm'
 import styles from './index.scss'
+
+
 
 export default class AffixCom extends React.Component {
   state = {
@@ -36,6 +40,9 @@ export default class AffixCom extends React.Component {
             Affix bottom
           </Button>
         </Affix>
+        <Calculator/>
+
+        <NameForm/>
       </div>
     );
   }

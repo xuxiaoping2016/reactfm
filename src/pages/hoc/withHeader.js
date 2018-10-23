@@ -20,7 +20,7 @@ import React, {Component} from 'react';
 
 export default (props) => (WrappedComponent) => class HOC extends Component {
   render() {
-    console.log(this.props)
+    // console.log(this.props)
     return <div>
       <div className="demo-header">
         {props.tit}

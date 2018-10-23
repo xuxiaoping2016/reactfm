@@ -13,6 +13,8 @@ import ContractNew from 'bundle-loader?lazy&name=contractnew!pages/contract/new/
 import Affix from 'bundle-loader?lazy&name=affix!pages/affix/index'
 import Hoc from 'bundle-loader?lazy&name=hoc!pages/hoc/index'
 
+// import Transitiondemo from 'bundle-loader?lazy&name=transition!pages/transition/index'
+import Transitiondemo from 'pages/transition/index'
 
 // import Todo from '../../component/todolists/index'
 // import Hello from '../../component/todolists/index2'
@@ -40,6 +42,7 @@ const getRouter = () => (
                 <li><Link to="/contract">ContractNew</Link></li>
                 <li><Link to="/affix">Affix  固钉</Link></li>
                 <li><Link to="/hoc">react 高阶组件</Link></li>
+                <li><Link to="/transitiondemo">react 动画</Link></li>
             </ul>
             <Switch style={{flex:1}}>
                 <Route exact path="/" component={createComponent(Home)}/>
@@ -49,6 +52,8 @@ const getRouter = () => (
                 <Route path="/contract" component={createComponent(ContractNew)}/>
                 <Route path="/affix" component={createComponent(Affix)}/>
                 <Route path="/hoc" component={createComponent(Hoc)}/>
+                {/* <Route path="/transitiondemo" component={createComponent(Transitiondemo)}/> */}
+                <Route path="/transitiondemo" component={Transitiondemo}/>
             </Switch>
         </div>
     </Router>
