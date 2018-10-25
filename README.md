@@ -20,3 +20,4 @@ https://segmentfault.com/u/xuchaobei/articles?page=1&sort=vote
 
 React.js 实现动画效果
 https://www.jianshu.com/p/e3565b2f4856
+http://reactcommunity.org/react-transition-group/transition/

@@ -6,7 +6,7 @@ export default class Transitiondemo extends Component {
   state= { in: false };
 
   toggleEnterState = () => {
-    this.setState({ in: true });
+    this.setState({ in: !this.state.in });
   }
 
   render() {

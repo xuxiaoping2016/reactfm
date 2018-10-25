@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import { CSSTransitionGroup ,Transition} from 'react-transition-group';
-import './style.less'
+import { Transition} from 'react-transition-group';
+// import './style.less'
 
 
 const duration = 300;
