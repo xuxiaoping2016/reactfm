@@ -44,7 +44,8 @@ const getRouter = () => (
                 <li><Link to="/hoc">react 高阶组件</Link></li>
                 <li><Link to="/transitiondemo">react 动画</Link></li>
             </ul>
-            <Switch style={{flex:1}}>
+            <div style={{flex:1}}>
+            <Switch >
                 <Route exact path="/" component={createComponent(Home)}/>
                 <Route path="/todo" component={createComponent(TodoView)}/>
                 <Route path="/order" component={createComponent(Order)}/>
@@ -55,6 +56,7 @@ const getRouter = () => (
                 {/* <Route path="/transitiondemo" component={createComponent(Transitiondemo)}/> */}
                 <Route path="/transitiondemo" component={Transitiondemo}/>
             </Switch>
+            </div>
         </div>
     </Router>
 );
