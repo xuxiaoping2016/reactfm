@@ -1,18 +1,18 @@
 import React, {Component} from 'react';
 import { Transition} from 'react-transition-group';
-// import './style.less'
+import './trans.less'
 
 
-const duration = 300;
+const duration = 1000;
 
 const defaultStyle = {
-  transition: `opacity ${duration}ms ease-in-out`,
-  opacity: 0,
+  transition: `color ${duration}ms ease-in-out`,
+  color: "#f00"
 }
 
 const transitionStyles = {
-  entering: { opacity: 0 },
-  entered:  { opacity: 1 },
+  entering: { color: "#f00" },
+  entered:  { color: "#00f" },
 };
 
 const Fade = ({ in: inProp }) => (

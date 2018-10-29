@@ -21,3 +21,12 @@ https://segmentfault.com/u/xuchaobei/articles?page=1&sort=vote
 React.js 实现动画效果
 https://www.jianshu.com/p/e3565b2f4856
 http://reactcommunity.org/react-transition-group/transition/
+创建 React 动画的五种方式
+https://www.jianshu.com/p/310dd7c3f38b
+
+react-motion
+https://www.npmjs.com/package/react-motion
+用react-motion实现react动画
+https://www.jianshu.com/p/82552ce3803a
+github 源码
+https://github.com/chenglou/react-motion/tree/9cb90eca20ecf56e77feb816d101a4a9110c7d70 

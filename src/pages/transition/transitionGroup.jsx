@@ -47,19 +47,21 @@ export default class TodoList extends React.Component {
             >
             </List>
         </TransitionGroup> */}
-        <TransitionGroup className="todo-list">
-            <ul>
-            {items.map(({ id, text }) => (
-              <CSSTransition
-                key={id}
-                timeout={500}
-                classNames="fade"
-              >
-                <li>{text}</li>
-              </CSSTransition>))
-              }
-            </ul>
-        </TransitionGroup>
+        <ul>
+          <TransitionGroup className="todo-list">
+              
+              {items.map(({ id, text }) => (
+                <CSSTransition
+                  key={id}
+                  timeout={2000}
+                  appear={true}
+                  classNames="fade"
+                >
+                  <li>{text}</li>
+                </CSSTransition>))
+                }
+          </TransitionGroup>
+        </ul>
         <Button
           type="button"
           onClick={() => {
@@ -68,7 +70,10 @@ export default class TodoList extends React.Component {
               this.setState(state => ({
                 items: [
                   ...state.items,
-                  text
+                  {
+                    id:state.items.length+1,
+                    text
+                  }
                 ],
               }));
             }
