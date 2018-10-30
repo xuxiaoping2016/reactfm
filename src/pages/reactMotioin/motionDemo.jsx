@@ -30,7 +30,7 @@ class MotionDemo extends Component {
   }
 
   render() {
-    console.log(spring(this.state.left, presets.wobbly))
+    // console.log(spring(this.state.left, presets.wobbly))
     return (
       <div className="container">
         <Motion style={{x: spring(this.state.left, presets.wobbly)}}>
@@ -43,6 +43,8 @@ class MotionDemo extends Component {
           }}
         </Motion>
         <button onClick={this.clickHandler.bind(this)}>run</button>
+
+        <div className={["box11",this.state.left ? 'on' :''].join(' ')}></div>
       </div>
     )
   }

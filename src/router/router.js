@@ -16,6 +16,7 @@ import Hoc from 'bundle-loader?lazy&name=hoc!pages/hoc/index'
 // import Transitiondemo from 'bundle-loader?lazy&name=transition!pages/transition/index'
 import Transitiondemo from 'pages/transition/index'
 import ReactMotion from '../pages/reactMotioin/index'
+import LodashDemo from '../pages/lodash'
 
 // import Todo from '../../component/todolists/index'
 // import Hello from '../../component/todolists/index2'
@@ -45,6 +46,7 @@ const getRouter = () => (
                 <li><Link to="/hoc">react 高阶组件</Link></li>
                 <li><Link to="/transitiondemo">react 动画</Link></li>
                 <li><Link to="/reactMotion">ReactMotion 动画</Link></li>
+                <li><Link to="/lodash">Lodash 源码学习</Link></li>
             </ul>
             <div style={{flex:1}}>
             <Switch >
@@ -58,6 +60,7 @@ const getRouter = () => (
                 {/* <Route path="/transitiondemo" component={createComponent(Transitiondemo)}/> */}
                 <Route path="/transitiondemo" component={Transitiondemo}/>
                 <Route path="/reactMotion" component={ReactMotion}/>
+                <Route path="/lodash" component={LodashDemo}/>
             </Switch>
             </div>
         </div>

@@ -8,6 +8,10 @@ import StaggeredMotionDemo from './staggeredMotionDemo'
 import TransitionMotionDemo from './transitionMotion'
 
 
+import Demo1 from './demo1'
+import Chat from './demo1-chat-heads'
+
+
 class Test1 extends Component {
  
   render() {
@@ -18,6 +22,9 @@ class Test1 extends Component {
        <StaggeredMotionDemo/>
 
        <TransitionMotionDemo/>
+
+       <Demo1></Demo1>
+       <Chat></Chat>
       </div>
     )
   }

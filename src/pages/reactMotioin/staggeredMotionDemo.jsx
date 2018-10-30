@@ -33,10 +33,13 @@ class StaggeredMotionDemo extends Component {
       })
     }
 
+    const v = this.state.length > 0 ? 1 : 0;
+
     return (
+      
       <div>
         <div>
-          {this.state.length > 0 ? (
+          {/* {this.state.length > 0 ? (
             <StaggeredMotion defaultStyles={boxes}
               styles={prevStyles => prevStyles.map((item, i) => {
                 return i === 0
@@ -57,7 +60,28 @@ class StaggeredMotionDemo extends Component {
                 </div>
               }
             </StaggeredMotion>
-          ) : null}
+          ) : null} */}
+
+          <StaggeredMotion defaultStyles={boxes}
+            styles={prevStyles => prevStyles.map((item, i) => {
+              return i === 0
+                ? { scale: spring(v, { ...presets.noWobble }) }
+                : prevStyles[i - 1]
+            })}>
+            {interpolatingStyles =>
+              <div>
+                {interpolatingStyles.map((item, i) => {
+                  return (
+                    <div className="box2"
+                      key={i}
+                      style={{
+                        transform: `scale(${item.scale}, ${item.scale})`
+                      }}></div>
+                  )
+                })}
+              </div>
+            }
+          </StaggeredMotion>
         </div>
         <button onClick={this.addLength.bind(this)}>run</button>
       </div>
