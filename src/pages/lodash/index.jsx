@@ -25,7 +25,8 @@ class Test1 extends Component {
             p6 : undefined,
             p7 : {name:"xuxiaoping",age:12,city:"上海",home:"香花"},
             p8 : null,
-            p9 : new Set()
+            p9 : Symbol("d"),
+            P10 : NaN
         }
         
         const data = [["name","55"],["age","12"],["city","shanghai"]];
@@ -42,7 +43,7 @@ class Test1 extends Component {
       // ==========================
     
       for(var i in params){
-        baseIndexOf(params,prams[i],0)
+        baseIndexOf(params,params[i],0)
       }
 
       

@@ -14,8 +14,8 @@ import strictIndexOf from './strictIndexOf.js'
  * @returns {number} Returns the index of the matched value, else `-1`.
  */
 function baseIndexOf(array, value, fromIndex) {
-  //value === value  是指 string number boolean undefined null基本数据类型
-  console.log(value === value)
+  //value === value  非NaN
+  console.log(value,value === value)
   return value === value
     ? strictIndexOf(array, value, fromIndex)
     : baseFindIndex(array, baseIsNaN, fromIndex)
