@@ -10,13 +10,13 @@ function eq(value, other) {
  * @param {*} key The key to search for.
  * @returns {number} Returns the index of the matched value, else `-1`.
  * 
+ * 某个键值对在数组中首次出现的位置
  * const data = [["name","55"],["age","12"],["city","12"]];
        console.log(assocIndexOf(data,"age"))
  */
 function assocIndexOf(array, key) {
   let { length } = array
   while (length--) {
-      console.log(array[length][0], key)
     if (eq(array[length][0], key)) {
       return length
     }
