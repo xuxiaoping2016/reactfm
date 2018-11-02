@@ -11,7 +11,8 @@ import assocIndexOf from './.internal/assocIndexOf'
 
 import MapCache from  './.internal/MapCache'
 
-import baseIndexOf from './.internal/baseIndexOf'
+import toNumber from './toNumber'
+
 
 class Test1 extends Component {
 
@@ -30,7 +31,7 @@ class Test1 extends Component {
         }
         
         const data = [["name","55"],["age","12"],["city","shanghai"]];
-        const data1 = ["1","gf","gfgghhh","徐小平","卞堡"]
+        const data1 = [[1, 2, 3, 4],'455',123434,false,function (){console.log('f')},undefined,{name:"xuxiaoping",age:12,city:"上海",home:"香花"},null,Symbol("d"),new Set(),NaN]
       //  console.log(assocIndexOf(data,"age"))
 
       //  console.log("Hash", new Hash)
@@ -41,13 +42,13 @@ class Test1 extends Component {
       // console.log(map)
 
       // ==========================
-    
-      for(var i in params){
-        baseIndexOf(params,params[i],0)
-      }
 
+      // for (var cur of data1){
+      //   toNumber(cur)
+      // }
+
+      toNumber([1, 2, 3, 4])
       
-
     }
 
     

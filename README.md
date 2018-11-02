@@ -38,3 +38,10 @@ lodash 源码
 https://github.com/lodash/lodash   
 lodash源码解析博客
 https://www.cnblogs.com/hefty/p/8416106.html
+https://github.com/yeyuqiudeng/pocket-lodash/issues/14
+
+lodash源码学习(1)
+https://www.cnblogs.com/wandiao/p/7101886.html
+
+
+lodash  baseGetTag.js  不是很理解
