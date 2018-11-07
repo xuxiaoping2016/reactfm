@@ -6,9 +6,11 @@ import getRouter from 'router/router';
 export default class App extends Component {
     render() {
         return (
-            <div>
+            <div className="app-container">
                 <Nav/>
+                <div className="app-content-container">
                 {getRouter()}
+                </div>
             </div>
         )
     }

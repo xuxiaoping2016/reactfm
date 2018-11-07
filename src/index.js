@@ -7,6 +7,7 @@ import store from './redux/store';
 import {BrowserRouter as Router} from 'react-router-dom';
 import App from 'components/App/App';
 
+import './theme.scss'
 /*初始化*/
 renderWithHotReload(App);
 
