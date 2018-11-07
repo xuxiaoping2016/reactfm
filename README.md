@@ -44,4 +44,5 @@ lodash源码学习(1)
 https://www.cnblogs.com/wandiao/p/7101886.html
 
 
-lodash  baseGetTag.js  不是很理解
+lodash 
+internal 文件夹下  baseGetTag.js  isFlattenable 不是很理解

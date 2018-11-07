@@ -15,8 +15,15 @@ import isObjectLike from './isObjectLike'
  *
  * isArguments([1, 2, 3])
  * // => false
+ * 
+ *  const a = function(){
+        console.log(Object.prototype.toString.call(arguments)) //[object Arguments]
+        return arguments;
+      }()
+     console.log(a)   rguments [callee: (...), Symbol(Symbol.iterator): ƒ]
  */
 function isArguments(value) {
+  // isObjectLike  type == "object" && value != null;
   return isObjectLike(value) && getTag(value) == '[object Arguments]'
 }
 

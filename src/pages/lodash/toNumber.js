@@ -62,15 +62,12 @@ function toNumber(value) {
   }
 
   //走到这一步 还有 字符串 Boolean fun，undefined,obj(null)
-  if (isObject(value)) { // 数组 对象 和 函数 进行处理
-    console.log("value.valueOf",value, typeof value.valueOf)
+  if (isObject(value)) { // 数组 对象 和 函数 进行处理 是对象 现获取原始值，原始值还是对象的话就转换为字符串
     const other = typeof value.valueOf == 'function' ? value.valueOf() : value
-    console.log(other)
-    console.log(isObject(other),isObject(other) && `${other}`)
     value = isObject(other) ? `${other}` : other
-    console.log(value)
   }
 
+  console.log(typeof value, typeof value != 'string')
   if (typeof value != 'string') {
     return value === 0 ? value : +value
   }

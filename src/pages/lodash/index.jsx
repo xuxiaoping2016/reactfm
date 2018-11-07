@@ -1,8 +1,6 @@
 
 import React, {Component} from 'react'
 
-import { slice } from './array'
-
 import {compact}  from 'lodash'
 
 import Hash from './.internal/Hash'
@@ -11,8 +9,8 @@ import assocIndexOf from './.internal/assocIndexOf'
 
 import MapCache from  './.internal/MapCache'
 
-import toNumber from './toNumber'
-
+import isArrayLikeObject from './isArrayLikeObject'
+import baseFlatten from './.internal/baseFlatten'
 
 class Test1 extends Component {
 
@@ -31,8 +29,9 @@ class Test1 extends Component {
         }
         
         const data = [["name","55"],["age","12"],["city","shanghai"]];
-        const data1 = [[1, 2, 3, 4],'455',123434,false,function (){console.log('f')},undefined,{name:"xuxiaoping",age:12,city:"上海",home:"香花"},null,Symbol("d"),new Set(),NaN]
-      //  console.log(assocIndexOf(data,"age"))
+        const data1 = [[5],[1, 2, 3, 4],'455',123434,false,function (){console.log('f')},undefined,{name:"xuxiaoping",age:12,city:"上海",home:"香花",length:3},null,Symbol("d"),new Set(),NaN]
+        const obj = {name:"xuxiaoping",age:12,city:"上海",home:"香花",length:3};
+        //  console.log(assocIndexOf(data,"age"))
 
       //  console.log("Hash", new Hash)
 
@@ -42,17 +41,10 @@ class Test1 extends Component {
       // console.log(map)
 
       // ==========================
-
-      // for (var cur of data1){
-      //   toNumber(cur)
-      // }
-
-      toNumber([1, 2, 3, 4])
-      
+      const r1 = [1, [2, 3, [4]]];
+      console.log("baseFlatten(data1)",baseFlatten(r1,2))
     }
 
-    
-    
 
   render() {
     return (

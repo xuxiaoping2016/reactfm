@@ -1,5 +1,4 @@
 import Mock from 'mockjs'
-console.log('fdsfdsfsdf')
 
 
 
