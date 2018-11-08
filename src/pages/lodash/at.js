@@ -1,4 +1,4 @@
-import baseAt from './.internal/baseAt.js'
+import baseAt from "./.internal/baseAt.js";
 
 /**
  * Creates an array of values corresponding to `paths` of `object`.
@@ -16,7 +16,7 @@ import baseAt from './.internal/baseAt.js'
  * // => [3, 4]
  */
 function at(...paths) {
-  return baseAt(paths)
+  return baseAt(paths);
 }
 
-export default at
+export default at;

@@ -4,6 +4,13 @@ import AddTodo from './AddTodo';
 // import '../styles/todo.less';
 
 export default class TodoView extends Component{
+    componentDidMount(){
+        const arr = {
+            fdf:function(){
+                console.log('55')
+            }
+        }
+    }
     render(){
         return(
             <div className='todoView'>

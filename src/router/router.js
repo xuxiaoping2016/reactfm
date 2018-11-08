@@ -4,7 +4,7 @@ import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom';
 
 import Bundle from './Bundle';
 
-import Home from 'bundle-loader?lazy&name=home!pages/Home/Home';
+import Home from 'bundle-loader?lazy&name=home!pages/Home/Home.jsx';
 import TodoView from 'bundle-loader?lazy&name=home!pages/tododemo/TodoView'
 import Order from 'bundle-loader?lazy&name=order!pages/order/index.jsx'
 import DrivedState from 'bundle-loader?lazy&name=drivedState!pages/getDerivedStateFromProps/index'
@@ -17,6 +17,8 @@ import Hoc from 'bundle-loader?lazy&name=hoc!pages/hoc/index'
 import Transitiondemo from 'pages/transition/index'
 import ReactMotion from '../pages/reactMotioin/index'
 import LodashDemo from '../pages/lodash'
+
+import CascaderDemo from '../pages/cascader'
 
 // import Todo from '../../component/todolists/index'
 // import Hello from '../../component/todolists/index2'
@@ -47,6 +49,7 @@ const getRouter = () => (
                 <li><Link to="/transitiondemo">react 动画</Link></li>
                 <li><Link to="/reactMotion">ReactMotion 动画</Link></li>
                 <li><Link to="/lodash">Lodash 源码学习</Link></li>
+                <li><Link to="/cascader">Cascader 级联选择</Link></li>
             </ul>
             <div style={{flex:1}}>
             <Switch >
@@ -61,6 +64,7 @@ const getRouter = () => (
                 <Route path="/transitiondemo" component={Transitiondemo}/>
                 <Route path="/reactMotion" component={ReactMotion}/>
                 <Route path="/lodash" component={LodashDemo}/>
+                <Route path="/cascader" component={CascaderDemo}/>
             </Switch>
             </div>
         </div>

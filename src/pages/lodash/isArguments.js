@@ -1,5 +1,5 @@
-import getTag from './.internal/getTag.js'
-import isObjectLike from './isObjectLike'
+import getTag from "./.internal/getTag.js";
+import isObjectLike from "./isObjectLike";
 
 /**
  * Checks if `value` is likely an `arguments` object.
@@ -19,12 +19,12 @@ import isObjectLike from './isObjectLike'
  *  const a = function(){
         console.log(Object.prototype.toString.call(arguments)) //[object Arguments]
         return arguments;
-      }()
-     console.log(a)   rguments [callee: (...), Symbol(Symbol.iterator): ƒ]
+      }()  
+      console.log(a) arguments [callee: (...), Symbol(Symbol.iterator): ƒ]
  */
 function isArguments(value) {
   // isObjectLike  type == "object" && value != null;
-  return isObjectLike(value) && getTag(value) == '[object Arguments]'
+  return isObjectLike(value) && getTag(value) == "[object Arguments]";
 }
 
-export default isArguments
+export default isArguments;

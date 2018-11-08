@@ -1,5 +1,5 @@
-import createFind from './.internal/createFind.js'
-import findLastIndex from './findLastIndex.js'
+import createFind from "./.internal/createFind.js";
+import findLastIndex from "./findLastIndex.js";
 
 /**
  * This method is like `find` except that it iterates over elements of
@@ -17,6 +17,6 @@ import findLastIndex from './findLastIndex.js'
  * findLast([1, 2, 3, 4], n => n % 2 == 1)
  * // => 3
  */
-const findLast = createFind(findLastIndex)
+const findLast = createFind(findLastIndex);
 
-export default findLast
+export default findLast;

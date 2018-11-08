@@ -1,5 +1,5 @@
-import isArrayLike from './isArrayLike.js'
-import isObjectLike from './isObjectLike.js'
+import isArrayLike from "./isArrayLike.js";
+import isObjectLike from "./isObjectLike.js";
 
 /**
  * This method is like `isArrayLike` except that it also checks if `value`
@@ -28,7 +28,7 @@ function isArrayLikeObject(value) {
   // isObjectLike 返回 [] {}
   // isArrayLike返回数组 字符串 以及有length属性的对象
   // 返回类数组对象(数组，及有length属性且属性值为有效数字的{})
-  return isObjectLike(value) && isArrayLike(value)
+  return isObjectLike(value) && isArrayLike(value);
 }
 
-export default isArrayLikeObject
+export default isArrayLikeObject;

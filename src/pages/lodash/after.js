@@ -16,14 +16,14 @@
  * // => Logs 'done saving!' after the two async saves have completed.
  */
 function after(n, func) {
-  if (typeof func != 'function') {
-    throw new TypeError('Expected a function')
+  if (typeof func !== "function") {
+    throw new TypeError("Expected a function");
   }
   return function(...args) {
     if (--n < 1) {
-      return func.apply(this, args)
+      return func.apply(this, args);
     }
-  }
+  };
 }
 
-export default after
+export default after;

@@ -1,4 +1,4 @@
-import isLength from './isLength.js'
+import isLength from "./isLength.js";
 
 /**
  * Checks if `value` is array-like. A value is considered array-like if it's
@@ -28,7 +28,7 @@ import isLength from './isLength.js'
  * 返回数组 字符串 以及有length属性的对象
  */
 function isArrayLike(value) {
-  return value != null && typeof value != 'function' && isLength(value.length)
+  return value != null && typeof value !== "function" && isLength(value.length);
 }
 
-export default isArrayLike
+export default isArrayLike;

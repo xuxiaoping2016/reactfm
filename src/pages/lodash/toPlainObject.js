@@ -21,12 +21,12 @@
  * // => { 'a': 1, 'b': 2, 'c': 3 }
  */
 function toPlainObject(value) {
-  value = Object(value)
-  const result = {}
+  value = Object(value);
+  const result = {};
   for (const key in value) {
-    result[key] = value[value]
+    result[key] = value[value];
   }
-  return result
+  return result;
 }
 
-export default toPlainObject
+export default toPlainObject;

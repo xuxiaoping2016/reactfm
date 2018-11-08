@@ -1,5 +1,5 @@
-import capitalize from './capitalize.js'
-import words from './words.js'
+import capitalize from "./capitalize.js";
+import words from "./words.js";
 
 /**
  * Converts `string` to [camel case](https://en.wikipedia.org/wiki/CamelCase).
@@ -21,10 +21,10 @@ import words from './words.js'
  * // => 'fooBar'
  */
 const camelCase = (string) => (
-  words(`${string}`.replace(/['\u2019]/g, '')).reduce((result, word, index) => {
-    word = word.toLowerCase()
-    return result + (index ? capitalize(word) : word)
-  }, '')
-)
+  words(`${string}`.replace(/['\u2019]/g, "")).reduce((result, word, index) => {
+    word = word.toLowerCase();
+    return result + (index ? capitalize(word) : word);
+  }, "")
+);
 
-export default camelCase
+export default camelCase;

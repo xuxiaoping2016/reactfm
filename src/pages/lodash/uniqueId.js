@@ -1,5 +1,5 @@
 /** Used to generate unique IDs. */
-const idCounter = {}
+const idCounter = {};
 
 /**
  * Generates a unique ID. If `prefix` is given, the ID is appended to it.
@@ -17,17 +17,17 @@ const idCounter = {}
  * uniqueId()
  * // => '105'
  */
-function uniqueId(prefix='$lodash$') {
+function uniqueId(prefix="$lodash$") {
   if (!idCounter[prefix]) {
-    idCounter[prefix] = 0
+    idCounter[prefix] = 0;
   }
 
-  const id =++idCounter[prefix]
-  if (prefix === '$lodash$') {
-    return `${id}`
+  const id =++idCounter[prefix];
+  if (prefix === "$lodash$") {
+    return `${id}`;
   }
 
-  return `${prefix + id}`
+  return `${prefix + id}`;
 }
 
-export default uniqueId
+export default uniqueId;

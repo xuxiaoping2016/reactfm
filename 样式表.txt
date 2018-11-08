@@ -1,0 +1,45 @@
+git 用远程覆盖本地
+ 
+
+git fetch --all
+git reset --hard origin/master
+
+eslint使用
+一、安装  
+	局部安装  npm install eslint --save-dev
+	全局安装  npm install -g eslint
+	版本查询  eslint -v
+	初始化文件  eslint --init
+二、配置 ESLint
+eslint的安装与使用  https://www.cnblogs.com/lsgxeva/p/7994474.html
+
+webpack引入eslint详解
+
+
+三、遇到的问题
+	1、解决：对修饰器的实验支持是一项将在将来版本中更改的功能。设置+"experimentalDecorators"+选项以删除此警告。
+	解答地址 ：https://blog.csdn.net/Run_youngman/article/details/80739856
+	{
+		"compilerOptions": {
+			"target": "esnext",
+			"experimentalDecorators": true,
+			"baseUrl": ".",
+			"paths": {
+				"@/*": ["./src/*"],
+				"src/*": ["./src/*"],
+				"assets/*": ["./src/assets/*"],
+				"utils/*": ["./src/utils/*"],
+				"pages/*": ["./src/pages/*"],
+				"components/*": ["./src/components/*"]
+			},
+			"jsx": "react"
+		},
+		"exclude": ["dist","node_modules"],
+		"include": ["src/**/*",]
+	}
+
+	附带问题  什么是jsconfig.json？
+		https://code.visualstudio.com/docs/languages/jsconfig
+		
+		目录中存在jsconfig.json文件表示该目录是JavaScript项目的根目录。 jsconfig.json文件指定根文件和JavaScript语言服务提供的功能选项。
+	

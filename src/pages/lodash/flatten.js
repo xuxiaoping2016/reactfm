@@ -1,4 +1,4 @@
-import baseFlatten from './.internal/baseFlatten.js'
+import baseFlatten from "./.internal/baseFlatten.js";
 
 /**
  * 参考  http://www.cnblogs.com/hahazexia/p/9737341.html
@@ -15,8 +15,8 @@ import baseFlatten from './.internal/baseFlatten.js'
  * // => [1, 2, [3, [4]], 5]
  */
 function flatten(array) {
-  const length = array == null ? 0 : array.length
-  return length ? baseFlatten(array, 1) : []
+  const length = array == null ? 0 : array.length;
+  return length ? baseFlatten(array, 1) : [];
 }
 
-export default flatten
+export default flatten;

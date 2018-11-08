@@ -1,6 +1,6 @@
-import filter from './filter.js'
-import baseXor from './.internal/baseXor.js'
-import isArrayLikeObject from './isArrayLikeObject.js'
+import filter from "./filter.js";
+import baseXor from "./.internal/baseXor.js";
+import isArrayLikeObject from "./isArrayLikeObject.js";
 
 /**
  * Creates an array of unique values that is the
@@ -19,7 +19,7 @@ import isArrayLikeObject from './isArrayLikeObject.js'
  * // => [1, 3]
  */
 function xor(...arrays) {
-  return baseXor(filter(arrays, isArrayLikeObject))
+  return baseXor(filter(arrays, isArrayLikeObject));
 }
 
-export default xor
+export default xor;

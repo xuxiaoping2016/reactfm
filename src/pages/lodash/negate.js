@@ -17,12 +17,12 @@
  * // => [1, 3, 5]
  */
 function negate(predicate) {
-  if (typeof predicate != 'function') {
-    throw new TypeError('Expected a function')
+  if (typeof predicate !== "function") {
+    throw new TypeError("Expected a function");
   }
   return function(...args) {
-    return !predicate.apply(this, args)
-  }
+    return !predicate.apply(this, args);
+  };
 }
 
-export default negate
+export default negate;

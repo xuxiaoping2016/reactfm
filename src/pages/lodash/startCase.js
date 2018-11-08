@@ -1,5 +1,5 @@
-import upperFirst from './upperFirst.js'
-import words from './words.js'
+import upperFirst from "./upperFirst.js";
+import words from "./words.js";
 
 /**
  * Converts `string` to
@@ -22,9 +22,9 @@ import words from './words.js'
  * // => 'FOO BAR'
  */
 const startCase = (string) => (
-  words(`${string}`.replace(/['\u2019]/g, '')).reduce((result, word, index) => (
-    result + (index ? ' ' : '') + upperFirst(word)
-  ), '')
-)
+  words(`${string}`.replace(/['\u2019]/g, "")).reduce((result, word, index) => (
+    result + (index ? " " : "") + upperFirst(word)
+  ), "")
+);
 
-export default startCase
+export default startCase;

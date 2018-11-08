@@ -1,9 +1,9 @@
 //concat.js
 // http://www.felearn.com/lodash-source-study-array-concat-compact-isarguments-isflattenable/  源码解析地址
-var arrayPush = require('./_arrayPush'),//同Array.push方法,第一个参数是原数组，第二个是需要添加的值得数组集合
-    baseFlatten = require('./_baseFlatten'),//数组扁平化，后面再分析，比如[1,[2,3],[4,5,[6]]] => [1,2,3,4,5,6]
-    copyArray = require('./_copyArray'),//拷贝数组
-    isArray = require('./isArray');//Array.isArray方法的引用。
+var arrayPush = require("./_arrayPush"),//同Array.push方法,第一个参数是原数组，第二个是需要添加的值得数组集合
+  baseFlatten = require("./_baseFlatten"),//数组扁平化，后面再分析，比如[1,[2,3],[4,5,[6]]] => [1,2,3,4,5,6]
+  copyArray = require("./_copyArray"),//拷贝数组
+  isArray = require("./isArray");//Array.isArray方法的引用。
 
 /**
  * @param {Array} array 需要处理的数组
@@ -26,8 +26,8 @@ function concat() {
     return [];
   }
   var args = Array(length - 1), //包含需要添加的数组或元素的数组
-      array = arguments[0],//原数组
-      index = length;//参数索引
+    array = arguments[0],//原数组
+    index = length;//参数索引
 
   while (index--) {//遍历参数，将除了第一个参数的其他参数加入args中
     args[index - 1] = arguments[index];
