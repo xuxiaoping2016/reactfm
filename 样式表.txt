@@ -42,4 +42,8 @@ webpack引入eslint详解
 		https://code.visualstudio.com/docs/languages/jsconfig
 		
 		目录中存在jsconfig.json文件表示该目录是JavaScript项目的根目录。 jsconfig.json文件指定根文件和JavaScript语言服务提供的功能选项。
+
+
+	梳理前端开发使用eslint和prettier来检查和格式化代码问题
+	http://web.jobbole.com/94786/
 	
