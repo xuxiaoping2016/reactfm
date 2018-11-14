@@ -1,16 +1,9 @@
-import React, {Component} from 'react';
-import './Page1.css';
-
-import image from './images/1.png';
+import React, { Component } from 'react';
 
 export default class Page1 extends Component {
-    render() {
+    render(){
         return (
-            <div  className="page-box">
-                this is Page1~___刷新测试！
-                <div>fdfdsklfjdkshufdsioiooifdf</div>
-                <img src={image}/>
-            </div>
+            <div>this is page1!! buchong</div>
         )
     }
 }

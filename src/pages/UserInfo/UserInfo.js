@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {getUserInfo} from "actions/userInfo";
+import {getUserInfo} from "store/actions/userInfo";
 
 class UserInfo extends Component {
 
@@ -9,7 +9,7 @@ class UserInfo extends Component {
         return (
             <div>
                 {
-                    isLoading ? '请求信息中......fdfdsf' :
+                    isLoading ? '请求信息中......' :
                         (
                             errorMsg ? errorMsg :
                                 <div>

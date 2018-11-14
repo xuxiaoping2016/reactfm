@@ -1,47 +1,91 @@
-const merge = require('webpack-merge');
-const path = require('path');
+const path = require("path");
+const webpack = require('webpack');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-const commonConfig = require('./webpack.common.config.js');
-
-const devConfig =  {
- 
-    /*入口*/
-    entry:{
+module.exports = {
+    entry : {
         app:[
-            'react-hot-loader/patch',
-            path.join(__dirname, 'src/pages/router1/router1.js')
+            "react-hot-loader/patch",
+            path.join(__dirname,'src/index.js')
+        ],
+        vendor: ['react', 'react-router-dom', 'redux', 'react-dom', 'react-redux']
+    },
+
+    output :{
+        path : path.join(__dirname,'dist'),
+        filename:"js/bundle.[hash].js",
+        chunkFilename: 'js/[name].[chunkhash].js'
+    },
+
+    module : {
+        rules:[
+            {
+                test:/\.(js|jsx)$/,
+                use:{
+                    loader:"babel-loader",
+                    options:{
+                        cacheDirectory:true,
+                        // presets:['@babel/preset-env']
+                    }
+                },
+                exclude: /(node_modules|bower_components)/,
+                include: path.join(__dirname, 'src')
+            },
+            {
+                test:/\.css$/,
+                use:['style-loader','css-loader']
+            },
+            {
+                test:/\.scss$/,
+                use:['style-loader','css-loader','sass-loader']
+            },
+            {
+                test: /\.(png|svg|jpg|gif)$/,
+                use:["url-loader"]
+            }
         ]
     },
-    
-    /*输出到dist文件夹，输出文件名字为bundle.js*/
-    output: {
-        filename: '[name].[hash].js'
-    },
 
-    module: {
-        rules: [{
-            test: /\.css$/,
-            use: ['style-loader', 'css-loader']
-         }]
-    },
+    plugins:[
+        new HtmlWebpackPlugin({
+            filename: 'index.html',
+            template: path.join(__dirname, 'src/index.html')
+        }),
+        new CopyWebpackPlugin([
+            { from: 'src/api', to: 'api' }
+        ]),
+    ],
 
-    devServer: {
-        contentBase: path.join(__dirname, './dist'),
-        historyApiFallback: {
-            disableDotRule: true   
-        },
-        port:8001
-        // hot:true
-    },
-   devtool: 'inline-source-map'
-};
-
-module.exports = merge({
-    customizeArray(a, b, key) {
-        /*entry.app不合并，全替换*/
-        if (key === 'entry.app') {
-            return b;
+    optimization: {
+        splitChunks: {
+            cacheGroups: {
+                commons: {
+                    name: "vendor",
+                    chunks: "initial",
+                    minChunks: 2
+                }
+            }
         }
-        return undefined;
-    }
-})(commonConfig, devConfig);
+    },
+    
+    devServer: {
+        contentBase:'./dist',
+        historyApiFallback: true,
+        port:"8001",
+        headers: {
+        'X-Custom-Foo': 'bar'
+        }
+    },
+
+    resolve:{
+        alias:{
+            pages: path.join(__dirname, 'src/pages'),
+            component: path.join(__dirname, 'src/component'),
+            router: path.join(__dirname, 'src/router'),
+            store: path.join(__dirname,'src/redux')
+        }
+    },
+    devtool: 'inline-source-map',
+    mode: "development"
+}

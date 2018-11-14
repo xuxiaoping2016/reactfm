@@ -1,24 +1,30 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+import './style.css'
+import './style.scss'
 
+import im from '../../images/wait.png'
 export default class Home extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.state ={
-            count:0
+        this.state = {
+            count: 0
         }
     }
 
-    handleClick = () =>{
+    _handleClick() {
         this.setState({
             count: ++this.state.count
         });
     }
-    render() {
+
+    render(){
         return (
-            <div>
-                this is home~558888888888888888888<br/>
+            <div className="container">
+                <p className="scss">测试scss 样式文件</p>
+                <img src={im}/>
+                this is home~~fdfkd<br/>
                 当前计数：{this.state.count}<br/>
-                <button onClick={ this.handleClick}>自增</button>
+                <button onClick={() => this._handleClick()}>自增</button>
             </div>
         )
     }

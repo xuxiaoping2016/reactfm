@@ -1,4 +1,4 @@
-import {GET_USER_INFO_REQUEST, GET_USER_INFO_SUCCESS, GET_USER_INFO_FAIL} from 'actions/userInfo';
+import {GET_USER_INFO_REQUEST, GET_USER_INFO_SUCCESS, GET_USER_INFO_FAIL} from 'store/actions/userInfo';
 
 
 const initState = {
@@ -20,7 +20,7 @@ export default function reducer(state = initState, action) {
             return {
                 ...state,
                 isLoading: false,
-                userInfo: action.result.data,
+                userInfo: action.userInfo,
                 errorMsg: ''
             };
         case GET_USER_INFO_FAIL:
