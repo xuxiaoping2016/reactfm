@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './style.css'
+// import './style.css'
 import './style.scss'
 
 import im from '../../images/wait.png'
@@ -20,7 +20,7 @@ export default class Home extends Component {
     render(){
         return (
             <div className="container">
-                <p className="scss">测试scss 样式文件</p>
+                <p className="scss">测试scss 样式文件!!!!!!!!!!</p>
                 <img src={im}/>
                 this is home~~fdfkd<br/>
                 当前计数：{this.state.count}<br/>

@@ -58,3 +58,37 @@ webpack.optimize.CommonsChunkPlugin has been removed, please use config.optimiza
 https://blog.csdn.net/github_36487770/article/details/80228147
 详解CommonsChunkPlugin的配置和用法
 https://segmentfault.com/a/1190000012828879
+
+
+十、代码压缩
+UglifyJSPlugin   vendor 直接从2600KB 变为330多kb
+webpack.DefinePlugin  vendor 直接从330KB 变为209kb
+
+十一、在使用extract-text-webpack-plugin给webpack打包时出现报错
+(node:14844) DeprecationWarning: Tapable.plugin is deprecated. Use new API on `.hooks` instead
+(node:14844) DeprecationWarning: Tapable.apply is deprecated. Call apply on the plugin directly instead
+
+问题原因：extract-text-webpack-plugin目前版本不支持webpack4。
+解决方案：使用extract-text-webpack-plugin的最新的beta版
+        npm install extract-text-webpack-plugin@next
+参考 ：https://blog.csdn.net/u011215669/article/details/81269386
+
+同类问题参考  Vue项目升级到Webpack 4.x初步踩坑总结
+              https://blog.csdn.net/harsima/article/details/80819747
+
+
+终极解决方案
+webpack 插件 mini-css-extract-plugin 配置项请教 https://segmentfault.com/q/1010000015723367/a-1020000015729448
+
+
+十二、nginx 配置解决 react 、vue 单页面刷新404问题
+https://blog.csdn.net/a20023930/article/details/80436663
+https://www.jianshu.com/p/b4f004bb8b66
+
+react单页面应用本地开发环境下刷新会停留在当页，部署在服务器上刷新404
+https://segmentfault.com/q/1010000011004310
+
+apache服务器开启rewrite模式总结 解决404错误
+
+通过比对本地wampserver的配置文件和服务器上的apache配置文件，解决了404错误
+
