@@ -23,6 +23,11 @@ const mapDispatchToProps = (dispatch) => {
 };
 @connect(mapStateToProps, mapDispatchToProps)
 export default class Counter extends Component {
+
+componentDidMount(){
+    console.log(process.env)
+}
+
     render() {
         const {increment, decrement, reset, counter} = this.props;
         return (

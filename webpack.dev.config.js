@@ -2,6 +2,10 @@ const path = require("path");
 const merge = require('webpack-merge');
 const commonConfig = require('./webpack.common.config.js');
 
+const dev = require('../config/dev.js');
+
+process.env.NODE_ENV = 'development';
+
 const devConfig = {
     devtool: 'inline-source-map',
     entry : {
@@ -37,7 +41,8 @@ const devConfig = {
         port:"8001",
         headers: {
         'X-Custom-Foo': 'bar'
-        }
+        },
+        ...dev.devServer
     },
     mode: "development"
 }
