@@ -1,0 +1,106 @@
+.header {
+    background-color: #fff !important;
+    box-shadow: 0 2px 20px 0 rgba(15, 12, 70, 0.1);
+    display: flex;
+    z-index: 1;
+    justify-content: flex-end;
+    :global {
+        .ant-badge-count {
+            min-width: 24px;
+            height: 16px;
+            line-height: 16px;
+            margin-bottom: 2px;
+            margin-left: 4px;
+        }
+    }
+}
+
+.container {
+    display: flex;
+}
+
+.box {
+    width: 290px;
+    padding-top: 10px;
+    background: #fff;
+    border-radius: 2px;
+    box-shadow: 0 6px 13px 0 rgba(73, 85, 115, 0.3);
+}
+
+.item {
+    cursor: pointer;
+    &:hover {
+        color: #2589ff;
+    }
+}
+
+.username {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    color: #595959;
+    &:hover {
+        color: #337ab7;
+        border-top-color: #337ab7;
+    }
+}
+
+.arrow {
+    margin-left: 5px;
+}
+
+.merchantList {
+    // margin-bottom: 10px;
+    :global {
+        .ant-dropdown-menu-submenu {
+            margin-top: 5px;
+            font-size: 12px;
+            .ant-dropdown-menu-submenu-title {
+                line-height: 40px;
+                height: 40px;
+                padding: 0 20px;
+                &:hover {
+                    background-color: rgba(50, 50, 50, 0.1);
+                }
+                &::after {
+                    width: 100%;
+                    border-bottom: 1px solid #e3e2e5;
+                    display: block;
+                    content: '';
+                }
+            }
+        }
+        i.ant-dropdown-menu-submenu-arrow {
+            right: 18px;
+        }
+        .ant-dropdown-menu-item {
+            overflow: hidden;
+            font-size: 12px;
+            padding: 0 20px;
+            height: 40px;
+            line-height: 40px;
+            &:hover {
+                background-color: rgba(50, 50, 50, 0.1) !important;
+            }
+        }
+    }
+}
+
+.logout {
+    line-height: 35px;
+    display: block;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 5px;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 0 20px;
+    &&:before {
+        content: '';
+        width: 100%;
+        display: block;
+    }
+    &:hover {
+        background-color: rgba(50, 50, 50, 0.1);
+    }
+}

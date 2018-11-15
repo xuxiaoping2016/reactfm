@@ -1,0 +1,68 @@
+.ant-upload.ant-upload-select-picture-card > .ant-upload,
+.ant-upload-list-picture .ant-upload-list-item,
+.ant-upload-list-picture-card .ant-upload-list-item {
+    padding: 0;
+    width: 120px;
+    height: 120px;
+    border: none;
+}
+
+.ant-upload.ant-upload-select-picture-card {
+    border: none;
+}
+
+.ant-upload-list-picture-card .ant-upload-list-item-info {
+    border-radius: 4px;
+    background: #fff;
+}
+
+// 图片上传 删除图标
+.ant-upload-list-item {
+    position: relative;
+    .ant-upload-list-item-info > span {
+        height: 100%;
+    }
+    & > .ant-upload-list-item-actions .anticon-eye-o {
+        display: none;
+        width: 0;
+    }
+    & > .ant-upload-list-item-actions > a {
+        width: 60px;
+        height: 20px;
+        display: block;
+        &::after {
+            content: '查看原图';
+            width: 100%;
+            color: white;
+            display: block;
+            text-align: center;
+        }
+    }
+    & > .ant-upload-list-item-actions svg {
+        display: none;
+    }
+    & > .ant-upload-list-item-actions > .anticon-delete {
+        z-index: 10;
+        position: absolute;
+        top: -60px;
+        right: -45px;
+        width: 20px;
+        height: 20px;
+        background-image: url('../../assets/image/delete.svg');
+        background-size: 20px 20px;
+        &::before {
+            content: '';
+        }
+    }
+    & > .ant-upload-list-item-actions {
+        opacity: 1;
+        & > a:first-child {
+            opacity: 0;
+        }
+    }
+    &:hover .ant-upload-list-item-actions {
+        & > a:first-child {
+            opacity: 1;
+        }
+    }
+}

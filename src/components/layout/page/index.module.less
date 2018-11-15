@@ -1,0 +1,42 @@
+.layout {
+    height: 100vh;
+    :global {
+        ::-webkit-scrollbar-thumb {
+            box-shadow: none;
+        }
+    }
+}
+
+.header {
+    background-color: #fff;
+    border-bottom: 1px solid #888;
+}
+
+.content {
+    overflow: hidden;
+    background: #fafafa;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.view {
+    // background-color: #f2f2f6;
+    padding: 10px 10px 0;
+    overflow-x: hidden;
+    width: 100%;
+}
+
+.card {
+    padding: 10px;
+    box-sizing: border-box;
+    background-color: #fff;
+    min-height: 100%;
+    box-shadow: 0 0 4px 0 rgba(200, 200, 200, 0.5);
+    width: 100%;
+    border-radius: 6px;
+    .global-card-container {
+        padding: 10px;
+        border-radius: 6px;
+        background: rgb(242, 242, 246);
+    }
+}
