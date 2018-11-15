@@ -13,12 +13,13 @@ const initState = {
 export default function reducer(state = initState, action) {
     switch (action.type) {
         case INCREMENT:
+        console.log(state)
             return {
-                count: state.count + 1
+                count: state.count + 2
             };
         case DECREMENT:
             return {
-                count: state.count - 1
+                count: state.count - 2
             };
         case RESET:
             return {count: 0};

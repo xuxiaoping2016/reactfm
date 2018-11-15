@@ -3,8 +3,8 @@ import ReactDom from 'react-dom';
 import {AppContainer} from 'react-hot-loader';
 import {Provider} from 'react-redux';
 import store from 'store/store.js'
-import getRouter from 'router/router'
-
+import App from './components/App/App.jsx';
+import '../mock/mock';
 
 if (module.hot) {
     module.hot.accept();
@@ -13,7 +13,7 @@ if (module.hot) {
 ReactDom.render(
     <AppContainer>
         <Provider store={store}>
-            {getRouter()}
+            <App/>
         </Provider>
     </AppContainer>, 
     document.getElementById('app')
