@@ -8,7 +8,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const commonConfig = require('./webpack.common.config.js');
 
-const prod = require('../config/prod.js');
+const prod = require('./config/prod.js');
 
 process.env.NODE_ENV = 'production';
 
