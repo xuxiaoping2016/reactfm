@@ -22,9 +22,13 @@ const createComponent = (Com) => (props) => (
 const getRouter = () => (
     <Switch>
         <Route exact path="/" component={createComponent(Home)}/>
-        <Route path="/page1" component={createComponent(Page1)}/>
+        <Route path="/page1/:id" component={createComponent(Page1)}/>
         <Route path="/counter" component={createComponent(Counter)}/>
         <Route path="/userinfo" component={createComponent(UserInfo)}/>
+        <Route path="/ceshilocation" render={(location) => {
+            console.log(location);
+            return <div>fdfdfd</div>
+        }}/>
         <Route component={createComponent(NotFound)}/>
     </Switch>
 );
