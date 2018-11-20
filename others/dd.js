@@ -26,6 +26,12 @@ module.exports.pitch = function(remainingRequest) {
 			"		cb(require(", loaderUtils.stringifyRequest(this, "!!" + remainingRequest), "));\n",
 			"	}" + chunkNameParam + ");\n",
 			"}"];
+
+			// module.exports = function(cb) {
+			// 	require.ensure([], function(require) {
+			// 		cb(require(loaderUtils.stringifyRequest(this, !!remainingRequest));
+			// 	} , chunkNameParam )
+			// }
 	} else {
 		result = [
 			"var cbs = [], \n",

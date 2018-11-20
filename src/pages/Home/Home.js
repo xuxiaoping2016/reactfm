@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 // import './style.css'
 import './style.scss'
 
+import d from '../../../others/dd'
+
 import im from '../../images/wait.png'
 export default class Home extends Component {
     constructor(props) {
@@ -9,6 +11,15 @@ export default class Home extends Component {
         this.state = {
             count: 0
         }
+    }
+
+    componentDidMount(){
+        console.log(d,',,,,,')
+			// module.exports = function(cb) {
+			// 	require.ensure([], function(require) {
+			// 		cb(require(loaderUtils.stringifyRequest(this, !!remainingRequest));
+			// 	} , chunkNameParam )
+			// }
     }
 
     _handleClick() {

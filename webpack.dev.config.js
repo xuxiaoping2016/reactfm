@@ -1,53 +1,88 @@
-const path = require("path");
-const merge = require('webpack-merge');
-const commonConfig = require('./webpack.common.config.js');
+const path = require('path');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
-const devConfig = {
-    devtool: 'inline-source-map',
-    entry : {
-        app:[
-            "babel-polyfill",
-            "react-hot-loader/patch",
-            path.join(__dirname,'src/index.js')
-        ]
-    },
-
-    output :{
-        filename:"js/bundle.[hash].js",
-    },
-
-    module : {
-        rules:[
-            {
-                test:/\.css$/,
-                use:['style-loader','css-loader',"postcss-loader"]
-            },
-            {
-                test:/\.scss$/,
-                use:['style-loader','css-loader','sass-loader','postcss-loader']
-            }
-        ]
-    },
+module.exports = {
+    mode: "development",
+    /*入口*/
+    entry: path.join(__dirname, 'src/index.js'),
     
+    /*输出到dist文件夹，输出文件名字为bundle.js*/
+    output: {
+        path: path.join(__dirname, './dist'),
+        filename: '[name].bundle.js',
+        chunkFilename: '[name].bundle.js'
+    },
+
+    module: {
+        rules: [{
+            test: /\.(js|jsx)$/,
+            use: ['babel-loader?cacheDirectory=true'],
+            include: path.join(__dirname, 'src')
+        },
+        {
+            test: /\.(png|svg|jpg|gif)$/,
+            use:["url-loader"]
+        },
+        {
+            test:/\.css$/,
+            use:[
+                {
+                    loader:MiniCssExtractPlugin.loader,
+                },'css-loader',"postcss-loader"]
+        },
+        {
+            test:/\.scss$/,
+            use:[{
+                loader:MiniCssExtractPlugin.loader,
+            },'css-loader','sass-loader','postcss-loader']
+        }]
+    },
+
+    plugins:[
+        new HtmlWebpackPlugin({
+            filename: 'index.html',
+            template: path.join(__dirname, 'src/index.html')
+        }),
+        // new CleanWebpackPlugin(['dist']),
+        new MiniCssExtractPlugin({
+            // Options similar to the same options in webpackOptions.output
+            // both options are optional
+            filename: "css/[name].css",
+            chunkFilename: "css/[id].css"
+        }),
+
+        // new CopyWebpackPlugin([
+        //     { from: 'src/api', to: 'api' }
+        // ]),
+        // new UglifyJSPlugin(),
+        // new webpack.DefinePlugin({
+        //     'process.env': {
+        //         'NODE_ENV': JSON.stringify('production')
+        //      }
+        //  }),
+    ],
+
+    // optimization: {
+    //     splitChunks: {
+    //         chunks: 'all'
+    //     }
+    // },
+
     devServer: {
-        contentBase:'./dist',
+        contentBase:["dist"],
         historyApiFallback: {
             disableDotRule: true
         },
-        port:"8001",
-        headers: {
-        'X-Custom-Foo': 'bar'
-        }
+        port:3000
     },
-    mode: "development"
-}
-
-module.exports = merge({
-    customizeArray(a, b, key) {
-        /*entry.app不合并，全替换*/
-        if (key === 'entry.app') {
-            return b;
+    resolve:{
+        extensions: [".js","jsx", ".json"],
+        alias:{
+            pages: path.join(__dirname, 'src/pages'),
+            components: path.join(__dirname, 'src/components'),
+            router: path.join(__dirname, 'src/router'),
+            store: path.join(__dirname,'src/redux')
         }
-        return undefined;
     }
-})(commonConfig, devConfig);
+};

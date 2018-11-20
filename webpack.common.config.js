@@ -7,13 +7,13 @@ const commonConfig = {
             "babel-polyfill",
             path.join(__dirname,'src/index.js')
         ],
-        vendor: ['react', 'react-router-dom', 'redux', 'react-dom', 'react-redux']
+        // vendor: ['react', 'react-router-dom', 'redux', 'react-dom', 'react-redux']
     },
 
     output :{
         path : path.join(__dirname,'dist'),
-        filename:"js/bundle.[chunkhash].js",
-        chunkFilename: 'js/[name].[chunkhash].js',
+        filename:"js/bundle.js",
+        chunkFilename: 'js/[chunkhash].js',
         publicPath:"/"
     },
 
@@ -25,7 +25,7 @@ const commonConfig = {
                     loader:"babel-loader",
                     options:{
                         cacheDirectory:true,
-                        // presets:['@babel/preset-env']
+                        presets:['es2015']
                     }
                 },
                 exclude: /(node_modules|bower_components)/,
@@ -45,17 +45,17 @@ const commonConfig = {
         })
     ],
 
-    optimization: {
-        splitChunks: {
-            cacheGroups: {
-                commons: {
-                    name: "vendor",
-                    chunks: "initial",
-                    minChunks: 2
-                }
-            }
-        }
-    },
+    // optimization: {
+    //     splitChunks: {
+    //         cacheGroups: {
+    //             commons: {
+    //                 name: "vendor",
+    //                 chunks: "initial",
+    //                 minChunks: 2
+    //             }
+    //         }
+    //     }
+    // },
 
     resolve:{
         extensions: [".js","jsx", ".json"],
