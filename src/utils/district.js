@@ -4556,7 +4556,7 @@ function translateAddress(pCode, cCode, aCode) {
   if (flag) {
     const ckey = `0,${pCode}`;
     const akey = `0,${pCode},${cCode}`;
-    const prince = aLocation[0][pCode];
+    const prince = aLocation[0][pCode]; //获取省
     const city = aLocation[ckey][cCode];
     let area = '';
     if (aCode !== null) {
@@ -4569,7 +4569,6 @@ function translateAddress(pCode, cCode, aCode) {
 }
 
 const newLocation = initArea([], '0');
-
 export default {
   newLocation,
   aLocation,
