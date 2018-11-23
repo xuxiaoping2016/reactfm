@@ -14,7 +14,7 @@ export default class Home extends Component {
     }
 
     componentDidMount(){
-        console.log(d,',,,,,')
+        // console.log(d,',,,,,')
 			// module.exports = function(cb) {
 			// 	require.ensure([], function(require) {
 			// 		cb(require(loaderUtils.stringifyRequest(this, !!remainingRequest));

@@ -14,6 +14,18 @@ const publicConfig = {
     module : {
         rules:[
             {
+                test:/\.css$/,
+                use:[
+                    {
+                    loader: MiniCssExtractPlugin.loader,
+                    options: {
+                      // you can specify a publicPath here
+                      // by default it use publicPath in webpackOptions.output
+                      publicPath: '../'
+                    }
+                  },'css-loader','postcss-loader']
+            },
+            {
                 test:/\.scss$/,
                 use:[
                     {

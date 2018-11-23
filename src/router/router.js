@@ -1,29 +1,44 @@
 import React from 'react';
-import Bundle from './Bundle';
+import Loadable from 'react-loadable';
+// import Loadable from '../utils/loadable'
 import {Route, Switch} from 'react-router-dom';
 
 import Loading from 'components/Loading/Loading.jsx'
-import Home from 'pages/Home/Home';
-import Page1 from 'pages/Page1/Page1';
-import Counter from 'pages/Counter/Counter'
-import UserInfo from 'pages/UserInfo/UserInfo';
-import NotFound from 'pages/NotFound/NotFound.jsx';
+// import Home from 'pages/Home/Home';
+// import Page1 from 'pages/Page1/Page1';
+// import Counter from 'pages/Counter/Counter'
+// import UserInfo from 'pages/UserInfo/UserInfo';
+// import NotFound from 'pages/NotFound/NotFound.jsx';
 
-// import Loading from 'components/Loading/Loading.jsx'
-// import Home from 'bundle-loader?lazy&name=home!pages/Home/Home';
-// import Page1 from 'bundle-loader?lazy&name=page1!pages/Page1/Page1';
-// import Counter from 'bundle-loader?lazy&name=counter!pages/Counter/Counter'
-// import UserInfo from 'bundle-loader?lazy&name=userinfo!pages/UserInfo/UserInfo';
-// import NotFound from 'bundle-loader?lazy&name=notFound!pages/NotFound/NotFound.jsx';
+const Home = Loadable({
+    loader: () => import('pages/Home/Home'),
+    loading: Loading,
+  });
 
+  const Page1 = Loadable({
+    loader: () => import('pages/Page1/Page1'),
+    loading: Loading,
+  });
 
-// const createComponent = (Com) => (props) => (
-//     <Bundle load={Com}>
-//         {
-//             (Com) => Com ? <Com {...props} /> : <Loading/>
-//         }
-//     </Bundle>
-// );
+  const Counter = Loadable({
+    loader: () => import('pages/Counter/Counter'),
+    loading: Loading,
+  });
+
+  const UserInfo = Loadable({
+    loader: () => import('pages/UserInfo/UserInfo'),
+    loading: Loading,
+  });
+
+  const TableList = Loadable({
+    loader: () => import('pages/Table/index.jsx'),
+    loading: Loading,
+  });
+
+  const NotFound = Loadable({
+    loader: () => import('pages/NotFound/NotFound.jsx'),
+    loading: Loading,
+  });
 
 
 const getRouter = () => (
@@ -32,6 +47,7 @@ const getRouter = () => (
         <Route path="/page1" component={Page1}/>
         <Route path="/counter" component={Counter}/>
         <Route path="/userinfo" component={UserInfo}/>
+        <Route path="/table" component={TableList}/>
         <Route component={NotFound}/>
         {/* <Route exact path="/" component={createComponent(Home)}/>
         <Route path="/page1" component={createComponent(Page1)}/>

@@ -13,7 +13,7 @@ const commonConfig = {
     output :{
         path : path.join(__dirname,'dist'),
         filename:"js/bundle.js",
-        chunkFilename: 'js/[chunkhash].js',
+        chunkFilename: 'js/[chunkhash:5].js',
         publicPath:"/"
     },
 
@@ -25,7 +25,7 @@ const commonConfig = {
                     loader:"babel-loader",
                     options:{
                         cacheDirectory:true,
-                        presets:['es2015']
+                        presets:['es2015',"react"]
                     }
                 },
                 exclude: /(node_modules|bower_components)/,
