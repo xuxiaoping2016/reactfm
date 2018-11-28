@@ -1,6 +1,6 @@
 import React from 'react';
 import Bundle from './Bundle';
-import {Route, Switch} from 'react-router-dom';
+import {Route, Switch,Redirect} from 'react-router-dom';
 
 import Loading from 'components/Loading/Loading.jsx'
 import Home from 'bundle-loader?lazy&name=home!pages/Home/Home';
@@ -21,7 +21,8 @@ const createComponent = (Com) => (props) => (
 
 const getRouter = () => (
     <Switch>
-        <Route exact path="/" component={createComponent(Home)}/>
+        <Route exact path="/home" component={createComponent(Home)}/>
+        <Redirect exact from="/" to="/home"/>
         <Route path="/page1" component={createComponent(Page1)}/>
         <Route path="/counter" component={createComponent(Counter)}/>
         <Route path="/userinfo" component={createComponent(UserInfo)}/>
