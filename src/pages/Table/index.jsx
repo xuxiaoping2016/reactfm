@@ -7,6 +7,8 @@ import CellMerge from './cellMerge.jsx'
 import TreeData from './treeData.jsx'
 import FixedColRow from './fixedColRow.jsx'
 import ColumnGroup from './columnGroup.jsx'
+import EditableTable from './editCell.jsx'
+import NestingTable from './nestingTable.jsx'
 import './index.scss'
 
 export default class TableList extends Component {
@@ -20,7 +22,9 @@ export default class TableList extends Component {
                 {/* <CellMerge/>
                 <TreeData /> */}
                 {/* <FixedColRow/> */}
-                <ColumnGroup />
+                {/* <ColumnGroup /> */}
+                {/* <EditableTable /> */}
+                <NestingTable />
             </div>
         );
     }

@@ -5,11 +5,13 @@ import { Table, Input, Button, Popconfirm, Form } from 'antd';
 const FormItem = Form.Item;
 const EditableContext = React.createContext();
 
-const EditableRow = ({ form, index, ...props }) => (
-  <EditableContext.Provider value={form}>
-    <tr {...props} />
-  </EditableContext.Provider>
-);
+const EditableRow = ({ form, index, ...props }) => {
+  return (
+    <EditableContext.Provider value={form}>
+      <tr {...props} />
+    </EditableContext.Provider>
+  )
+};
 
 const EditableFormRow = Form.create()(EditableRow);
 
@@ -108,7 +110,7 @@ class EditableCell extends React.Component {
   }
 }
 
-class EditableTable extends React.Component {
+export default class EditableTable extends React.Component {
   constructor(props) {
     super(props);
     this.columns = [{
@@ -222,5 +224,3 @@ class EditableTable extends React.Component {
     );
   }
 }
-
-ReactDOM.render(<EditableTable />, mountNode);

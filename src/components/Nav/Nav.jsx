@@ -10,6 +10,7 @@ export default class Nav extends Component {
                 <li><Link to="/counter">counter</Link></li>
                 <li><Link to="/userinfo">userinfo</Link></li>
                 <li><Link to="/table">table</Link></li>
+                <li><Link to="/context">context</Link></li>
             </ul>
         )
     }

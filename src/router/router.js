@@ -35,10 +35,16 @@ const Home = Loadable({
     loading: Loading,
   });
 
+  const ContextStudy = Loadable({
+    loader: () => import('pages/context/index.jsx'),
+    loading: Loading,
+  });
+
   const NotFound = Loadable({
     loader: () => import('pages/NotFound/NotFound.jsx'),
     loading: Loading,
   });
+
 
 
 const getRouter = () => (
@@ -48,6 +54,7 @@ const getRouter = () => (
         <Route path="/counter" component={Counter}/>
         <Route path="/userinfo" component={UserInfo}/>
         <Route path="/table" component={TableList}/>
+        <Route path="/context" component={ContextStudy}/>
         <Route component={NotFound}/>
         {/* <Route exact path="/" component={createComponent(Home)}/>
         <Route path="/page1" component={createComponent(Page1)}/>
