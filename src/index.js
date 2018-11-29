@@ -1,3 +1,4 @@
+import 'raf/polyfill'
 import React from 'react';
 import ReactDom from 'react-dom';
 import {AppContainer} from 'react-hot-loader';

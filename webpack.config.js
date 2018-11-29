@@ -9,7 +9,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const commonConfig = require('./webpack.common.config.js');
 
 const publicConfig = {
-    devtool: 'cheap-module-source-map',
+    devtool: 'inline-source-map',
     mode: "production",
     module : {
         rules:[
@@ -48,7 +48,8 @@ const publicConfig = {
         }),
 
         new CopyWebpackPlugin([
-            { from: 'src/api', to: 'api' }
+            { from: 'src/api', to: 'api' },
+            { from: './.htaccess', to: '' }
         ]),
         // new UglifyJSPlugin(),
         new webpack.DefinePlugin({

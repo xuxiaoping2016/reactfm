@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import XLSX from 'xlsx'
-import { Input, Table } from 'antd'
+import { Input, Table, message } from 'antd'
 
 const { Column } = Table;
 
@@ -24,7 +24,13 @@ export default class FileReaderDemo extends Component {
     }
 
     onImageChange = e => {
+        if(typeof FileReader === undefined) {
+            message.warning('你的浏览器版本过低，请升级！！！')
+            return false;
+        }
+        
         const file = e.target.files[0];
+        
 
         const reader = new FileReader();
         reader.onload= (res) => {
