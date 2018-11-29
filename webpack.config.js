@@ -50,7 +50,7 @@ const publicConfig = {
         new CopyWebpackPlugin([
             { from: 'src/api', to: 'api' }
         ]),
-        new UglifyJSPlugin(),
+        // new UglifyJSPlugin(),
         new webpack.DefinePlugin({
             'process.env': {
                 'NODE_ENV': JSON.stringify('production')
