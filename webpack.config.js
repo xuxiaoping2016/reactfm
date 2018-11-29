@@ -14,6 +14,16 @@ const publicConfig = {
     module : {
         rules:[
             {
+                test:/\.css$/,
+                use:[
+                    {
+                    loader: MiniCssExtractPlugin.loader,
+                    options: {
+                      publicPath: '../'
+                    }
+                  },'css-loader','postcss-loader']
+            },
+            {
                 test:/\.scss$/,
                 use:[
                     {

@@ -10,6 +10,7 @@ import UserInfo from 'bundle-loader?lazy&name=userinfo!pages/UserInfo/UserInfo';
 import NotFound from 'bundle-loader?lazy&name=notFound!pages/NotFound/NotFound.jsx';
 
 
+
 const createComponent = (Com) => (props) => (
     <Bundle load={Com}>
         {
@@ -21,7 +22,7 @@ const createComponent = (Com) => (props) => (
 
 const getRouter = () => (
     <Switch>
-        <Route exact path="/home" component={createComponent(Home)}/>
+        <Route path="/home" component={createComponent(Home)}/>
         <Redirect exact from="/" to="/home"/>
         <Route path="/page1" component={createComponent(Page1)}/>
         <Route path="/counter" component={createComponent(Counter)}/>
