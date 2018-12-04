@@ -14,7 +14,7 @@ export default class FileReaderDemo extends Component {
         }
     }
 
-    fixdata= data => { //文件流转BinaryString
+    fixdata= data => { //文件流转 
         var o = "",
             l = 0,
             w = 10240;
