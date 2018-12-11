@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {request} from 'utils/request'
 
 export default class Home extends Component {
     constructor(props) {
@@ -12,6 +13,10 @@ export default class Home extends Component {
         if (this.state.count == 1) {
             console.log("...")
         }
+
+        request({
+            url:"/apif/purchaseList"
+        })
     }
 
     handleClick = () => {
