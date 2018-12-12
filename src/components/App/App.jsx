@@ -9,7 +9,7 @@ export default class App extends Component {
     render(){
         return (
             <Router>
-                <div>
+                <div style={{display:'flex'}}>
                     <Nav/>
                     {getRouter()}
                 </div>

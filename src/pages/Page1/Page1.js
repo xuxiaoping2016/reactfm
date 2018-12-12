@@ -1,6 +1,5 @@
 import history from 'utils/history'
 import React, { Component } from 'react';
-import { matchPath } from "react-router";
 import { Prompt } from 'react-router-dom'
 import His from './com'
 

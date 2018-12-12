@@ -1,0 +1,19 @@
+.foo{
+    font-size: 18px;
+}
+.bar {
+    color: #0f0;
+}
+.baz{
+    font-weight: bold;
+}
+
+.abc{
+    font-size: 24px;
+}
+.def {
+    color: #f00;
+}
+.xyz{
+    font-style: italic;
+}
