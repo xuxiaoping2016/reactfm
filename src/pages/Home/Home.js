@@ -1,30 +1,32 @@
 import React, { Component } from 'react';
-// import './style.css'
-import './style.scss'
 
-import im from '../../images/wait.png'
-export default class Home extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            count: 0
-        }
+
+
+
+class Search extends Component {
+    render(){
+        return (
+            <div>
+                {this.props.searchType}:<input type="text" />
+                <button>Search</button>
+            </div>
+        )
     }
+}
 
-    _handleClick() {
-        this.setState({
-            count: ++this.state.count
-        });
+export default class Home extends Component {
+    state = {enable: false}
+
+    handleClick = () => {
+        this.setState({enable: !this.state.enable});
     }
 
     render(){
         return (
-            <div className="container">
-                <p className="scss">测试scss 样式文件!!!!!!!!!!</p>
-                <img src={im}/>
-                this is home~~fdfkd<br/>
-                当前计数：{this.state.count}<br/>
-                <button onClick={() => this._handleClick()}>自增</button>
+            <div>
+                <h1>Welcome!</h1>
+                <Search searchType="Title" />
+                <Search  searchType="Content" />
             </div>
         )
     }
