@@ -2,15 +2,15 @@ import React, {Component} from 'react';
 import { observer, inject } from 'mobx-react';
 import { Table, Popconfirm } from 'antd';
 
-@inject('storebox')
+@inject('todoStore')
 @observer
 export default class TodoList extends Component{
     componentDidMount(){
-        const { storebox } = this.props;
-        storebox.fetchTodos();
+        const { todoStore } = this.props;
+        todoStore.fetchTodos();
     }
     render(){
-        const { storebox } = this.props;
+        const { todoStore } = this.props;
         const columns = [{
             title: 'todo',
             dataIndex: 'todo',
@@ -20,27 +20,27 @@ export default class TodoList extends Component{
             width: 100,
             render:  (text, record) => {
                 return(
-                    <Popconfirm title="确认删除?" onConfirm={() => storebox.remove(record.key)}>
+                    <Popconfirm title="确认删除?" onConfirm={() => todoStore.remove(record.key)}>
                         <a>删除</a>
                     </Popconfirm>
                 )
             }
         }];
         const rowSelection = {
-            selectedRowKeys: storebox.selectedRowKeys,
-            onChange: storebox.onSelectChange,
+            selectedRowKeys: todoStore.selectedRowKeys,
+            onChange: todoStore.onSelectChange,
         };
         return(
             <div>
                 <Table
-                    dataSource={storebox.todos.toJS()}
+                    dataSource={todoStore.todos.toJS()}
                     columns={columns}
                     rowSelection={rowSelection}
-                    loading={storebox.loading}
+                    loading={todoStore.loading}
                     pagination={false}
                     size='middle'
                 />
-                <p style={{marginTop:'15px'}}>{`Total ${storebox.total} items`}</p>
+                <p style={{marginTop:'15px'}}>{`Total ${todoStore.total} items`}</p>
             </div>
         )
     }

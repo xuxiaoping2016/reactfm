@@ -1,28 +1,30 @@
 import React from 'react';
-
+import Bundle from './Bundle';
 import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom';
 
-import Bundle from './Bundle';
-
 import Home from 'bundle-loader?lazy&name=home!pages/Home/Home.jsx';
-import TodoView from 'bundle-loader?lazy&name=home!pages/tododemo/TodoView'
+import TodoView from 'bundle-loader?lazy&name=home!pages/tododemo'
 import Order from 'bundle-loader?lazy&name=order!pages/order/index.jsx'
-import DrivedState from 'bundle-loader?lazy&name=drivedState!pages/getDerivedStateFromProps/index'
+import DrivedState from 'bundle-loader?lazy&name=drivedState!pages/getDerivedStateFromProps/index.jsx'
 import ContractNew from 'bundle-loader?lazy&name=contractnew!pages/contract/new/index'
 
-import Affix from 'bundle-loader?lazy&name=affix!pages/affix/index'
-import Hoc from 'bundle-loader?lazy&name=hoc!pages/hoc/index'
+import Affix from 'bundle-loader?lazy&name=affix!pages/affix/index.jsx'
+import Hoc from 'bundle-loader?lazy&name=hoc!pages/hoc/index.jsx'
 
 // import Transitiondemo from 'bundle-loader?lazy&name=transition!pages/transition/index'
-import Transitiondemo from 'pages/transition/index'
+import Transitiondemo from 'pages/transition/index.jsx'
 import ReactMotion from '../pages/reactMotioin/index'
-import LodashDemo from '../pages/lodash'
+import LodashDemo from '../pages/lodash/index.jsx'
 
-import CascaderDemo from '../pages/cascader'
+import CascaderDemo from '../pages/cascader/index.jsx'
 
+// import MobxDemo from 'bundle-loader?lazy&name=mobxDemo!pages/mobxDemo'
+// import MobxDemoChild1 from 'bundle-loader?lazy&name=mobxDemo!pages/mobxDemo/mobxDemo'
+import MobxDemo from '../pages/mobxDemo'
+import MobxDemoChild1 from '../pages/mobxDemo/mobxDemo'
+import MobxDemoChild2 from '../pages/mobxDemo/observerInfo'
 // import Todo from '../../component/todolists/index'
 // import Hello from '../../component/todolists/index2'
-
 const Loading = function () {
     return <div>Loading...</div>
 };
@@ -30,10 +32,11 @@ const Loading = function () {
 const createComponent = (Component) => (props) => (
     <Bundle load={Component}>
         {
-            (Component) => Component ? <Component {...props} /> : <Loading/>
+            (Com) => Com ? <Com {...props} /> : <Loading/>
         }
     </Bundle>
 );
+
 
 const getRouter = () => (
     <Router>
@@ -50,6 +53,7 @@ const getRouter = () => (
                 <li><Link to="/reactMotion">ReactMotion 动画</Link></li>
                 <li><Link to="/lodash">Lodash 源码学习</Link></li>
                 <li><Link to="/cascader">Cascader 级联选择</Link></li>
+                <li><Link to="/mobxdemo">mobx使用示例</Link></li>
             </ul>
             <div style={{flex:1}}>
             <Switch >
@@ -65,6 +69,13 @@ const getRouter = () => (
                 <Route path="/reactMotion" component={ReactMotion}/>
                 <Route path="/lodash" component={LodashDemo}/>
                 <Route path="/cascader" component={CascaderDemo}/>
+                {/* <Route path="/mobxdemo" component={createComponent(MobxDemo)}/> */}
+                <Route path="/mobxdemo" render = {() =>
+                    <MobxDemo>
+                        <Route path="/mobxdemo/child1" component={MobxDemoChild1}/>
+                        <Route path="/mobxdemo/child2" component={MobxDemoChild2}/>
+                    </MobxDemo>
+                }/>
             </Switch>
             </div>
         </div>

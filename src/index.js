@@ -2,9 +2,7 @@ import React from 'react';
 import ReactDom from 'react-dom';
 import {AppContainer} from 'react-hot-loader';
 import {Provider} from 'mobx-react';
-import AppStore from './store/AppStore'
-
-const storebox = new AppStore();
+import store from './store'
 
 import getRouter from 'router/router'
 
@@ -22,19 +20,10 @@ if (module.hot) {
 function renderWithHotReload(RootElement) {
     ReactDom.render(
         <AppContainer>
-            <Provider storebox = {storebox}>
+            <Provider {...store}>
                 {RootElement}
             </Provider>
         </AppContainer>,
         document.getElementById('app')
     )
 }
-
-
-
-// if (module.hot) {
-//     module.hot.accept();
-// }
-
-// ReactDom.render(
-//     getRouter(), document.getElementById('app'));

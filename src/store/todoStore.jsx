@@ -1,28 +1,25 @@
 import { observable, computed, action } from 'mobx';
 import $ from 'jquery'
+import {request} from 'utils/request'
 import { message } from 'antd';
 class AppStore {
     @observable todos = []; //todos列表
     @observable newtodo = ""; //新添加的todo
     @observable selectedRowKeys = []; //选择行的key
-    @observable loading = true; //Table-loading
+    @observable loading = false; //Table-loading
     @observable _key = 0; //key
     @observable total = 0; //数据量
 
-    @action fetchTodos(){
-        const that = this;
-        $.ajax({
-            url:"http://localhost/api/todos",
-            method:"GET",
-            type:"json",
-            success:(data) => {
-                var data = JSON.parse(data)
-                that.total = data.count;
-                that._key = data.data.length===0 ? 0: data.data[data.data.length-1].key;
-                that.todos = data.data;
-                that.loading = false;
-            }
+    @action async fetchTodos(){
+        this.loading = true;
+        const res = await request({
+            url:"http://localhost/api/todos"
         })
+        const data = res.data;
+        this.total = res.count;
+        this._key = data.length===0 ? 0: data[data.length-1].key;
+        this.todos = data;
+        this.loading = false;
     }
 
     @action fetchTodoAdd(){
@@ -98,4 +95,4 @@ class AppStore {
     }
 
 }
-export default AppStore;
+export default new AppStore();

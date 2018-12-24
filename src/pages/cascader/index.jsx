@@ -74,13 +74,12 @@ export default class CascaderDemo extends Component {
                <CascaderWithCode/>
                <LazyOptions/> */}
 
-               <AreasCascader
+               {/* <AreasCascader
                 style={{ width: '330px' }}
-                // useCache
                 placeholder="请选择开户省市"
                 query={{name:"xuxi"}}
                 displayRender={this.displayRender}
-              />
+              /> */}
             </div>
         )
     }
