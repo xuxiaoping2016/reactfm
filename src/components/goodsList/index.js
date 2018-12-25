@@ -1,154 +1,138 @@
 import React, { Component } from 'react';
-import { Checkbox, Icon, Spin } from 'antd';
-import Pagination from 'components/pagination';
-import PropTypes from 'prop-types';
+import { Checkbox, Spin } from 'antd';
+import PT from 'prop-types';
 
-import styles from './index.module.less';
+import './index.module.less';
 
 export default class GoodsList extends Component {
   static propTypes = {
-    dataSource: PropTypes.shape({
-      list: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-    }).isRequired,
-    column: PropTypes.arrayOf(Object).isRequired,
-    rowSelect: PropTypes.bool,
-    title: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.element,
-      PropTypes.func,
-    ]),
-    onSelectChange: PropTypes.func,
-    selected: PropTypes.arrayOf(PropTypes.shape({})),
-    onPageChange: PropTypes.func,
-    loading: PropTypes.bool,
-    showPagination: PropTypes.bool,
+    list: PT.arrayOf(PT.object).isRequired,
+    column: PT.arrayOf(Object).isRequired,
+    rowSelect: PT.shape({
+      onSelectChange: PT.func,
+    }),
+    title: PT.oneOfType([PT.string, PT.object, PT.func]),
+    loading: PT.bool,
+    className: PT.string,
   };
 
   static defaultProps = {
-    showPagination: true,
-    selected: [],
-    rowSelect: false,
+    // 只要有选择功能，rowSelect的三个字段都传递
+    rowSelect: {
+      show: false, // 是否展示选择框
+      selected: [], // 默认选中项
+      onSelectChange(selectedRows) {
+        // 选框变化后的回调函数  参数为选中的列表
+        console.log(selectedRows);
+      },
+    },
     title: '',
-    onSelectChange() {},
     loading: false,
-    onPageChange() {},
+    className: '',
   };
 
-  onChoose = e => {
+  // 处理全选 全不选
+  handleSelectAll = e => {
     const btn = e.target.checked;
     const {
-      dataSource: { list },
-      onSelectChange,
-      selected,
+      list,
+      rowSelect: { onSelectChange },
     } = this.props;
-    if (btn) {
-      // 全选
-      const data = [...list];
-      onSelectChange(data);
-    } else {
-      onSelectChange([]);
-    }
+
+    const data = btn ? [...list] : [];
+    // this.setState({ selected: data });
+    onSelectChange && onSelectChange(data);
   };
 
-  onSelect = (val, selected) => {
-    const { list } = this.props.dataSource;
-    const { onSelectChange } = this.props;
-    const data = [...selected];
-
-    const index = data.indexOf(val);
+  onSelect = val => {
+    const {
+      rowSelect: { onSelectChange, selected },
+    } = this.props;
+    const index = selected.indexOf(val);
     if (index == -1) {
-      data.push(val);
+      selected.push(val);
     } else {
-      data.splice(index, 1);
+      selected.splice(index, 1);
     }
-    onSelectChange(data);
+    onSelectChange && onSelectChange(selected);
   };
 
   render() {
     const {
-      dataSource: { list = [], ...pagination },
+      list = [],
       column,
-      rowSelect,
-      selected,
       title: ListTit,
-      onPageChange,
       loading,
-      showPagination,
+      rowSelect: { show, selected },
+      className,
     } = this.props;
-    const { page: current, pageSize, totalCount: total } = pagination;
-
-    const pageParam = {
-      current,
-      pageSize,
-      total,
-    };
 
     return (
-      <div className="goods-list-container-only">
+      <div className={`goods-list-container-only ${className}`}>
         <ul
           className="list-header"
-          style={{ paddingLeft: rowSelect ? '40px' : '0' }}
+          style={{ paddingLeft: show ? '40px' : '0' }}
         >
           {column.map((val, index) => {
             const child =
-              index == 0 && rowSelect && list.length ? (
+              index == 0 && show && list.length ? (
                 <Checkbox
-                  checked={selected.length && selected.length == list.length}
-                  onChange={this.onChoose}
+                  checked={selected.length && selected.length === list.length}
+                  onChange={this.handleSelectAll}
                 />
               ) : null;
             return (
-              <li key={index}>
+              <li
+                key={index}
+                className={index === 0 && show ? 'has-choose' : ''}
+                style={{ flex: val.width }}
+              >
                 {child}
                 {val.title}
               </li>
             );
           })}
         </ul>
+        <Spin spinning={loading}>
+          <ul className="list-body">
+            {list.length ? null : <li className="no-data">暂无数据</li>}
+            {list.map((val, index) => (
+              <li
+                key={index}
+                className={show ? 'list-item select' : 'list-item'}
+              >
+                <div className="list-item-title">
+                  {show ? (
+                    <Checkbox
+                      checked={selected.indexOf(val) != -1}
+                      onChange={this.onSelect.bind(this, val)}
+                    />
+                  ) : null}
+                  {typeof ListTit === 'function' ? (
+                    <ListTit record={val} />
+                  ) : (
+                    ListTit
+                  )}
+                </div>
+                <div className="list-item-body">
+                  {column.map((item, index) => {
+                    const text = val[item.key];
 
-        <ul className="list-body">
-          {list.length ? null : <li className="no-data">暂无数据</li>}
-          {list.map((val, index) => (
-            <li
-              key={index}
-              className={rowSelect ? 'list-item select' : 'list-item'}
-            >
-              <div className="list-item-title">
-                {rowSelect ? (
-                  <Checkbox
-                    checked={selected.indexOf(val) != -1}
-                    onChange={this.onSelect.bind(this, val, selected)}
-                  />
-                ) : null}
-                {typeof ListTit === 'string' ? '' : <ListTit data={val} />}
-              </div>
-              <div className="list-item-body">
-                {column.map((item, index) => {
-                  const text = val[item.key];
-
-                  return (
-                    <div className="item" key={index}>
-                      {item.render(text, val)}
-                    </div>
-                  );
-                })}
-              </div>
-            </li>
-          ))}
-        </ul>
-
-        <Spin spinning={loading} className="spin" />
-        {showPagination && total ? (
-          <div className="list-pagination">
-            <Pagination
-              onChange={onPageChange}
-              showTotal={() =>
-                `共${Math.ceil(total / pageSize)}页，当前为第${current}页`
-              }
-              {...pageParam}
-            />
-          </div>
-        ) : null}
+                    return (
+                      <div
+                        className="item"
+                        key={index}
+                        style={{ flex: item.width }}
+                      >
+                        {item.render ? item.render(text, val) : text}
+                      </div>
+                    );
+                  })}
+                </div>
+              </li>
+            ))}
+          </ul>
+        </Spin>
       </div>
     );
   }

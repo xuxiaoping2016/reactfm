@@ -8,14 +8,14 @@ export default function AuthorizedRoute(props) {
     render,
     authority,
     redirectPath,
-    onUnMatched,
+    onReject,
     ...rest
   } = props;
 
   return (
     <Authorized
       authority={authority}
-      onUnMatched={onUnMatched}
+      onReject={onReject}
       noMatch={
         <Route
           {...rest}

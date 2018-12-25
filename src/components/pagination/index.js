@@ -67,7 +67,7 @@ export default class Pagination extends React.Component {
 
   defaultShowTotal = () => {
     const { total, current } = this.props;
-    return `共${total}条记录,当前为第${current}页`;
+    return `共${total}条记录，当前为第${current}页`;
   };
 
   render() {

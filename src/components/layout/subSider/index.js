@@ -5,8 +5,6 @@ import { observer, inject } from 'mobx-react';
 import memoize from 'memoize-one';
 import classNames from 'classnames';
 import { Icon } from 'antd';
-import orderManageStore from 'pages/orderManage/list/modal';
-import rightsSafeguard from 'pages/rightsSafeguard/list/modal';
 import { findSubMatch } from '../../../utils/helper';
 import style from './index.module.less';
 
@@ -19,8 +17,6 @@ class SubSider extends React.Component {
   onClick = url => {
     const { reset } = this.props.ParamsStore;
     reset();
-    orderManageStore.reSet();
-    rightsSafeguard.reSet();
     window.location.href = url;
   };
 

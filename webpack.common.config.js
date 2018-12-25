@@ -63,7 +63,7 @@ const commonConfig = {
             pages: path.join(__dirname, 'src/pages'),
             components: path.join(__dirname, 'src/components'),
             router: path.join(__dirname, 'src/router'),
-            store: path.join(__dirname,'src/redux'),
+            store: path.join(__dirname,'src/store'),
             utils: path.join(__dirname,'src/utils')
         }
     }

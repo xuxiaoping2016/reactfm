@@ -37,14 +37,14 @@ class Sider extends React.Component {
 
   async componentDidMount() {
     const { initIds, saveActiveId } = this.props.SystemStore;
-    const { getKeyOrMenu } = this.props.XinyunStore;
+    const { getQueryMenu } = this.props.XinyunStore;
     const {
       location: { pathname },
     } = this.props.history;
     const pid = pathname.split('/')[2];
     const storeId = pathname.split('/')[3];
     initIds(pid, storeId);
-    await getKeyOrMenu(pid, storeId);
+    await getQueryMenu(pid, storeId);
     const { menu } = this.props.XinyunStore;
     const activeId = findMatch(menu, pathname);
     if (activeId) {

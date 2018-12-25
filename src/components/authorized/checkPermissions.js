@@ -49,10 +49,10 @@ function checkPermissions(auth, permissions, target, exception) {
   return exception;
 }
 
-export default function check(auth, target, exception, onUnMatched) {
+export default function check(auth, target, exception, onReject) {
   const result = checkPermissions(auth, currentPermissions, target, exception);
-  if (result !== target && typeof onUnMatched === 'function') {
-    onUnMatched(currentPermissions);
+  if (result !== target && typeof onReject === 'function') {
+    onReject(currentPermissions);
   }
   return result;
 }

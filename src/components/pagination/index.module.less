@@ -1,42 +1,46 @@
 .pagination {
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    padding-left: 20px;
-    padding-right: 20px;
-    height: 60px;
-    :global {
-        .ant-pagination {
-            flex: 1;
-            display: flex;
-            .ant-pagination-total-text {
-                flex: 1;
-            }
-        }
-        .right {
-            margin-left: 20px;
-            display: flex;
-        }
-        .input {
-            width: 60px;
-            margin-right: 0;
-            border-top-right-radius: 0;
-            border-bottom-right-radius: 0;
-            border-right-width: 0;
-        }
-        .button {
-            width: 36px;
-            padding: 0;
-            margin-left: 0;
-            border-top-left-radius: 0;
-            border-bottom-left-radius: 0;
-        }
-        .pre,
-        .next {
-            width: 36px;
-            padding: 0;
-            margin: 0;
-        }
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-left: 20px;
+  padding-right: 20px;
+  height: 60px;
+  overflow: hidden;
+  :global {
+    .ant-pagination {
+      flex: 1;
+      display: flex;
+      .ant-pagination-total-text {
+        flex: 1;
+      }
     }
+    .right {
+      margin-left: 20px;
+      display: flex;
+    }
+    .input {
+      width: 60px;
+      margin-right: 0;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      border-right-width: 0;
+    }
+    .button {
+      width: 36px;
+      padding: 0;
+      margin-left: 0;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+    .pre,
+    .next {
+      width: 36px;
+      padding: 0;
+      margin: 0;
+    }
+    .ant-pagination-total-text {
+      white-space: nowrap;
+    }
+  }
 }

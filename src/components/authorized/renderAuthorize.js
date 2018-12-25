@@ -2,7 +2,7 @@
 let currentPermissions = [];
 
 function renderAuthorize(Authorized) {
-  return function(permissions) {
+  return function authorize(permissions) {
     currentPermissions = permissions;
     return Authorized;
   };

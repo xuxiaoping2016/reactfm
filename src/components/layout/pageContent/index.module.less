@@ -1,23 +1,31 @@
 .pageContent {
-    background-color: #fff;
-    height: calc(100vh - 60px);
-    border-radius: 5px;
-    padding: 0px 10px;
-    display: flex;
-    flex-direction: column;
+  background-color: #fff;
+  border-radius: 5px;
+  padding-left: 10px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  box-shadow: 0 0 4px 0 rgba(200, 200, 200, 0.4);
 }
 
-.titles {
-    height: 66px;
-    display: flex;
-    align-items: center;
+.title {
+  :global {
+    .ant-breadcrumb-link {
+      line-height: 66px;
+    }
+  }
 }
 
-.scroll {
-    flex: 1;
-    overflow-y: auto;
-    border-radius: 5px;
-    background: #f2f2f6;
-    border-radius: 5px;
-    overflow-y: auto;
+.contentWrap {
+  flex: 1;
+  // overflow-y: auto;
+  border-radius: 5px;
+  background: #f2f2f6;
+  border-radius: 5px;
+}
+.scroller {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  overflow-y: auto;
 }

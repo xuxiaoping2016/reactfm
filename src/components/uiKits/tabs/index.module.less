@@ -1,0 +1,36 @@
+.tabs {
+  background-color: #fff;
+  height: 100%;
+  :global {
+    .ant-tabs {
+      height: 100%;
+    }
+    .ant-tabs.ant-tabs-card > .ant-tabs-bar {
+      margin-bottom: 0;
+      border-bottom: none;
+      .ant-tabs-nav-container {
+        height: 66px;
+        display: flex;
+        align-items: center;
+        .ant-tabs-tab {
+          font-size: 14px;
+          background-color: transparent;
+          border: none;
+          border-radius: 6px;
+          margin-right: 20px;
+          color: #595961;
+          &-active {
+            background: #2589ff;
+            color: #fff;
+            font-weight: normal;
+          }
+        }
+      }
+    }
+    .ant-tabs-extra-content {
+      height: 66px;
+      display: flex;
+      align-items: center;
+    }
+  }
+}

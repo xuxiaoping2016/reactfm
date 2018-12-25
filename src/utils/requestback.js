@@ -1,27 +1,26 @@
-/* eslint-disable */
-import 'whatwg-fetch';
 import qs from 'qs';
-import get from 'lodash/get';
-import { hashStr } from './string';
+import {
+  isFunction,
+  isUndefined,
+  isNumber,
+  isString,
+  isArray,
+  get,
+} from 'lodash';
 import { getToken, getPid, logoutURL, removeToken } from './env';
 import history from './history';
 import { qualificationApplyPath } from './pathPattern';
 
-//组合
-function compose(...middleswares) {
-  if (middleswares.length === 0) {
-    return (fetch, url, options) => fetch(url, options);
-  }
-  return middleswares.reduce(
-    (outer, inner) => (fetch, outerUrl, outerOptions) =>
-      outer(
-        (innerUrl, innerOptions) => inner(fetch, innerUrl, innerOptions),
-        outerUrl,
-        outerOptions
-      )
-  );
-}
-//网络错误状态码
+const isObject = value => value !== null && typeof value === 'object';
+const navigator = {
+  toQualificationApply() {
+    history.push(qualificationApplyPath());
+  },
+  logout() {
+    removeToken();
+    window.location.href = logoutURL;
+  },
+};
 const errCodeMessages = {
   400: '发出的请求有错误，服务器没有进行新建或修改数据的操作。',
   401: '用户没有权限（令牌、用户名、密码错误）。',
@@ -35,59 +34,6 @@ const errCodeMessages = {
   503: '服务不可用，服务器暂时过载或维护。',
   504: '网关超时。',
 };
-//状态码判断
-function isResponseStatusOk(response) {
-  const { status } = response;
-  return (status >= 200 && status < 300) || status === 304;
-}
-//response error抛出
-function throwError(response = {}) {
-  const errortext = errCodeMessages[response.status] || response.statusText;
-  const error = new Error(errortext);
-  error.name = response.status;
-  error.response = response;
-  console.warn(`"${response.url}"请求错误 ${response.status}: ${errortext}`);
-  throw error;
-}
-//url参数填充 /person/:id + options.params={id:'1'} --> /person/1
-const stringifyParams = (fetch, url, options) => {
-  const { params } = options;
-  if (typeof params === 'object') {
-    url = url.replace(/:([a-z0-9_\-%]+)/gi, (source, $1) => params[$1] || '');
-  }
-  return fetch(url, options);
-};
-//url查询参数填充
-const stringifyQuery = (fetch, url, options) => {
-  const { query } = options;
-  if (typeof query === 'object') {
-    const search = url.split('?')[1];
-    url = url + (search ? '&' : '?') + qs.stringify(query);
-  }
-  return fetch(url, options);
-};
-//自动添加headers的 “Content-Type”
-const autoContentType = (fetch, url, options) => {
-  const { body, method, query } = options;
-  if (!options.headers) {
-    options.headers = {};
-  }
-  if (!options.headers['Content-Type']) {
-    if (method === 'POST' || method === 'PUT') {
-      if (body instanceof FormData) {
-        options.headers['Content-Type'] = 'multipart/form-data';
-      } else if (body instanceof Object) {
-        options.body = JSON.stringify(body);
-        options.headers['Content-Type'] = 'application/json; charset=utf-8';
-      }
-    }
-    if (typeof query === 'object') {
-      options.headers['Content-Type'] = 'application/x-www-form-urlencoded';
-    }
-  }
-  return fetch(url, options);
-};
-
 const responseTypes = {
   'application/json': 'json',
   'text/html': 'text',
@@ -96,11 +42,200 @@ const responseTypes = {
   FormData: 'formData',
   ArrayBuffer: 'arrayBuffer',
 };
-//自动格式化response
-const autoResponseType = response => {
+
+const throwError = (response = {}) => {
+  const errortext = errCodeMessages[response.status] || response.statusText;
+  const error = new Error(errortext);
+  error.name = response.status;
+  error.response = response;
+  console.warn(`"${response.url}"请求错误 ${response.status}: ${errortext}`);
+  throw error;
+};
+
+const isResponseStatusOk = response => {
+  const { status } = response;
+  return (status >= 200 && status < 300) || status === 304;
+};
+
+class InterceptorsManager {
+  constructor(interceptors) {
+    this.interceptors = interceptors;
+  }
+
+  use(onFulfilled, onReject) {
+    if (isFunction(onFulfilled)) {
+      if (isUndefined(onReject)) {
+        this.interceptors.push(onFulfilled);
+        return this.interceptors.length - 1;
+      }
+      if (isFunction(onReject)) {
+        this.interceptors.push({ onFulfilled, onReject });
+        return this.interceptors.length - 1;
+      }
+    }
+    return -1;
+  }
+
+  eject(id) {
+    if (isNumber(id) && id >= 0 && id < this.interceptors.length) {
+      this.interceptors.splice(id, 1);
+    }
+  }
+
+  compose(promise, additionalInterceptors = []) {
+    return additionalInterceptors
+      .concat(this.interceptors)
+      .reduce((access, interceptor) => {
+        if (isObject(interceptor)) {
+          return access.then(interceptor.onFulfilled, interceptor.onReject);
+        }
+
+        if (isFunction(interceptor)) {
+          return access.then(interceptor);
+        }
+        return access;
+      }, promise);
+  }
+}
+
+class Request {
+  constructor(opts = {}) {
+    const { transformRequest = [], transformResponse = [] } = opts;
+    this.interceptors = {
+      request: new InterceptorsManager(transformRequest),
+      response: new InterceptorsManager(transformResponse),
+    };
+
+    ['get', 'post', 'put', 'patch', 'head', 'delete'].forEach(name => {
+      this[name] = (url, options = {}) =>
+        this.send({ url, ...options, method: name.toUpperCase() });
+    });
+  }
+
+  send(opts = {}) {
+    const { transformRequest, transformResponse, ...config } = opts;
+    let promise = Promise.resolve(config);
+    promise = this.interceptors.request.compose(
+      promise,
+      transformRequest
+    );
+    promise = promise.then(({ url, ...options }) => fetch(url, options));
+    promise = this.interceptors.response.compose(
+      promise,
+      transformResponse
+    );
+    return promise;
+  }
+}
+
+//* ************request interceptors start */
+function auth(config) {
+  // eslint-disable-next-line no-param-reassign
+  config.headers = Object.assign(config.headers || {}, {
+    authorization: `Bearer ${getToken()}`,
+    pid: getPid(),
+    wid: window.wid,
+  });
+  return config;
+}
+
+class MobxGetter {
+  static stores = {};
+
+  static pathsMap = {
+    pid: ['SystemStore', 'pid'],
+    storeId: ['SystemStore', 'storeId'],
+    wid: ['SystemStore', 'wid'],
+    fid: ['financeStore', 'fid'],
+    supplierId: ['XinyunStore', 'supplierInfo', 'supplierId'],
+  };
+
+  static regist(stores) {
+    MobxGetter.stores = stores;
+  }
+
+  static interceptor(config) {
+    const { fromMobx, ...restConfig } = config;
+    if (isObject(fromMobx)) {
+      Object.keys(fromMobx).forEach(prop => {
+        const mobxPaths = fromMobx[prop];
+        if (isArray(mobxPaths)) {
+          const values = {};
+          mobxPaths.forEach(i => {
+            if (MobxGetter.pathsMap[i]) {
+              values[i] = get(MobxGetter.stores, MobxGetter.pathsMap[i]);
+            }
+          });
+          restConfig[prop] = Object.assign(restConfig[prop] || {}, values);
+        }
+      });
+    }
+    return restConfig;
+  }
+}
+
+function injectParams(config) {
+  const { url, params } = config;
+  if (isObject(params)) {
+    // eslint-disable-next-line no-param-reassign
+    config.url = url.replace(
+      /:([a-z0-9_\-%]+)/gi,
+      (source, $1) => params[$1] || ''
+    );
+  }
+  return config;
+}
+
+function autoContentType(config) {
+  const { body, method, query } = config;
+  let { headers } = config;
+  if (!isObject(headers)) {
+    // eslint-disable-next-line no-param-reassign
+    config.headers = {};
+    headers = config.headers;
+  }
+  if (!isString(headers['Content-Type'])) {
+    if (method === 'POST' || method === 'PUT') {
+      if (isObject(body)) {
+        // eslint-disable-next-line no-param-reassign
+        config.body = JSON.stringify(body);
+        headers['Content-Type'] = 'application/json; charset=utf-8';
+      }
+    }
+    if (isObject(query)) {
+      headers['Content-Type'] = 'application/x-www-form-urlencoded';
+    }
+  } else if (body instanceof FormData) {
+    delete headers['Content-Type'];
+  }
+  return config;
+}
+
+function serializeQuery(config) {
+  const { url, query } = config;
+  if (isObject(query)) {
+    const search = url.split('?')[1];
+    // eslint-disable-next-line no-param-reassign
+    config.url = url + (search ? '&' : '?') + qs.stringify(query);
+  }
+  return config;
+}
+//* ************request interceptors end */
+
+//* ************response interceptors start */
+function checkResponseStatus(response) {
+  if (isResponseStatusOk(response)) {
+    return response;
+  }
+  throwError(response);
+  return null;
+}
+
+function autoResponseType(response) {
   const contentType = response.headers.get('content-type');
-  let responseType;
+  let responseType = '';
   if (contentType) {
+    // eslint-disable-next-line
     for (const key in responseTypes) {
       if (contentType.includes(key)) {
         responseType = responseTypes[key];
@@ -109,203 +244,38 @@ const autoResponseType = response => {
     }
   }
   return responseType ? response[responseType]() : response;
-};
-//检查response状态码 原生fetch对于某些网络错误仍然会resolve
-const checkResponseStatus = response => {
-  if (isResponseStatusOk(response)) {
-    return response;
-  }
-  throwError(response);
-};
-// 登录信息失效
-function invalidSession(response) {
-  const code = parseInt(response.code);
+}
+
+function checkSession(response) {
+  const code = parseInt(response.code, 10);
   if (code === 1041) {
-    removeToken();
-    window.location.href = logoutURL;
-    response.statusText = '登录信息失效';
+    navigator.logout();
     throwError(response);
   }
   return response;
 }
-// 供货商未入驻
-function invalidSupplier(response) {
-  const code = parseInt(response.code);
+
+function checkSupplier(response) {
+  const code = parseInt(response.code, 10);
   if (code >= 3800200150000 && code < 3800200160000) {
-    history.push(qualificationApplyPath());
+    navigator.toQualificationApply();
   }
   return response;
 }
-//预添加headers参数中间件的生成器
-const setHeaders = (name, value) => (fetch, url, options) => {
-  const finalValue = typeof value === 'function' ? value() : value;
-  if (finalValue) {
-    (options.headers || (options.headers = {}))[name] = finalValue;
-  }
-  return fetch(url, options);
-};
+//* ************response interceptors end */
 
-class Request {
-  constructor(requestMiddlewares, responseHandlers) {
-    this.requestMiddlewares = requestMiddlewares || [];
-    this.responseHandlers = responseHandlers || [];
-    this.chain = compose(...this.requestMiddlewares);
-    ['get', 'post', 'put', 'patch', 'head', 'delete'].forEach(method => {
-      this[method] = (url, options, extraMiddlewares) =>
-        this.fetch(
-          url,
-          { ...options, method: method.toUpperCase() },
-          extraMiddlewares
-        );
-    });
-  }
+const request = new Request();
 
-  header(name, value) {
-    this.middleware(`headers.${name}`, setHeaders(name, value));
-  }
+request.interceptors.request.use(auth);
+request.interceptors.request.use(MobxGetter.interceptor);
+request.interceptors.request.use(injectParams);
+request.interceptors.request.use(autoContentType);
+request.interceptors.request.use(serializeQuery);
 
-  middleware(name, middleware) {
-    const index = this.requestMiddlewares.findIndex(
-      item => item.MIDDLEWARE_NAME === name
-    );
-    const middlewares = this.requestMiddlewares.slice(0);
-    if (typeof middleware === 'function') {
-      middleware.MIDDLEWARE_NAME = name;
-      if (index === -1) {
-        middlewares.push(middleware);
-      } else {
-        middlewares[index] = middleware;
-      }
-    } else if (index >= 0) {
-      middlewares.splice(index, 1);
-    }
-    this.requestMiddlewares = middlewares;
-    this.chain = compose(...this.requestMiddlewares);
-  }
-
-  fetch(url, options = {}, extraMiddlewares) {
-    const { expires } = options;
-
-    let cacheKey;
-    let shouldCache = false;
-    //{expires:5000} localStorage缓存5秒后过期
-    if (typeof expires === 'number' && expires > 0) {
-      cacheKey = hashStr(url);
-      const cachedData = localStorage.getItem(cacheKey);
-      const cachedDate = localStorage.getItem(`${cacheKey}:ms`);
-      if (cachedData) {
-        if (Date.now() - Number(cachedDate) < expires) {
-          return Promise.resolve(JSON.parse(cachedData));
-        }
-        localStorage.removeItem(cacheKey);
-        localStorage.removeItem(`${cacheKey}:ms`);
-        shouldCache = true;
-      } else {
-        shouldCache = true;
-      }
-    }
-    let handlers = this.responseHandlers;
-    let finalFetch = this.chain;
-    if (extraMiddlewares) {
-      if (typeof extraMiddlewares === 'function') {
-        finalFetch = compose(
-          extraMiddlewares,
-          this.chain
-        );
-      } else if (Array.isArray(extraMiddlewares)) {
-        finalFetch = compose(
-          ...extraMiddlewares,
-          this.chain
-        );
-      }
-    }
-
-    return finalFetch(
-      global.fetch || window.fetch || Window.fetch,
-      url,
-      options
-    ).then(response => {
-      const contentType = response.headers.get('Content-Type');
-      if (
-        shouldCache &&
-        contentType &&
-        isResponseStatusOk(response) &&
-        contentType.match(/application\/json/i)
-      ) {
-        response
-          .clone()
-          .json()
-          .then(data => {
-            localStorage.setItem(cacheKey, JSON.stringify(data));
-            localStorage.setItem(`${cacheKey}:ms`, Date.now());
-          });
-      }
-      if (!handlers || handlers.length === 0) {
-        return response;
-      }
-      return handlers.reduce(
-        (promise, hanler) => promise.then(hanler),
-        Promise.resolve(response)
-      );
-    });
-  }
-}
-
-const request = new Request(
-  [stringifyParams, stringifyQuery, autoContentType],
-  [checkResponseStatus, autoResponseType, invalidSession, invalidSupplier]
-);
-request.header('authorization', () => `Bearer ${getToken()}`);
-request.header('pid', () => getPid());
-request.header('wid', () => window.wid || '');
-
-const mobxKeyPathsMap = {
-  pid: 'SystemStore.pid',
-  storeId: 'SystemStore.storeId',
-  wid: 'SystemStore.wid',
-  fid: 'financeStore.fid',
-};
-function registStores(stores) {
-  request.stores = stores;
-}
-const formatValue = value => {
-  const pathName = mobxKeyPathsMap[value];
-  return typeof value === 'function'
-    ? value(stores)
-    : pathName && get(request.stores, pathName);
-};
-const createMiddleware = type => (setters, item) => (fetch, url, options) => {
-  if (!options[type]) {
-    options[type] = {};
-  }
-  if (typeof setters === 'string') {
-    if (item) {
-      options[type][setters] = formatValue(item) || item;
-    } else {
-      const finalValue = formatValue(setters);
-      if (finalValue) {
-        options[type][setters] = finalValue;
-      }
-    }
-  } else if (Array.isArray(setters)) {
-    setters.forEach(value => {
-      const finalValue = formatValue(value);
-      if (finalValue) {
-        options[type][value] = finalValue;
-      }
-    });
-  } else if (typeof setters === 'object') {
-    Object.keys(setters).forEach(key => {
-      const value = setters[key];
-      options[type][key] = formatValue(value) || value;
-    });
-  }
-  return fetch(url, options);
-};
-
-const extraQuery = createMiddleware('query');
-const extraBody = createMiddleware('body');
-const extraHeader = createMiddleware('headers');
+request.interceptors.response.use(checkResponseStatus);
+request.interceptors.response.use(autoResponseType);
+request.interceptors.response.use(checkSession);
+request.interceptors.response.use(checkSupplier);
 
 export default request;
-export { registStores, extraQuery, extraBody, extraHeader };
+export { MobxGetter };

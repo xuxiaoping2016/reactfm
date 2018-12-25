@@ -1,8 +1,7 @@
 import React from 'react';
 import PropsTypes from 'prop-types';
 import { Table, Form } from 'antd';
-import { isEqual } from 'lodash';
-import Ellipsis from 'components/ellipsis';
+import Ellipsis from 'components/uiKits/ellipsis';
 import { EditableFormRow, EditableCell, EditableContext } from './editableCell';
 import TableContext from './tableContext';
 import style from './index.module.less';
@@ -43,6 +42,7 @@ class DetailTable extends React.Component {
       disabledKey,
       emptyText,
       form,
+      type,
       isFormWrapped,
       bordered,
     } = this.props;
@@ -105,25 +105,27 @@ class DetailTable extends React.Component {
     };
 
     return (
-      <TableContext.Provider value={form}>
-        <Table
-          className={style.table}
-          components={components}
-          loading={isLoading}
-          size={size}
-          scroll={scroll}
-          rowKey={rowKey}
-          bordered={bordered}
-          dataSource={dataSource}
-          locale={{ emptyText: emptyText || '暂无数据' }}
-          rowSelection={checkable ? rowSelection : null}
-          pagination={false}
-          onChange={this.onChange}
-        >
-          {items}
-          {action ? action() : null}
-        </Table>
-      </TableContext.Provider>
+      <div className={style[`ui-${type}-table`]}>
+        <TableContext.Provider value={form}>
+          <Table
+            className={style.table}
+            components={components}
+            loading={isLoading}
+            size={size}
+            scroll={scroll}
+            rowKey={rowKey}
+            bordered={bordered}
+            dataSource={dataSource}
+            locale={{ emptyText: emptyText || '暂无数据' }}
+            rowSelection={checkable ? rowSelection : null}
+            pagination={false}
+            onChange={this.onChange}
+          >
+            {items}
+            {action ? action() : null}
+          </Table>
+        </TableContext.Provider>
+      </div>
     );
   }
 }
@@ -148,6 +150,7 @@ DetailTable.propsTypes = {
   disabledKey: PropsTypes.string,
   bordered: PropsTypes.bool,
   onSorterChange: PropsTypes.func,
+  type: PropsTypes.oneOf(['', 'strip', 'pure']),
 };
 
 DetailTable.defaultProps = {
@@ -156,7 +159,7 @@ DetailTable.defaultProps = {
   pageSize: 10,
   current: 1,
   total: 0,
-  size: 'middle',
+  size: 'default',
   action: null,
   isLoading: false,
   checkable: false,
@@ -165,4 +168,5 @@ DetailTable.defaultProps = {
   bordered: false,
   scroll: {},
   onSorterChange: () => {},
+  type: '',
 };

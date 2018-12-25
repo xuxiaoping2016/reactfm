@@ -1,0 +1,47 @@
+.commonModal {
+  .modalBody {
+  }
+
+  :global {
+    .ant-modal-body {
+      padding: 20px 0px;
+    }
+    .loading {
+      background: url('../assets/img/loading.gif') no-repeat left center;
+      height: 30px;
+      line-height: 30px;
+      padding-left: 40px;
+      width: 120px;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      margin-left: -60px;
+      z-index: 1002;
+    }
+
+    .text-ellipsis {
+      display: block;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .clearfix:before,
+    .clearfix:after {
+      content: ' ';
+      display: table;
+    }
+    .clearfix:after {
+      clear: both;
+    }
+    .clearfix:before {
+      content: '';
+      display: block;
+      height: 0;
+      clear: both;
+    }
+
+    .clearfix {
+      zoom: 1;
+    }
+  }
+}

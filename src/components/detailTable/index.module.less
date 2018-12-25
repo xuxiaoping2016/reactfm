@@ -1,38 +1,80 @@
 .table {
-    table {
-        border-collapse: collapse;
+  table {
+    border-collapse: collapse;
+  }
+  :global {
+    .ant-table-thead {
+      border-bottom: 1px solid #e8e8e8;
     }
-    :global {
-        .ant-pagination-options-quick-jumper {
-            button {
-                background-color: #fff;
-                width: 50px;
-                height: 32px;
-                border-radius: 4px;
-                line-height: 20px;
-                margin-left: 8px;
-            }
-        }
-        .ant-table-thead {
-            border-bottom: 1px solid #e8e8e8;
-        }
-        .ant-table-pagination {
-            display: flex;
-            width: 100%;
-        }
-        .ant-pagination-total-text {
-            padding-left: 10px;
-            flex: 1;
-        }
-        .ant-table-selection-column {
-            min-width: 30px !important;
-            width: 30px !important;
-        }
-        .ant-table {
-            border: 1px solid #e8e8e8;
-        }
-        .ant-table-content {
-            border: none !important;
-        }
+    .ant-table-pagination {
+      display: flex;
+      width: 100%;
     }
+    .ant-pagination-total-text {
+      padding-left: 10px;
+      flex: 1;
+    }
+    .ant-table-selection-column {
+      min-width: 30px !important;
+      width: 30px !important;
+    }
+    .ant-table {
+      border: 1px solid #e8e8e8;
+    }
+    .ant-table-content {
+      border: none !important;
+    }
+    .ant-table-content {
+      tr {
+        border: none;
+        td {
+          border: none;
+        }
+      }
+    }
+    .ant-table-content {
+      overflow: hidden;
+      border-radius: 10px !important;
+      border: 1px solid #e3e2e5;
+    }
+
+    .ant-table-tbody > tr > td {
+      border-bottom: none;
+    }
+
+    .ant-card-wider-padding .ant-card-body {
+      padding: 10px;
+    }
+
+    .ant-table-thead > tr > th {
+      background: #fff;
+      border-bottom: none;
+    }
+
+    .ant-table-tbody .ant-table-row:nth-child(2n-1) {
+      background: #f2f2f6;
+    }
+
+    .ant-table-thead > tr > th,
+    .ant-table-tbody > tr > td {
+      padding: 15px;
+    }
+    .ant-table {
+      background: #fff;
+      border-radius: 10px;
+      table {
+        th,
+        td {
+          font-size: 12px;
+          padding: 15px;
+        }
+        th {
+          font-weight: 700;
+        }
+      }
+    }
+  }
 }
+
+@import './uiStyles/pure';
+@import './uiStyles/strip';

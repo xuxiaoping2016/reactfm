@@ -1,0 +1,136 @@
+.merchantItemSmall {
+  position: relative;
+  float: left;
+  margin: 0 24px 30px;
+}
+
+.merchantItemSmall .item-content {
+  display: block;
+  width: 80px;
+  height: 100px;
+  color: #595961;
+}
+
+.merchantItemSmall .item-content .shop-logo-container {
+  width: 80px;
+  height: 80px;
+  position: relative;
+}
+
+.merchantItemSmall .item-content .shop-logo-container .item-img {
+  border: 1px solid #e5e4e9;
+  width: 80px;
+  height: 80px;
+  border-radius: 40px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.merchantItemSmall .item-content .shop-logo-container .logo-mark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 80px;
+  height: 80px;
+  border-radius: 40px;
+  background-color: rgba(255, 255, 255, 0);
+  z-index: 1;
+  transition: all 0.3s;
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+}
+
+.merchantItemSmall .item-content .item-name {
+  text-align: center;
+}
+
+.merchantItemSmall .item-content .item-operate {
+  display: none;
+  position: relative;
+}
+
+.merchantItemSmall .item-content .item-operate .edit-btn,
+.merchantItemSmall .item-content .item-operate .del-btn {
+  display: inline-block;
+  position: absolute;
+  width: 50px;
+  height: 24px;
+  line-height: 24px;
+  background: rgba(255, 255, 255, 0);
+  border: 1px solid #ecf0f7;
+  border-radius: 100px;
+  text-align: center;
+  cursor: pointer;
+  &:hover {
+    background: #ecf0f7;
+  }
+}
+
+.merchantItemSmall .item-content .item-operate .edit-btn {
+  left: -13px;
+  top: 0;
+}
+
+.merchantItemSmall .item-content .item-operate .del-btn {
+  right: -13px;
+  top: 0;
+}
+
+.merchantItemSmall .item-content .item-footer {
+  height: 20px;
+  line-height: 20px;
+  margin-top: 5px;
+}
+
+.merchantItemSmall .item-content:hover {
+  cursor: pointer;
+}
+
+.merchantItemSmall .item-content:hover .item-operate {
+  display: block;
+}
+
+.merchantItemSmall .item-content:hover .item-name {
+  display: none;
+}
+
+.sfc-shop-handle-box .shop-list-box .modal-body .big-shop-container {
+  position: relative;
+  padding: 0 15px;
+}
+
+.del-shop-tips-new-sm {
+  width: 220px;
+  height: 200px;
+  overflow-y: auto;
+  background-color: #fff;
+  box-shadow: 0 20px 40px 0 rgba(2, 31, 65, 0.1);
+  border-radius: 10px;
+  z-index: 1000;
+  padding: 20px 20px 0;
+}
+.del-shop-tips-left {
+  position: absolute;
+  left: 130px;
+}
+.del-shop-tips-right {
+  position: absolute;
+  right: 130px;
+}
+
+.tip-title {
+  font-size: 12px;
+  color: #ff5050;
+  line-height: 20px;
+}
+
+.tips-container {
+  font-size: 12px;
+  color: #000000;
+  line-height: 20px;
+  list-style: none;
+  padding-left: 12px;
+  margin-top: 10px;
+}

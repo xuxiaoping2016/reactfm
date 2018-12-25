@@ -1,0 +1,155 @@
+.editForm {
+  display: flex; // justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  height: 385px;
+  overflow-y: auto;
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    background-color: #f4f6f7;
+  }
+  &::-webkit-scrollbar-thumb {
+    // width: 10px;
+    height: 65px; // -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: rgba(50, 50, 50, 0.3);
+  }
+  :global {
+    .ant-form-item-children {
+      display: flex;
+    }
+    .ant-form-item {
+      margin-bottom: 0;
+    }
+    .ant-input {
+      margin-top: 0px;
+    }
+  }
+  .uploadBtn {
+    color: #2589ff;
+    cursor: pointer;
+  }
+  .logo {
+    :global {
+      .ant-upload-list {
+        display: none;
+      }
+    }
+  }
+  .img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-bottom: 25px;
+  }
+  .uploadModal {
+    display: none;
+  }
+  .img:hover + .uploadModal {
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 25px;
+    text-align: center;
+    height: 30px;
+    width: 60px;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    padding-top: 5px;
+    background-color: rgba(0, 0, 0, 0.5);
+    font-size: 12px;
+  }
+  .uploadModal:hover {
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 25px;
+    text-align: center;
+    height: 30px;
+    width: 60px;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    padding-top: 5px;
+    background-color: rgba(0, 0, 0, 0.5);
+    font-size: 12px;
+  }
+  .formItem {
+    border-bottom: 1px solid #ccc;
+    width: 320px;
+    line-height: 50px;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    input {
+      font-size: 14px;
+    }
+  }
+  .errorFormItem {
+    border-bottom: 1px solid red;
+    width: 320px;
+    line-height: 50px;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    input {
+      font-size: 14px;
+    }
+  }
+  .mustDot {
+    position: absolute;
+    left: -8px;
+    top: 22px;
+    background-color: #ff5050;
+    width: 4px;
+    height: 4px;
+    border-radius: 2px;
+  }
+  .yunyinTitle {
+    font-size: 14px;
+    color: #595961;
+    width: 320px;
+    margin: 20px auto 15px;
+    text-align: left;
+  }
+  .modalFooter {
+    background-image: linear-gradient(
+      0deg,
+      #f7f7fa 50%,
+      rgba(247, 247, 250, 0) 100%
+    );
+    padding: 0;
+    border: none;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    text-align: center;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }
+  .createShopBtn {
+    display: inline-block;
+    width: 140px;
+    height: 40px;
+    line-height: 40px;
+    margin: 0 auto;
+    background: #479bff;
+    border-radius: 100px;
+    text-align: center;
+    color: #ffffff;
+    transition: all 0.3s;
+    font-size: 14px;
+    letter-spacing: 0.1em;
+    text-decoration: none;
+
+    &:hover {
+      background: #2589ff;
+    }
+    span {
+      position: relative;
+    }
+  }
+}

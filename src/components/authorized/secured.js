@@ -4,14 +4,14 @@ import Authorized from './authorized';
 const indentity = () => null;
 
 export default function Secured(authority, options = {}) {
-  const { noMatch = null, onUnMatched = indentity } = options;
+  const { noMatch = null, onReject = indentity } = options;
   return WrappedComponent => {
     function WithAuthHOC(props) {
       return (
         <Authorized
           authority={authority}
           noMatch={noMatch}
-          onUnMatche={onUnMatched}
+          onUnMatche={onReject}
         >
           <WrappedComponent {...props} />
         </Authorized>

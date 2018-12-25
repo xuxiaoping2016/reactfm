@@ -1,0 +1,86 @@
+// :global {
+//   .rc-trigger-popup {
+//     left: 215px !important;
+//     top: 145px !important;
+//   }
+// }
+
+.cascader {
+  padding: 10px;
+  max-width: 600px;
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.tabs {
+  display: flex;
+}
+
+.activeTab {
+  background-color: rgb(242, 242, 246);
+}
+
+.tab {
+  cursor: pointer;
+  font-size: 14px;
+  margin-right: 15px;
+  display: inline-block;
+  width: 80px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  &:hover {
+    background-color: rgb(242, 242, 246);
+  }
+}
+
+.content {
+  font-size: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.wrapper {
+  width: 25%;
+  margin: 8px 0;
+}
+
+.item {
+  cursor: pointer;
+  padding: 5px 10px;
+  &:hover {
+    background-color: rgb(242, 242, 246);
+  }
+}
+
+.activeItem {
+  background-color: rgb(242, 242, 246);
+}
+
+.inputWrapper {
+  display: flex;
+}
+
+.input {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.arrow {
+  background: url(../../assets/icons/arrow-down.svg) no-repeat 0 0;
+  display: block;
+  width: 20px;
+  height: 21px;
+  position: relative;
+  left: 80px;
+  top: 8px;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+}

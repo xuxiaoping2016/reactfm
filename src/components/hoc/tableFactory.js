@@ -1,5 +1,6 @@
 import React from 'react';
 import { inject } from 'mobx-react';
+import { message } from 'antd';
 import { mapValues } from 'lodash';
 
 const TableFactory = ({
@@ -15,9 +16,9 @@ const TableFactory = ({
       this.state = {
         query: {
           page: 1,
-          pageSize: 10,
-          ...(pathQuery || {}),
+          pageSize: 20,
           ...params,
+          ...(pathQuery || {}),
         },
         data: {},
         isLoading: false,
@@ -58,6 +59,7 @@ const TableFactory = ({
         ...mapValues(query, p => ''),
         page: 1,
         pageSize: 20,
+        ...params,
       };
       this.onConfirmFilter(emptyQuery);
     };
@@ -66,6 +68,11 @@ const TableFactory = ({
       this.setState({ isLoading: true });
       const { query } = this.state;
       const data = await getAction(format(query));
+      if (
+        data.code !== 0 &&
+        !(data.code >= 3800200150000 && data.code < 3800200160000)
+      )
+        message.warning(data.message);
       this.setState({ data: (data || {}).data || {}, isLoading: false });
     };
 

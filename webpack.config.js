@@ -21,13 +21,35 @@ const publicConfig = {
                 test:/\.scss$/,
                 use:[
                     {
-                    loader: MiniCssExtractPlugin.loader,
-                    options: {
-                      // you can specify a publicPath here
-                      // by default it use publicPath in webpackOptions.output
-                      publicPath: '../'
-                    }
-                  },'css-loader','sass-loader','postcss-loader']
+                        loader: MiniCssExtractPlugin.loader,
+                        options: {
+                        // you can specify a publicPath here
+                        // by default it use publicPath in webpackOptions.output
+                        publicPath: '../'
+                        }
+                    },
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            modules: true
+                        },
+                    },'sass-loader','postcss-loader']
+            },
+            {
+                test:/\.scss$/,
+                use:[
+                    {
+                        loader: MiniCssExtractPlugin.loader,
+                        options: {
+                            publicPath: '../'
+                        }
+                    },
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            modules: true
+                        },
+                    },'less-loader','postcss-loader']
             }
         ]
     },

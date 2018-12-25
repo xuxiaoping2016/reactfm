@@ -99,7 +99,7 @@ const getToken = () => {
     token = Cookies.get(`saasAuthData_${env}`);
   }
   return (
-    token || 'a0f13e6aad933df669090c7be9a78c80912188987555a915ec58b30b2bc59905'
+    token || 'e1cfc43aa7494965b0d4be1f1edea9db'
   );
 };
 

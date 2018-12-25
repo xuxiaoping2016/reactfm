@@ -1,10 +1,8 @@
 import React from 'react';
-import { List, Icon } from 'antd';
-import Modal from 'components/modal';
+import { Icon } from 'antd';
+import Modal from 'components/uiKits/modal';
 import PropTypes from 'prop-types';
 import styles from './index.module.less';
-
-const { Item: ListItem } = List;
 
 export default class ImageReview extends React.Component {
   constructor(props) {
@@ -65,7 +63,7 @@ export default class ImageReview extends React.Component {
         >
           <div
             onClick={this.slideImg.bind(this, true)}
-            className={`${styles['btn-left']} ${index == 0 && styles.hidden}`}
+            className={`${styles['btn-left']} ${index === 0 && styles.hidden}`}
           >
             <Icon type="left" theme="outlined" />
           </div>
@@ -73,7 +71,7 @@ export default class ImageReview extends React.Component {
           <img alt="example" style={{ width: '100%' }} src={data[index]} />
           <div
             onClick={this.slideImg.bind(this, false)}
-            className={`${styles['btn-right']} ${index == len - 1 &&
+            className={`${styles['btn-right']} ${index === len - 1 &&
               styles.hidden}`}
           >
             <Icon type="right" theme="outlined" />

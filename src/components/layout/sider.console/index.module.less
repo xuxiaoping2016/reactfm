@@ -1,0 +1,126 @@
+@media screen and (max-width: 768px) {
+  .sider {
+    display: none !important;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.sider {
+  display: flex;
+  > div {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+  }
+  :global {
+    .ant-menu-submenu {
+      cursor: pointer;
+      background: #191b24 !important;
+    }
+    .ant-menu-submenu-title {
+      height: 34px !important;
+      margin-top: 4px !important;
+      margin-bottom: 4px !important;
+      padding-left: 20px !important;
+    }
+  }
+}
+
+.logo {
+  padding-top: 10px;
+  flex-shrink: 0;
+  height: 50px;
+  align-content: center;
+  text-align: center;
+}
+
+.iconContainer {
+  position: relative;
+  top: 2px;
+  &::after {
+    opacity: 0;
+    right: -68px;
+    position: absolute;
+    content: '';
+    top: -2px;
+    height: 18px;
+    width: 4px;
+    border-radius: 2px;
+    background: #fff;
+  }
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 35px auto 30px auto;
+}
+
+.icon {
+  margin-right: 6px;
+  height: 14px;
+  width: 14px;
+  transition: all 1.5s linear;
+}
+
+.menu {
+  flex: 1;
+  height: 100%;
+  margin-right: -20px;
+  overflow-y: auto;
+  width: 120% !important;
+  background-color: #191b24;
+}
+
+.submenu {
+  color: #757993 !important;
+  position: relative;
+  ul {
+    display: none;
+  }
+  :global {
+    .ant-menu-submenu-arrow::before {
+      display: none;
+    }
+    .ant-menu-submenu-arrow::after {
+      display: none;
+    }
+  }
+  &:hover {
+    .iconContainer::after {
+      border-radius: 2px;
+      animation: slideIn 0.5s linear forwards;
+    }
+  }
+  .iconActive {
+    opacity: 0;
+  }
+  &:hover {
+    transition: all 1.5s linear;
+    .iconActive {
+      animation: slideIn 0.5s linear forwards;
+    }
+  }
+}
+
+.submenuActive {
+  color: #fff !important;
+  .iconContainer::after {
+    animation: slideIn 0.5s linear forwards;
+  }
+  .iconActive {
+    opacity: 1;
+  }
+}

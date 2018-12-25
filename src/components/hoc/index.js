@@ -2,4 +2,4 @@ export { default as TableFactory } from './tableFactory';
 
 export { default as CreateFactory } from './createFactory';
 
-export { default as AutoData } from './autoData';
+export { default as Pager } from './pager';
