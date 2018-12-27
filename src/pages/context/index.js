@@ -10,7 +10,8 @@ class ContextDemo extends Component {
         
         return (
             <div>
-                {/* <Example/> */}
+                <Example/>
+                
                 <div style={{paddingTop:"30px"}}>
                     <p>按钮主题</p>
                     <Theme/>
