@@ -9,7 +9,7 @@ class ContextDemo extends Component {
         return (
             <div>
                 <div>
-                    <h1 style={{color:"#f00"}}>优化性能  没有看完。。。。。。</h1>
+                    <h1>Web 组件(Web Components)</h1>
                     <p>一、使用生产版本</p>
                     <p>二、单文件构建</p>
                 </div>

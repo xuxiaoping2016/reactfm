@@ -14,6 +14,8 @@ import HijackRenderHoc from './demo2/hijackRenderHoc'
 import FunctionContainer from './demo2/functionContainer'
 
 import Title from './demo3/title'
+import HocRefs from './demo3/refs'
+import HocInheritance from './demo3/HocInheritance'
 class ContextDemo extends Component {
 
     render() {
@@ -43,11 +45,17 @@ class ContextDemo extends Component {
                     <FunctionContainer />
                 </Card> */}
 
-                <Card title="表单高阶组件">
-                    <Title title="自定义标题" />
+                <Card title="">
+                    <Title />
                 </Card>
 
-                
+                <Card title="">
+                    <HocRefs />
+                </Card>
+
+                <Card title="">
+                    <HocInheritance />
+                </Card>
 
                 
 
