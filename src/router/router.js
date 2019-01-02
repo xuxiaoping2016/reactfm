@@ -25,6 +25,8 @@ import PropTypes from 'bundle-loader?lazy&name=propTypes!pages/propTypes';
 import UncontrolledCom from 'bundle-loader?lazy&name=uncontrolledCom!pages/uncontrolledCom';
 import WebComponents from 'bundle-loader?lazy&name=webComponents!pages/webComponents';
 
+import ApiReact from 'bundle-loader?lazy&name=apireact!pages/apiReact';
+
 import Counter from 'bundle-loader?lazy&name=counter!pages/Counter/Counter'
 import ContextDemo from 'bundle-loader?lazy&name=context!pages/context';
 import NotFound from 'bundle-loader?lazy&name=notFound!pages/NotFound/NotFound.jsx';
@@ -63,6 +65,7 @@ const getRouter = () => (
         <Route path="/propTypes" component={createComponent(PropTypes)} />
         <Route path="/uncontrolledcom" component={createComponent(UncontrolledCom)} />
         <Route path="/webcomponents" component={createComponent(WebComponents)} />
+        <Route path="/apireact" component={createComponent(ApiReact)} />
         <Route component={createComponent(NotFound)}/>
     </Switch>
 );

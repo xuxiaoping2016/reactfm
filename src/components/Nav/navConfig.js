@@ -87,4 +87,8 @@ export default [
         path:'/webcomponents',
         label:'Web 组件(Web Components)'
     },
+    {
+        path:'/apireact',
+        label:'API参考 React'
+    },
 ]
