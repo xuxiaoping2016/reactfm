@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import Demo1 from './demo1'
-import Demo2 from './demo2'
+import NameForm from './nameForm'
+import FileInput from './fileInput'
 
 class ContextDemo extends Component {
 
@@ -8,12 +8,11 @@ class ContextDemo extends Component {
         
         return (
             <div>
-                <div>
-                    <h1 style={{color:"#f00"}}>优化性能  没有看完。。。。。。</h1>
-                    <p>一、使用生产版本</p>
-                    <p>二、单文件构建</p>
+                <div style={{marginBottom:"20px"}}>
+                    <NameForm />
                 </div>
-                <Demo2 />
+                
+                <FileInput/>
             </div>
         )
     }

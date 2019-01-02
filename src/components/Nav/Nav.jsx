@@ -6,7 +6,6 @@ import menus from './navConfig'
 const MenuItem = Menu.Item;
 export default class Nav extends Component {
     render(){
-        console.log(this.props,'........../////////......')
         return (
         <Menu
             mode="inline"
