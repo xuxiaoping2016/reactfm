@@ -50,20 +50,21 @@
     "url-loader": "^1.1.2",
     "webpack": "^4.25.1",
     "webpack-cli": "^3.1.2",
-    "webpack-dev-server": "^3.1.10",
+    "webpack-dev-server": "^3.1.14",
     "webpack-merge": "^4.1.4"
   },
   "dependencies": {
     "antd": "^3.10.9",
     "axios": "^0.18.0",
-    "react": "^16.6.3",
-    "react-dom": "^16.6.3",
-    "react-router-dom": "^4.3.1",
+    "cspackage": "^1.0.2",
     "jquery": "^3.3.1",
     "lodash": "^4.17.11",
-    "mobx": "^5.5.0",
-    "mobx-react": "^5.2.8",
+    "mobx": "^5.8.0",
+    "mobx-react": "^5.4.3",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
     "react-motion": "^0.5.2",
-    "react-transition-group": "^2.5.0"
+    "react-router-dom": "^4.3.1",
+    "react-transition-group": "^2.5.2"
   }
 }
