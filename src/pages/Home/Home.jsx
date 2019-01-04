@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {request} from 'utils/request'
-import GoodsList from 'cspackage'
+import { List} from 'cspackage'
 
 const data = [
     {
@@ -170,7 +170,7 @@ const column = [{
     key: 'orderSn'
   },
 ];
-console.log(GoodsList)
+
 export default class Home extends Component {
     constructor(props) {
         super(props);
@@ -196,10 +196,10 @@ export default class Home extends Component {
                 this is home~558888888888888888888<br />
                 当前计数：{this.state.count}<br />
                 <button onClick={this.handleClick}>自增</button>
-                {/* <GoodsList 
+                <List 
                     list={data}
                     column={column}
-                /> */}
+                />
             </div>
         )
     }
