@@ -23,6 +23,8 @@ import CascaderDemo from '../pages/cascader/index.jsx'
 import MobxDemo from '../pages/mobxDemo'
 import MobxDemoChild1 from '../pages/mobxDemo/mobxDemo'
 import MobxDemoChild2 from '../pages/mobxDemo/observerInfo'
+
+import InputCount from 'bundle-loader?&name=inputcount!pages/inputCount'
 // import Todo from '../../component/todolists/index'
 // import Hello from '../../component/todolists/index2'
 const Loading = function () {
@@ -54,6 +56,7 @@ const getRouter = () => (
                 <li><Link to="/lodash">Lodash 源码学习</Link></li>
                 <li><Link to="/cascader">Cascader 级联选择</Link></li>
                 <li><Link to="/mobxdemo">mobx使用示例</Link></li>
+                <li><Link to="/inputcount">输入框计数</Link></li>
             </ul>
             <div style={{flex:1}}>
             <Switch >
@@ -76,6 +79,7 @@ const getRouter = () => (
                         <Route path="/mobxdemo/child2" component={MobxDemoChild2}/>
                     </MobxDemo>
                 }/>
+                <Route path="/inputcount" component={createComponent(InputCount)}/>
             </Switch>
             </div>
         </div>
