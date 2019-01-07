@@ -56,7 +56,8 @@
   "dependencies": {
     "antd": "^3.10.9",
     "axios": "^0.18.0",
-    "cspackage": "^1.0.2",
+    "cspackage": "^1.0.10",
+    "githubb": "^1.0.0",
     "jquery": "^3.3.1",
     "lodash": "^4.17.11",
     "mobx": "^5.8.0",
