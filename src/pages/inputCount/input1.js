@@ -14,19 +14,19 @@ class InputCounts extends Compoent {
       ...restProps
     } = this.props;
     console.log(this.props, 'mmmm');
-    return (<Input />
-      // <Input
-      //   // className={styles['input-wrap']}
-      //   type="text"
-      //   {...restProps}
-      //   suffix={
-      //     <span>
-      //       {enteredCharacters()}/{maxLength}
-      //     </span>
-      //   }
-      //   onChange={onChange}
-      //   placeholder={placeholder || `请输入文字,字数不能超过${maxLength}个`}
-      // />
+    return (
+      <Input
+        // className={styles['input-wrap']}
+        type="text"
+        {...restProps}
+        suffix={
+          <span>
+            {enteredCharacters()}/{maxLength}
+          </span>
+        }
+        onChange={onChange}
+        placeholder={placeholder || `请输入文字,字数不能超过${maxLength}个`}
+      />
     );
   }
 }
