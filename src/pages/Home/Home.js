@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import './style.scss'
 
 import im from '../../images/wait.png'
+
 export default class Home extends Component {
     constructor(props) {
         super(props);
