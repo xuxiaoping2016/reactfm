@@ -48,6 +48,25 @@ class ApiReact extends Component {
         })
         //每个都回执行 
     };
+
+    cameCase(str) {
+        return str.replace(/(\/[a-z])/g, s => {
+            console.log(s)
+            return s[1].toUpperCase();
+        });
+    }
+
+    injectParams(str, params) {
+        return str.replace(/:([a-z0-9_\-%]+)/gi, (s, $1) => {
+            console.log("33", s, $1)
+            return params[$1] || `:${$1}`
+        });
+    }
+
+    componentDidMount(){
+        // console.log(this.cameCase('/fdf32325/f8k9d9v9'))
+        console.log(this.injectParams('app/:id/:dt/:dd',{id:1253,dt:89}))
+    }
     
     componentDidUpdate(){
         console.log(`The expected  numberObject is 4,real value is ${this.state.numberObject}`);
