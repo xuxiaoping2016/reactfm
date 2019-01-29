@@ -1,5 +1,6 @@
 const path = require("path");
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var ProgressBarPlugin = require('progress-bar-webpack-plugin');
 
 const commonConfig = {
     entry : {
