@@ -55,7 +55,7 @@
     "webpack-merge": "^4.1.4"
   },
   "dependencies": {
-    "antd": "^3.10.9",
+    "antd": "~3.11.6",
     "axios": "^0.18.0",
     "cspackage": "^1.0.10",
     "githubb": "^1.0.0",

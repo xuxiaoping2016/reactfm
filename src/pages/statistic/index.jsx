@@ -1,25 +1,27 @@
 import React, {Component} from 'react';
-import {observable} from 'mobx';
-import {observer} from "mobx-react"
+import {Modal, Row, Col} from 'antd'
+import {observable,action} from 'mobx';
+import TimerView from './mobxdemo1'
 
 var appState = observable({
     timer: 0
 });
 
-@observer
-export default class StatisticView extends Component{
-    componentDidMount(){
-        console.log(props)
-    }
-    onReset = () => {
-        this.props.appState.resetTimer();
-    }
+appState.resetTimer = action(function reset() {
+    appState.timer = 0;
+});
 
+setInterval(action(function tick() {
+    appState.timer += 1;
+}), 1000);
+
+export default class Demo extends Component{
     render() {
         return (
-            <button onClick={this.onReset}>
-                Seconds passed: {this.props.appState.timer}
-            </button>
+           <div>
+               <TimerView appState = {appState}/>
+           </div>
         );
     }
 }
+

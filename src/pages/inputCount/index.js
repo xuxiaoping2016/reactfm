@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Form } from 'antd';
-import InputCount from './input1'
+import InputCount from './input'
 import CountText from './r'
 
 const FormItem = Form.Item;
