@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import {BrowserRouter as Router} from 'react-router-dom';
 
-import Nav from 'components/Nav/Nav.jsx';
-import getRouter from 'router/router';
+import Nav from '../Nav/Nav';
+import getRouter from '../../router/router';
 
 
 export default class App extends Component {
