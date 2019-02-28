@@ -5,7 +5,7 @@ const commonConfig = {
     entry : {
         app:[
             "babel-polyfill",
-            path.join(__dirname,'src/index.js')
+            path.join(__dirname,'src/index.tsx')
         ],
         vendor: ['react', 'react-router-dom', 'redux', 'react-dom', 'react-redux']
     },
@@ -19,18 +19,19 @@ const commonConfig = {
 
     module : {
         rules:[
-            {
-                test:/\.(js|jsx)$/,
-                use:{
-                    loader:"babel-loader",
-                    options:{
-                        cacheDirectory:true,
-                        // presets:['@babel/preset-env']
-                    }
-                },
-                exclude: /(node_modules|bower_components)/,
-                include: path.join(__dirname, 'src')
-            },
+            // {
+            //     test:/\.(js|jsx)$/,
+            //     use:{
+            //         loader:"babel-loader",
+            //         options:{
+            //             cacheDirectory:true,
+            //         }
+            //     },
+            //     exclude: /(node_modules|bower_components)/,
+            //     include: path.join(__dirname, 'src')
+            // },
+            { test: /\.tsx?$/, loader: "awesome-typescript-loader" },
+            { enforce: "pre", test: /\.js$/, loader: "source-map-loader" },
             {
                 test: /\.(png|svg|jpg|gif)$/,
                 use:["url-loader"]
@@ -58,7 +59,7 @@ const commonConfig = {
     },
 
     resolve:{
-        extensions: [".js","jsx", ".json"],
+        extensions: [".ts", ".tsx", ".js", ".json"],
         alias:{
             pages: path.join(__dirname, 'src/pages'),
             components: path.join(__dirname, 'src/components'),

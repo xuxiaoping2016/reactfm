@@ -8,6 +8,7 @@ import Home from '../pages/Home/Home';
 import Fanxing from '../pages/fanxing/index'
 import IntersectionTypes from '../pages/IntersectionTypes/index'
 import Enum from '../pages/enum/index'
+import Jsx from '../pages/jsx/index'
 // import UserInfo from 'bundle-loader?lazy&name=userinfo!pages/UserInfo/UserInfo';
 import NotFound from '../pages/NotFound/NotFound';
 
@@ -27,6 +28,7 @@ const getRouter = () => (
         <Route path="/fanxing" component={Fanxing}/>
         <Route path="/intersectiontypes" component={IntersectionTypes}/>
         <Route path="/enum" component={Enum}/>
+        <Route path="/jsx" component={Jsx}/>
         <Route component={NotFound}/>
         {/* <Route exact path="/" component={createComponent(Home)}/>
         <Route path="/page1" component={createComponent(Page1)}/>
