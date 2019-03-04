@@ -29,6 +29,8 @@ import ApiReact from 'bundle-loader?lazy&name=apireact!pages/apiReact';
 
 import Counter from 'bundle-loader?lazy&name=counter!pages/Counter/Counter'
 import ContextDemo from 'bundle-loader?lazy&name=context!pages/context';
+import HooksDemo from 'bundle-loader?lazy&name=hooks!pages/hooks';
+import Motions from 'bundle-loader?lazy&name=motions!pages/motion';
 import NotFound from 'bundle-loader?lazy&name=notFound!pages/NotFound/NotFound.jsx';
 
 
@@ -66,6 +68,8 @@ const getRouter = () => (
         <Route path="/uncontrolledcom" component={createComponent(UncontrolledCom)} />
         <Route path="/webcomponents" component={createComponent(WebComponents)} />
         <Route path="/apireact" component={createComponent(ApiReact)} />
+        <Route path="/hooks" component={createComponent(HooksDemo)} />
+        <Route path="/motions" component={createComponent(Motions)} />
         <Route component={createComponent(NotFound)}/>
     </Switch>
 );

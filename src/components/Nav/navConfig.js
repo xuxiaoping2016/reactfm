@@ -91,4 +91,12 @@ export default [
         path:'/apireact',
         label:'API参考 React'
     },
+    {
+        path:'/hooks',
+        label:'hooks提案'
+    },
+    {
+        path:'/motions',
+        label:'react-motion动画'
+    },
 ]
