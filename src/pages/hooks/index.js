@@ -1,40 +1,34 @@
 import React, { useState ,Component } from 'react';
 import HooksDemo1 from './demo1'
+import useDocumentTitle from './demo2'
 import MouseTracker from './mouseTracker'
 import MouseTracker2 from './mouseTracker2'
 
-// function Example() {
-//     const [count, setCount] = useState(0);
-  
+//  export default function HooksDemo(){
+//     // useDocumentTitle('useEffect');
 //     return (
-//       <div>
-//         <p>You clicked {count} times</p>
-//         <button onClick={() => setCount(count + 1)}>
-//           Click me
-//         </button>
-//       </div>
-//     );
-//   }
+//         <div>
+//             <h1>hooks!</h1>
+//             <HooksDemo1 />
+//             {/* 
+//             <MouseTracker/>
+//             <MouseTracker2/> */}
+//         </div>
+//     )
+// }
 
-//   export default Example;
 
- export default class HooksDemo extends Component {
-    
+export default function Example() {
+  // 声明一个新的状态变量，我们将其称为 "count"
+  const [count, setCount] = useState(0);
 
-    render(){
-        return (
-            <div>
-                <h1>hooks!</h1>
-                <HooksDemo1 render={data => <ul>
-                    {data.map((val) => <li key={val.id}>{val.text}</li>)}
-                </ul>}/>
-                <MouseTracker/>
-                <MouseTracker2/>
-            </div>
-        )
-    }
+  return (
+    <div>
+      <p>you clicked {count} times</p>
+      <button onClick={() => setCount(count + 1)}>click me</button>
+    </div>
+  );
 }
-
 
 
 /**

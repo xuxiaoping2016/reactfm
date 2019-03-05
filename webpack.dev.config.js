@@ -42,7 +42,7 @@ const devConfig = {
     mode: "development"
 }
 
-module.exports = merge({
+const config = merge({
     customizeArray(a, b, key) {
         /*entry.app不合并，全替换*/
         if (key === 'entry.app') {
@@ -51,3 +51,7 @@ module.exports = merge({
         return undefined;
     }
 })(commonConfig, devConfig);
+
+console.log(config)
+
+module.exports = config

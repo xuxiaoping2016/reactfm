@@ -1,21 +1,22 @@
-import React from 'react';
-import ReactDom from 'react-dom';
-import {AppContainer} from 'react-hot-loader';
-import {Provider} from 'react-redux';
-import store from 'store/store.js'
-import history from './utils/history'
-import App from './components/App/App.jsx';
-import '../mock/mock';
+import React, { useState } from "react";
+import ReactDOM from "react-dom";
 
-if (module.hot) {
-    module.hot.accept();
+function App() {
+  let [count, setCount] = useState(6);
+
+  return (
+    <div>
+      <p>you clicked {count} times</p>
+      <button onClick={() => setCount(999)}>click me</button>
+    </div>
+  );
 }
 
-ReactDom.render(
-    <AppContainer>
-        <Provider store={store}>
-            <App history={history}/>
-        </Provider>
-    </AppContainer>, 
+
+ReactDOM.render(
+    <App/>,
     document.getElementById('app')
 );
+
+
+//https://codesandbox.io/s/km6yv14285
