@@ -1,30 +1,28 @@
-import React, { Component } from 'react';
-  class IncreasingCounter {
-    _count = 0
-    get value() {
-        console.log('Getting the current value!');
-        return this._count;
-    }
-    increment() {
-        this._count++;
-    }
-  }
+// 强大的拖拽组件：React DnD 的使用
+// https://segmentfault.com/a/1190000014723549
 
+import React, { Component } from 'react'
+import { DragDropContext } from 'react-dnd'
+import HTML5Backend from 'react-dnd-html5-backend'
+import Dustbin from './Dustbin'
+import Box from './Box'
 
-
-export default class Home extends Component {
-    componentDidMount(){
-        var i = new IncreasingCounter()
-        console.log(i.value)
-        i.increment()
-        console.log(i.value)
-    }
-
-    render(){
-        return (
-            <div>
-                <h1>Welcome!</h1>
-            </div>
-        )
-    }
+@DragDropContext(HTML5Backend)
+export default class Container extends Component {
+	render() {
+        console.log('home',this.props)
+		return (
+			<div>
+                <div>拖拽</div>
+				<div style={{ overflow: 'hidden', clear: 'both' }}>
+					<Dustbin n="fd"/>
+				</div>
+				<div style={{ overflow: 'hidden', clear: 'both' }}>
+					<Box name="Glass" m="fd" />
+					<Box name="Banana" />
+					<Box name="Paper" />
+				</div>
+			</div>
+		)
+	}
 }

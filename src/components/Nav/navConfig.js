@@ -1,7 +1,7 @@
 export default [
     {
         path:'/',
-        label:'react的工作原理'
+        label:'react-dnd拖拽'
     },
     {
         path:'/thought',
