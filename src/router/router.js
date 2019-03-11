@@ -3,7 +3,7 @@ import Bundle from './Bundle';
 import {Route, Switch} from 'react-router-dom';
 
 import Loading from 'components/Loading/Loading.jsx'
-import Home from 'bundle-loader?lazy&name=home!pages/Home/Home';
+import Reactdnd from 'bundle-loader?lazy&name=reactdnd!pages/reactDnd';
 import Thought from 'bundle-loader?lazy&name=thought!pages/Thought';
 import ErrorBoundaries from 'bundle-loader?lazy&name=errorBoundaries!pages/errorBoundaries';
 import Refs from 'bundle-loader?lazy&name=refs!pages/refs';
@@ -43,7 +43,7 @@ const createComponent = (Com) => (props) => (
 
 const getRouter = () => (
     <Switch>
-        <Route exact path="/" component={createComponent(Home)}/>
+        <Route exact path="/" component={createComponent(Reactdnd)}/>
         <Route path="/thought" component={createComponent(Thought)}/>
         <Route path="/counter" component={createComponent(Counter)}/>
         <Route path="/context" component={createComponent(ContextDemo)}/>

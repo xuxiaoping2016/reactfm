@@ -32,6 +32,12 @@ const commonConfig = {
                 include: path.join(__dirname, 'src')
             },
             {
+                test:/\.tsx?$/,
+                use:["babel-loader","ts-loader"],
+                exclude: /(node_modules|bower_components)/,
+                include: path.join(__dirname, 'src')
+            },
+            {
                 test: /\.(png|svg|jpg|gif)$/,
                 use:["url-loader"]
             }
@@ -58,7 +64,7 @@ const commonConfig = {
     },
 
     resolve:{
-        extensions: [".js","jsx", ".json"],
+        extensions: [".ts","tsx",".js","jsx", ".json"],
         alias:{
             pages: path.join(__dirname, 'src/pages'),
             components: path.join(__dirname, 'src/components'),
