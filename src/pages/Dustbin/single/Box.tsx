@@ -8,13 +8,13 @@ import {
 import ItemTypes from './ItemTypes'
 
 const style: React.CSSProperties = {
-	border: '1px dashed gray',
-	backgroundColor: 'white',
-	padding: '0.5rem 1rem',
+    backgroundColor: 'white',
+    border: '1px dashed gray',
+    cursor: 'move',
+	float: 'left',
 	marginRight: '1.5rem',
 	marginBottom: '1.5rem',
-	cursor: 'move',
-	float: 'left',
+	padding: '0.5rem 1rem',
 }
 
 interface BoxProps {
@@ -48,7 +48,6 @@ class Box extends React.Component<BoxProps & BoxCollectedProps> {
 		const { isDragging, connectDragSource } = this.props
 		const { name } = this.props
 		const opacity = isDragging ? 0.4 : 1
-
 		return connectDragSource(<div style={{ ...style, opacity }}>{name}</div>)
 	}
 }

@@ -1,20 +1,23 @@
 import * as React from 'react'
-import Dustbin from './Dustbin'
-import Box from './Box'
+import { Link } from 'react-router-dom'
 
-export default class Container extends React.Component {
-	public render() {
-		return (
-			<div>
-				<div style={{ overflow: 'hidden', clear: 'both' }}>
-					<Dustbin />
-				</div>
-				<div style={{ overflow: 'hidden', clear: 'both' }}>
-					<Box name="Glass" />
-					<Box name="Banana" />
-					<Box name="Paper" />
-				</div>
-			</div>
-		)
-	}
+const ulstyle: React.CSSProperties = {
+    display:"flex"
+}
+const listyle: React.CSSProperties = {
+   flex:1
+}
+
+export default class Dustbin extends React.Component {
+    public render(){
+        return (
+            <div>
+                <ul style={ulstyle}>
+                    <li style={listyle}><Link to="/mobxdemo/child1">单个拖拽</Link></li>
+                    <li style={listyle}><Link to="/mobxdemo/child2">单个拖拽 hooks</Link></li>
+                </ul>
+                {this.props.children}
+            </div>
+        )
+    }
 }

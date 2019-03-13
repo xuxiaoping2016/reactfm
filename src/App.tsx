@@ -1,10 +1,8 @@
 import * as React from 'react';
 import { BrowserRouter as Router} from 'react-router-dom'
 import Nav from './components/Nav/Nav';
-import { Layout } from 'antd'; 
-
-// import getRouter from './router';
-
+import {  Layout } from 'antd'; 
+import Routes from './router'
 import './App.css';
 
 
@@ -24,7 +22,7 @@ overflow: 'auto', height: '100vh', position: 'fixed', left: 0,
             <Layout style={{ marginLeft: 200 }}>
                 <Header>头部</Header>
                 <Content style={{padding:"20px"}}>
-                {this.props.children}
+                  <Routes/>
                 </Content>
             </Layout>
         </Layout>

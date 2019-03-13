@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { getExclamationMarks } from '../utils/helper'
+import { getExclamationMarks } from '../../utils/helper'
 
 export interface Iprops {
   name: string;
@@ -12,7 +12,7 @@ function Hello({ name, enthusiasmLevel = 1 }: Iprops) {
   }
 
   return (    <div className="hello">      <div className="greeting">
-        Hello {name + getExclamationMarks(enthusiasmLevel)}      </div>    </div>
+        Hello {name + getExclamationMarks(enthusiasmLevel)}      </div> fdfd   </div>
   );
 }
 

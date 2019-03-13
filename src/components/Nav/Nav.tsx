@@ -1,11 +1,11 @@
 import * as React from 'react';
 import {Link} from 'react-router-dom';
-import { Menu } from 'antd';
+import {Menu} from 'antd';
 import menus from './navConfig'
 
 const MenuItem = Menu.Item;
 export default class Nav extends React.Component {
-    render(){
+    public render(){
         return (
         <Menu
             mode="inline"
