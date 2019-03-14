@@ -14,5 +14,9 @@ export default [
     {
         label:"跳跳棋",
         path:"/chessboard"
+    },
+    {
+        label:"计数器",
+        path:"/counter"
     }
 ]

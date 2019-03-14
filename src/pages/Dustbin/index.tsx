@@ -13,8 +13,8 @@ export default class Dustbin extends React.Component {
         return (
             <div>
                 <ul style={ulstyle}>
-                    <li style={listyle}><Link to="/mobxdemo/child1">单个拖拽</Link></li>
-                    <li style={listyle}><Link to="/mobxdemo/child2">单个拖拽 hooks</Link></li>
+                    <li style={listyle}><Link to="/dustbin/child1">单个拖拽</Link></li>
+                    <li style={listyle}><Link to="/dustbin/child2">单个拖拽 hooks</Link></li>
                 </ul>
                 {this.props.children}
             </div>

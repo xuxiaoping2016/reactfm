@@ -1,8 +1,9 @@
 import { EnthusiasmAction } from '../actions';
-import { StoreState } from '../types/index';
+import { Demo } from '../types/index';
 import { INCREMENT_ENTHUSIASM, DECREMENT_ENTHUSIASM } from '../constants/index';
+import initState from '../initState';
 
-export function enthusiasm(state: StoreState, action: EnthusiasmAction): StoreState {
+export function enthusiasm(state: Demo = initState.demo, action: EnthusiasmAction): Demo {
   switch (action.type) {
     case INCREMENT_ENTHUSIASM:
       return { ...state, enthusiasmLevel: state.enthusiasmLevel + 1 };

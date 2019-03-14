@@ -7,11 +7,12 @@ import Dustbin from '../pages/Dustbin'
 import Dustbin1 from '../pages/Dustbin/single'
 import DustbinHook from '../pages/Dustbin/singleHook'
 import ChessBoard from '../pages/Chessboard'
+import Counter from '../pages/counter'
 
 const Child = () => (
     <Dustbin>
-        <Route path="/mobxdemo/child1" component={Dustbin1}/>
-        <Route path="/mobxdemo/child2" component={DustbinHook}/>
+        <Route path="/dustbin/child1" component={Dustbin1}/>
+        <Route path="/dustbin/child2" component={DustbinHook}/>
     </Dustbin>
 )
 class Routes extends React.Component {
@@ -20,8 +21,9 @@ class Routes extends React.Component {
             <Switch>
                 <Route path="/button" component = {Home}/>
                 <Route path="/hello" component = {Hello}/>
-                <Route path="/mobxdemo" render = {Child}/>
+                <Route path="/dustbin" render = {Child}/>
                 <Route path="/chessboard" component={ChessBoard}/>
+                <Route path="/counter" component={Counter}/>
             </Switch>
         )
     }
