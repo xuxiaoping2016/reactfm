@@ -18,5 +18,9 @@ export default [
     {
         label:"计数器",
         path:"/counter"
+    },
+    {
+        label:"拖拽dragAround",
+        path:"/dragaround"
     }
 ]

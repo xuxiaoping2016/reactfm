@@ -9,6 +9,9 @@ import DustbinHook from '../pages/Dustbin/singleHook'
 import ChessBoard from '../pages/Chessboard'
 import Counter from '../pages/counter'
 
+import CustomDragLayer from '../pages/DragAround/CustomDragLayer'
+import Native from '../pages/DragAround/Naive'
+
 const Child = () => (
     <Dustbin>
         <Route path="/dustbin/child1" component={Dustbin1}/>
@@ -24,6 +27,9 @@ class Routes extends React.Component {
                 <Route path="/dustbin" render = {Child}/>
                 <Route path="/chessboard" component={ChessBoard}/>
                 <Route path="/counter" component={Counter}/>
+
+                <Route path="/dragaround" component={CustomDragLayer}/>
+                <Route path="/dragaroundnative" component={Native}/>
             </Switch>
         )
     }

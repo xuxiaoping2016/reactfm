@@ -1,6 +1,10 @@
 <!-- 学习地址
 https://www.html.cn/doc/typescript/doc/handbook/tutorials/React.html -->
 
+
+<!-- react with typescript
+https://github.com/sw-yx/react-typescript-cheatsheet -->
+
 bugs
 1、interface name must start with a capitalized I
 
