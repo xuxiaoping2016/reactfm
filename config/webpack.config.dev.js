@@ -177,6 +177,11 @@ module.exports = {
               {
                 loader: require.resolve('css-loader'),
                 options: {
+                  modules: true,
+                  namedExport: true,
+                  camelCase: true,
+                  minimize: true,
+                  localIdentName: "[local]_[hash:base64:5]",
                   importLoaders: 1,
                 },
               },
@@ -210,7 +215,11 @@ module.exports = {
               {
                 loader: require.resolve('css-loader'),
                 options: {
-                  importLoaders: 1,
+                  modules: true,
+                  namedExport: true,
+                  camelCase: true,
+                  minimize: true,
+                  localIdentName: "[local]_[hash:base64:5]"
                 },
               },
               require.resolve('less-loader'),

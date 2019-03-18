@@ -1,6 +1,7 @@
 import * as React from 'react';
 import classNames from 'classnames';
-import './button.less';
+import style from  './button.less';
+import c from './css.css'
 
 export interface ButtonOption {
     text?: string;
@@ -43,7 +44,13 @@ export default class Button extends React.Component<ButtonOption, any>{
             '': isAny
         })
 
-        return <button className={classes} type='button' onClick={onClick}  >{text}</button>
+        return (
+            <div>
+                <p className={c.name}>mingzi</p>
+                <span className={style['keep-btn']}>fdf</span>
+                <button className={classes} type='button' onClick={onClick}  >{text}</button>
+            </div>
+        )
     }
 
 
