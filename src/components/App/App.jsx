@@ -6,9 +6,13 @@ import getRouter from 'router/router';
 
 
 export default class App extends Component {
+    componentDidMount(){
+        console.log("App",this.props)
+    }
     render(){
+        const { history } = this.props;
         return (
-            <Router>
+            <Router history={history}>
                 <div>
                     <Nav/>
                     {getRouter()}
