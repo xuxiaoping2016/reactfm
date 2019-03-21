@@ -30,6 +30,8 @@ history.go(n)
 history.goBack()
 history.goForward()
 history.canGo(n)
+history.block()
+history.createHref()
 
 其中listen事件的事件处理函数接受location和action作为参数
 ```
@@ -61,3 +63,4 @@ history.listen((location, action) => {
 
 
   https://www.npmjs.com/package/history
+  https://github.com/ReactTraining/history

@@ -12,8 +12,7 @@ if (module.hot) {
 }
 
 history.listen((location, action) => {
-    console.log(location)
-    console.log(action, location.pathname, location.state);
+    console.log(action, location);
 });
   
 
