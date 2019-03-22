@@ -7,6 +7,7 @@ import getRouter from 'router/router';
 
 export default class App extends Component {
     componentDidMount(){
+        console.log(this)
         console.log("App",this.props)
     }
     render(){
