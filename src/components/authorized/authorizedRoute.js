@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import Authorized from './authorized';
 
-export default function AuthorizedRoute(props) {
+export default function AuthorizedRoute(properties) {
   const {
     component: Component,
     render,
@@ -10,19 +10,14 @@ export default function AuthorizedRoute(props) {
     redirectPath,
     onReject,
     ...rest
-  } = props;
+  } = properties;
+
+  const NoMatch = redirectPath ? (
+    <Redirect to={{ pathname: redirectPath }} />
+  ) : null;
 
   return (
-    <Authorized
-      authority={authority}
-      onReject={onReject}
-      noMatch={
-        <Route
-          {...rest}
-          render={() => <Redirect to={{ pathname: redirectPath }} />}
-        />
-      }
-    >
+    <Authorized authority={authority} onReject={onReject} noMatch={NoMatch}>
       <Route
         {...rest}
         render={props => (Component ? <Component {...props} /> : render(props))}
