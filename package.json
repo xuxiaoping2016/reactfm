@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --config webpack.config.js",
-    "start": "webpack-dev-server --config webpack.dev.config.js --hot"
+    "start": "webpack-dev-server --config webpack.dev.config.js --hot",
+    "prettier": "prettier src/**/*.js"
   },
   "repository": {
     "type": "git",
@@ -38,6 +39,7 @@
     "node-sass": "^4.10.0",
     "postcss-cssnext": "^3.1.0",
     "postcss-loader": "^3.0.0",
+    "prettier": "^1.16.4",
     "react-hot-loader": "^4.3.12",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
