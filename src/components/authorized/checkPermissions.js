@@ -52,6 +52,7 @@ function checkPermissions(auth, permissions, target, exception) {
   return exception;
 }
 
+//计算显示的组件 及无权限是的操作跳转操作（跳转或登出）
 
 // auth  需要校验的权限字符串  "ec#app.marketing.searchSource1
 // target  子元素 children
