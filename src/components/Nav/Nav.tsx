@@ -11,6 +11,7 @@ export default class Nav extends Component {
                 <li><Link to="/enum">枚举</Link></li>
                 <li><Link to="/jsx">jsx</Link></li>
                 <li><Link to="/moduledemo">模块</Link></li>
+                <li><Link to="/functions">函数</Link></li>
                 {/*
                 <li><Link to="/userinfo">userinfo</Link></li> */}
             </ul>
