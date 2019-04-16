@@ -9,7 +9,7 @@ import Fanxing from '../pages/fanxing/index'
 import IntersectionTypes from '../pages/IntersectionTypes/index'
 import Enum from '../pages/enum/index'
 import Jsx from '../pages/jsx/index'
-// import ModuleDemo from '../pages/module'
+import ModuleDemo from '../pages/module'
 import Functions from '../pages/function'
 // import UserInfo from 'bundle-loader?lazy&name=userinfo!pages/UserInfo/UserInfo';
 import NotFound from '../pages/NotFound/NotFound';
@@ -31,7 +31,7 @@ const getRouter = () => (
         <Route path="/intersectiontypes" component={IntersectionTypes}/>
         <Route path="/enum" component={Enum}/>
         <Route path="/jsx" component={Jsx}/>
-        {/* <Route path="/moduledemo" component={ModuleDemo}/> */}
+        <Route path="/moduledemo" component={ModuleDemo}/>
         <Route path="/functions" component={Functions}/>
         <Route component={NotFound}/>
         {/* <Route exact path="/" component={createComponent(Home)}/>

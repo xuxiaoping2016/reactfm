@@ -1,10 +1,20 @@
 import React, { Component } from 'react';
 
+interface Card {
+    suit: string;
+    card: number;
+}
+interface Deck {
+    suits: string[];
+    cards: number[];
+    createCardPicker(this: Deck): () => Card;
+}
+
 let deck = {
     suits: ["hearts", "spades", "clubs", "diamonds"],
     cards: Array(52),
-    createCardPicker: function() {
-        return function() {
+    createCardPicker: function(this: Deck) {
+        return () => {
             let pickedCard = Math.floor(Math.random() * 52);
             let pickedSuit = Math.floor(pickedCard / 13);
 

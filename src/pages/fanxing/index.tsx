@@ -8,16 +8,28 @@ export interface HelloProps {
 class Hello extends React.Component<HelloProps, {}> {
     componentDidMount(){
         //泛型类型
-        // function identity<T>(arg: T): T {
-        //     return arg;
-        // }
+        function identity<T>(arg: T): T {
+            return arg;
+        }
         
-        // interface GenericIdentityFn{
-        //     <T>(arg:T):T
-        // }
-        // let myIdentity: GenericIdentityFn = identity;
+        interface GenericIdentityFn{
+            <T>(arg:T):T
+        }
+        let myIdentity: GenericIdentityFn = identity;
 
-        // console.log(myIdentity(4))
+        console.log(myIdentity(4))
+
+        class Indentitys{
+            name:String;
+            constructor(){
+                this.name = name;
+            }
+
+            identity<T>(arg: T): T {
+                return arg;
+            }
+        }
+        const s:Indentitys = new Indentitys();
 
         // 泛型类
         // class GenericNumber<T>{
