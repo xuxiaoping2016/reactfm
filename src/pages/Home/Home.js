@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { take, map } from 'rxjs/operators';
 import { of } from 'rxjs/observable/of';
 // import './style.css'
-import './style.scss'
+// import './style.scss'
 
 import im from '../../images/wait.png'
 export default class Home extends Component {
