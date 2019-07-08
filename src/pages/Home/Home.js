@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+// import Rx from 'rxjs/Rx';
 import { take, map } from 'rxjs/operators';
 import { of } from 'rxjs/observable/of';
 // import './style.css'
@@ -14,15 +15,12 @@ export default class Home extends Component {
     }
 
     componentDidMount(){
-        // of(1,2,3)
-        // .pipe(
-        //     take(2),
-        //     map(val => val + 2)
-        // ).subscribe(console.log);
-        var source = Rx.Observable.interval(1000);var click = Rx.Observable.fromEvent(document.body, 'click');var example = source.takeUntil(click);     
+        of(1,2,3,4,5)
+        .pipe(
+            take(3),
+            map(val => val + 2)
+        ).subscribe(console.log);
 
-example.subscribe({    next: (value) => { console.log(value); },    error: (err) => { console.log('Error: ' + err); },    complete: () => { console.log('complete'); }
-});
     }
 
     _handleClick() {
