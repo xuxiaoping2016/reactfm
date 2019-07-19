@@ -10,18 +10,24 @@ import UserInfo from 'bundle-loader?lazy&name=userinfo!pages/UserInfo/UserInfo';
 import NotFound from 'bundle-loader?lazy&name=notFound!pages/NotFound/NotFound.jsx';
 
 
-const createComponent = (Com) => (props) => (
-    <Bundle load={Com}>
+const createComponent = (Com) => (props) => {
+    console.log('dd',props)
+    return (
+        <Bundle load={Com}>
         {
             (Com) => Com ? <Com {...props} /> : <Loading/>
         }
-    </Bundle>
-);
+        </Bundle>
+    )
+};
 
 
 const getRouter = () => (
     <Switch>
         <Route exact path="/" component={createComponent(Home)}/>
+        <Route path="/rxjs9" title="30" component={createComponent(Home)}/>
+        <Route path="/rxjs10" title="31" component={createComponent(Home)}/>
+        <Route path="/rxjs11" component={createComponent(Home)}/>
         <Route path="/page1" component={createComponent(Page1)}/>
         <Route path="/counter" component={createComponent(Counter)}/>
         <Route path="/userinfo" component={createComponent(UserInfo)}/>

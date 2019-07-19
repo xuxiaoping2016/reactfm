@@ -9,8 +9,8 @@ export default class App extends Component {
     render(){
         return (
             <Router>
-                <div>
-                    <Nav/>
+                <div className="container">
+                    <Nav className="nav-menu-wrap"/>
                     {getRouter()}
                 </div>
             </Router>
