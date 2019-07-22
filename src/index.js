@@ -4,7 +4,6 @@ import {AppContainer} from 'react-hot-loader';
 import {Provider} from 'react-redux';
 import store from 'store/store.js'
 import App from './components/App/App.jsx';
-import './style.css'
 import '../mock/mock';
 
 if (module.hot) {
