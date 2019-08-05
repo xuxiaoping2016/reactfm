@@ -86,10 +86,10 @@ var invokeGuardedCallbackImpl = function (name, func, context, a, b, c, d, e, f)
   // like caught exceptions, and the DevTools won't pause unless the developer
   // takes the extra step of enabling pause on caught exceptions. This is
   // unintuitive, though, because even though React has caught the error, from
-  // the developer's perspective, the error is uncaught.
+  // the developer's perspective(态度; 观点; 思考方法; 客观判断力; 权衡轻重的能力; 透视法), the error is uncaught.
   //
   // To preserve the expected "Pause on exceptions" behavior, we don't use a
-  // try-catch in DEV. Instead, we synchronously dispatch a fake event to a fake
+  // try-catch in DEV. Instead, we synchronously(同步地) dispatch a fake(假的; 冒充的; 伪造的) event to a fake
   // DOM node, and call the user-provided callback from inside an event handler
   // for that fake event. If the callback throws, the error is "captured" using
   // a global event handler. But because the error happens in a different
@@ -222,7 +222,7 @@ var invokeGuardedCallbackImpl = function (name, func, context, a, b, c, d, e, f)
 
 var invokeGuardedCallbackImpl$1 = invokeGuardedCallbackImpl;
 
-// Used by Fiber to simulate a try-catch.
+// Used by Fiber to simulate(假装; 冒充; 装作; (用计算机或模型等) 模拟; 模仿;) a try-catch.
 var hasError = false;
 var caughtError = null;
 
