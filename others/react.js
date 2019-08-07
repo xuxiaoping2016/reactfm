@@ -999,6 +999,7 @@ function traverseAllChildrenImpl(children, nameSoFar, callback, traverseContext)
   if (children === null) {
     invokeCallback = true;
   } else {
+    //function不考虑吗？
     switch (type) {
       case 'string':
       case 'number':
@@ -1073,7 +1074,7 @@ function traverseAllChildrenImpl(children, nameSoFar, callback, traverseContext)
  *
  * The `traverseContext` is an optional argument that is passed through the
  * entire traversal. It can be used to store accumulations or anything else that
- * the callback might find relevant.
+ * the callback might find relevant(紧密相关的; 切题的; 有价值的; 有意义的;).
  *
  * @param {?*} children Children tree object.
  * @param {!function} callback To invoke upon traversing each child.
@@ -1787,7 +1788,7 @@ function cloneElementWithValidation(element, props, children) {
   return newElement;
 }
 
-// Helps identify side effects in begin-phase lifecycle hooks and setState reducers:
+// Helps identify side effects in begin-phase(阶段; 时期; 月相; (月亮的) 盈亏) lifecycle hooks and setState reducers:
 
 
 // In some cases, StrictMode should also double-render lifecycles.

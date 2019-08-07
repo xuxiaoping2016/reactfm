@@ -107,13 +107,13 @@ var invokeGuardedCallbackImpl = function (name, func, context, a, b, c, d, e, f)
       // when we call document.createEvent(). However this can cause confusing
       // errors: https://github.com/facebookincubator/create-react-app/issues/3482
       // So we preemptively throw with a better message instead.
-      !(typeof document !== 'undefined') ? invariant(false, 'The `document` global was defined when React was initialized, but is not defined anymore. This can happen in a test environment if a component schedules an update from an asynchronous callback, but the test has already finished running. To solve this, you can either unmount the component at the end of your test (and ensure that any asynchronous operations get canceled in `componentWillUnmount`), or you can change the test itself to be asynchronous.') : void 0;
+      !(typeof document !== 'undefined') ? invariant(false, 'The `document` global was defined when React was initialized, but is not defined anymore. This can happen in a test environment if a component schedules([ˈʃedjuːlz]工作计划; 日程安排; (电视或广播) 节目表; (价格、收费或条款等的) 一览表，明细表，清单;) an update from an asynchronous callback, but the test has already finished running. To solve this, you can either unmount the component at the end of your test (and ensure that any asynchronous operations get canceled in `componentWillUnmount`), or you can change the test itself to be asynchronous.') : void 0;
       var evt = document.createEvent('Event');
 
       // Keeps track of whether the user-provided callback threw an error. We
       // set this to true at the beginning, then set it to false right after
       // calling the function. If the function errors, `didError` will never be
-      // set to false. This strategy works even if the browser is flaky and
+      // set to false. This strategy works even if the browser is flaky(易碎成小薄片的; 易剥落的; 行为古怪的; 好忘事的;) and
       // fails to call our global error handler, because it doesn't rely on
       // the error event at all.
       var didError = true;
@@ -153,7 +153,7 @@ var invokeGuardedCallbackImpl = function (name, func, context, a, b, c, d, e, f)
       // Create a global error event handler. We use this to capture the value
       // that was thrown. It's possible that this error handler will fire more
       // than once; for example, if non-React code also calls `dispatchEvent`
-      // and a handler for that event throws. We should be resilient to most of
+      // and a handler for that event throws. We should be resilient([rɪˈzɪliənt] 可迅速恢复的; 有适应力的; 有弹性(或弹力)的; 能复原的) to most of
       // those cases. Even if our error event handler fires more than once, the
       // last error event is always used. If the callback actually does error,
       // we know that the last error event is the correct one, because it's not
@@ -1441,7 +1441,7 @@ function functionThatReturnsFalse() {
  * event should be released into the pool after being dispatched. Users that
  * need a persisted event should invoke `persist`.
  *
- * Synthetic events (and subclasses) implement the DOM Level 3 Events API by
+ * Synthetic([sɪnˈθetɪk]人造的; (人工) 合成的; 综合(型)的) events (and subclasses) implement the DOM Level 3 Events API by
  * normalizing browser quirks. Subclasses do not necessarily have to implement a
  * DOM interface; custom application-specific events can also subclass this.
  *
@@ -1450,6 +1450,8 @@ function functionThatReturnsFalse() {
  * @param {object} nativeEvent Native browser event.
  * @param {DOMEventTarget} nativeEventTarget Target node.
  */
+
+ //感觉是将原生事件对象的属性添加到合成事件对象上
 function SyntheticEvent(dispatchConfig, targetInst, nativeEvent, nativeEventTarget) {
   {
     // these have a getter/setter for warnings
@@ -1485,6 +1487,7 @@ function SyntheticEvent(dispatchConfig, targetInst, nativeEvent, nativeEventTarg
   }
 
   var defaultPrevented = nativeEvent.defaultPrevented != null ? nativeEvent.defaultPrevented : nativeEvent.returnValue === false;
+  //合成事件的isDefaultPrevented属性和isPropagationStopped
   if (defaultPrevented) {
     this.isDefaultPrevented = functionThatReturnsTrue;
   } else {
@@ -1748,7 +1751,7 @@ function isKeypressCommand(nativeEvent) {
 
 /**
  * Translate native top level events into event types.
- *
+ *  获取合成事件类型
  * @param {string} topLevelType
  * @return {object}
  */
@@ -2424,6 +2427,7 @@ var describeComponentFrame = function (name, source, ownerName) {
 
 // The Symbol used to tag the ReactElement-like types. If there is no native Symbol
 // nor polyfill, then a plain number is used for performance.
+//  react元素类型 没有symbol 使用纯数字表示
 var hasSymbol = typeof Symbol === 'function' && Symbol.for;
 
 var REACT_ELEMENT_TYPE = hasSymbol ? Symbol.for('react.element') : 0xeac7;
@@ -2916,7 +2920,7 @@ var capitalize = function (token) {
 
 /**
  * Get the value for a property on a node. Only used in DEV for SSR validation.
- * The "expected" argument is used as a hint of what the expected value is.
+ * The "expected" argument is used as a hint(暗示; 提示; 示意; 征兆; 迹象; 少许; 少量) of what the expected value is.
  * Some properties have multiple equivalent values.
  */
 function getValueForProperty(node, name, expected, propertyInfo) {
@@ -3649,7 +3653,7 @@ function getTargetInstForInputEventPolyfill(topLevelType, targetInst) {
  */
 function shouldUseClickEvent(elem) {
   // Use the `click` event to detect changes to checkbox and radio inputs.
-  // This approach works across all browsers, whereas `change` does not fire
+  // This approach works across all browsers, whereas(用以比较或对比两个事实) 然而，但是，尽管; (用于正式文件中句子的开头) 鉴于) `change` does not fire
   // until `blur` in IE8.
   var nodeName = elem.nodeName;
   return nodeName && nodeName.toLowerCase() === 'input' && (elem.type === 'checkbox' || elem.type === 'radio');
@@ -5088,7 +5092,7 @@ function getLeafNode(node) {
 
 /**
  * Get the next sibling within a container. This will walk up the
- * DOM if a node's siblings have been exhausted.
+ * DOM if a node's siblings have been exhausted(筋疲力尽的; 疲惫不堪的; 用完的; 耗尽的; 枯竭的).
  *
  * @param {DOMElement|DOMTextNode} node
  * @return {?DOMElement|DOMTextNode}
@@ -5636,7 +5640,7 @@ var SelectEventPlugin = {
 };
 
 /**
- * Inject modules for resolving DOM hierarchy and plugin ordering.
+ * Inject modules for resolving DOM hierarchy(等级制度(尤指社会或组织); 统治集团; 层次体系) and plugin ordering.
  */
 injection.injectEventPluginOrder(DOMEventPluginOrder);
 setComponentTree(getFiberCurrentPropsFromNode$1, getInstanceFromNode$1, getNodeFromInstance$1);
@@ -5750,6 +5754,7 @@ var valuePropNames = ['value', 'defaultValue'];
 
 /**
  * Validation function for `value` and `defaultValue`.
+ * 校验 select 控件输入值是否合规
  */
 function checkSelectPropTypes(props) {
   ReactControlledValuePropTypes.checkPropTypes('select', props);
