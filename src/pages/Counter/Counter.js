@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {increment, decrement, reset} from 'store/actions/counter';
+import Name from './compo'
 
 const mapStateToProps = (state) => {
     return {
@@ -23,10 +24,14 @@ const mapDispatchToProps = (dispatch) => {
 };
 @connect(mapStateToProps, mapDispatchToProps)
 export default class Counter extends Component {
+    state ={
+        name:'xuxia'
+    }
     render() {
         const {increment, decrement, reset, counter} = this.props;
         return (
             <div>
+                <Name name={this.state.name}></Name>
                 <div>当前计数为(显示redux计数){counter.count}</div>
                 <button onClick={() => {
                     increment()

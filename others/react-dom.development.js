@@ -15986,7 +15986,7 @@ function readContext(context, observedBits) {
   return isPrimaryRenderer ? context._currentValue : context._currentValue2;
 }
 
-// UpdateQueue is a linked list of prioritized updates.
+// UpdateQueue is a linked list of prioritized(按重要性排列; 划分优先顺序; 优先处理) updates.
 //
 // Like fibers, update queues come in pairs: a current queue, which represents
 // the visible state of the screen, and a work-in-progress queue, which can be
@@ -16105,8 +16105,8 @@ function cloneUpdateQueue(currentQueue) {
     firstUpdate: currentQueue.firstUpdate,
     lastUpdate: currentQueue.lastUpdate,
 
-    // TODO: With resuming, if we bail out and resuse the child tree, we should
-    // keep these effects.
+    // TODO: With resuming(n.	摘要; 概述; 概要;   v.	重新开始; (中断后) 继续; 恢复席位 / 地位 / 职位;), 
+    // if we bail out and resuse(再次使用; 重复使用) the child tree, we should keep these effects.
     firstCapturedUpdate: null,
     lastCapturedUpdate: null,
 
@@ -16144,7 +16144,7 @@ function appendUpdateToQueue(queue, update) {
 }
 
 function enqueueUpdate(fiber, update) {
-  // Update queues are created lazily.
+  // Update queues are created lazily(lazily).
   var alternate = fiber.alternate;
   var queue1 = void 0;
   var queue2 = void 0;

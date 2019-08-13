@@ -30,3 +30,6 @@ https://www.cnblogs.com/raion/p/10598473.html
 
 ViewGroup事件传递原理
 https://www.jianshu.com/p/a1f8f983b972
+
+react组件挂载和更新 － React源码浅析
+https://www.jianshu.com/p/45f4b2137878
