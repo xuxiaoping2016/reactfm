@@ -671,7 +671,7 @@ function defineRefPropWarningGetter(props, displayName) {
 }
 
 /**
- * Factory method to create a new React element. This no longer adheres to
+ * Factory method to create a new React element. This no longer adheres(黏附; 附着) to
  * the class pattern, so do not use new to call it. Also, no instanceof check
  * will work. Instead test $$typeof field against Symbol.for('react.element') to check
  * if something is a React Element.
@@ -681,10 +681,10 @@ function defineRefPropWarningGetter(props, displayName) {
  * @param {string|object} ref
  * @param {*} self A *temporary* helper to detect places where `this` is
  * different from the `owner` when React.createElement is called, so that we
- * can warn. We want to get rid of owner and replace string `ref`s with arrow
+ * can warn. We want to get rid of(摆脱) owner and replace string `ref`s with arrow
  * functions, and as long as `this` and owner are the same, there will be no
  * change in behavior.
- * @param {*} source An annotation object (added by a transpiler or otherwise)
+ * @param {*} source An annotation([ˌænəˈteɪʃn]注解; 评注; 注文; 释文) object (added by a transpiler or otherwise)
  * indicating filename, line number, and/or other information.
  * @param {*} owner
  * @param {*} props
@@ -701,7 +701,7 @@ var ReactElement = function (type, key, ref, self, source, owner, props) {
     ref: ref,
     props: props,
 
-    // Record the component responsible for creating this element.
+    // Record(记录; 记载) the component responsible(有责任; 负责; 承担义务; 应受责备; 作为原因; 成为起因) for creating this element.
     _owner: owner
   };
 
@@ -844,7 +844,7 @@ function cloneElement(element, config, children) {
   // Original props are copied
   var props = _assign({}, element.props);
 
-  // Reserved names are extracted
+  // Reserved names are extracted（提取; 提炼; 索取，设法得到(对方不愿提供的信息、钱财等); 选取; 摘录; 选录;）
   var key = element.key;
   var ref = element.ref;
   // Self is preserved since the owner is preserved.
@@ -938,6 +938,16 @@ function escape(key) {
  * pattern.
  */
 
+
+/**
+ * 参考地址 https://www.w3school.com.cn/jsref/jsref_replace.asp
+ * $1、$2、...、$99	与 regexp 中的第 1 到第 99 个子表达式相匹配的文本
+ * $&	与 regexp 相匹配的子串。
+ * $`	位于匹配子串左侧的文本。
+ * $'	位于匹配子串右侧的文本。
+ * $$	直接量符号。
+ */  
+
 var didWarnAboutMaps = false;
 
 var userProvidedKeyEscapeRegex = /\/+/g;
@@ -949,7 +959,7 @@ var POOL_SIZE = 10;
 var traverseContextPool = [];
 function getPooledTraverseContext(mapResult, keyPrefix, mapFunction, mapContext) {
   if (traverseContextPool.length) {
-    var traverseContext = traverseContextPool.pop();
+    var traverseContext = traverseContextPool.pop();  //pop() 方法将删除 arrayObject 的最后一个元素，把数组长度减 1，并且返回它删除的元素的值。如果数组已经为空，则 pop() 不改变数组，并返回 undefined 值。
     traverseContext.result = mapResult;
     traverseContext.keyPrefix = keyPrefix;
     traverseContext.func = mapFunction;
@@ -1157,7 +1167,7 @@ function mapSingleChildIntoContext(bookKeeping, child, childKey) {
     result.push(mappedChild);
   }
 }
-
+//源码解读 地址  https://segmentfault.com/a/1190000019968074
 function mapIntoWithKeyPrefixInternal(children, array, prefix, func, context) {
   var escapedPrefix = '';
   if (prefix != null) {

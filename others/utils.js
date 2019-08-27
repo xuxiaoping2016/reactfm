@@ -12,3 +12,11 @@ function isArguments(value) {
 	}
 	return isArgs;
 };
+
+
+const currency = {
+	//价格千分位格式化
+	formatNum: function(num){
+		return (num.toFixed(2) + '').replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,');
+	}
+}
