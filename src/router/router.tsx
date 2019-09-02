@@ -4,6 +4,7 @@ import {Route, Switch} from 'react-router-dom';
 
 // import Loading from 'components/Loading/Loading.tsx'
 import Home from '../pages/Home/Home';
+import InterfaceDemo from '../pages/interface'
 // import Page1 from 'bundle-loader?lazy&name=page1!pages/Page1/Page1';
 import Fanxing from '../pages/fanxing/index'
 import IntersectionTypes from '../pages/IntersectionTypes/index'
@@ -27,6 +28,7 @@ import NotFound from '../pages/NotFound/NotFound';
 const getRouter = () => (
     <Switch>
         <Route exact path="/" component={Home}/>
+        <Route path="/interface" component={InterfaceDemo}/>
         <Route path="/fanxing" component={Fanxing}/>
         <Route path="/intersectiontypes" component={IntersectionTypes}/>
         <Route path="/enum" component={Enum}/>

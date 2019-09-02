@@ -6,15 +6,15 @@ import Gaoji from './gaoji'
 export default class Enum extends Component {
     componentDidMount(){
         //https://www.imooc.com/article/41842
-        // enum Direction {
-        //     Up = 1,
-        //     Down,
-        //     Left,
-        //     Right
-        // }
+        enum Direction {
+            Up = 1,
+            Down,
+            Left,
+            Right
+        }
 
-        // let bi:Direction = Direction.Up;
-        // console.log(bi,Direction[2])
+        let bi:Direction = Direction.Up;
+        console.log(bi,Direction[2])
 
         // enum E {
         //     X,Y,Z
