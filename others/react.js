@@ -218,11 +218,11 @@ function warnNoop(publicInstance, callerName) {
 }
 
 /**
- * This is the abstract API for an update queue.
+ * This is the abstract(抽象的) API for an update queue.
  */
 var ReactNoopUpdateQueue = {
   /**
-   * Checks whether or not this composite component is mounted.
+   * Checks whether or not this composite(合成的; 混成的; 复合的) component is mounted.
    * @param {ReactClass} publicInstance The instance we want to test.
    * @return {boolean} True if mounted, false otherwise.
    * @protected
@@ -233,10 +233,10 @@ var ReactNoopUpdateQueue = {
   },
 
   /**
-   * Forces an update. This should only be invoked when it is known with
+   * Forces an update. This should only be invoked(引用) when it is known with
    * certainty that we are **not** in a DOM transaction.
    *
-   * You may want to call this when you know that some deeper aspect of the
+   * You may want to call this when you know that some deeper aspect(方面; 层面; 样子; 外观; 外表; 朝向; 方位) of the
    * component's state has changed but `setState` was not called.
    *
    * This will not invoke `shouldComponentUpdate`, but it will invoke
@@ -253,7 +253,7 @@ var ReactNoopUpdateQueue = {
 
   /**
    * Replaces all of the state. Always use this or `setState` to mutate state.
-   * You should treat `this.state` as immutable.
+   * You should treat `this.state` as immutable(不可改变的).
    *
    * There is no guarantee that `this.state` will be immediately updated, so
    * accessing `this.state` after calling this method may return the old value.
@@ -306,19 +306,19 @@ function Component(props, context, updater) {
 Component.prototype.isReactComponent = {};
 
 /**
- * Sets a subset of the state. Always use this to mutate
+ * Sets a subset(分组; 小组; 子集) of the state. Always use this to mutate
  * state. You should treat `this.state` as immutable.
  *
  * There is no guarantee that `this.state` will be immediately updated, so
  * accessing `this.state` after calling this method may return the old value.
  *
- * There is no guarantee that calls to `setState` will run synchronously,
- * as they may eventually be batched together.  You can provide an optional
+ * There is no guarantee that calls to `setState` will run synchronously(同步; 同步地; 同步执行; 同步模式; 同步写;)
+ * as they may eventually be batched(一批; (食物、药物等) 一批生产的量; 批) together.  You can provide an optional
  * callback that will be executed when the call to setState is actually
  * completed.
  *
  * When a function is provided to setState, it will be called at some point in
- * the future (not synchronously). It will be called with the up to date
+ * the future (not synchronously). It will be called with the up to date(最新的)
  * component arguments (state, props, context). These values can be different
  * from this.* because your function may be called after receiveProps but before
  * shouldComponentUpdate, and this new state, props, and context will not yet be
@@ -377,7 +377,7 @@ Component.prototype.forceUpdate = function (callback) {
     }
   }
 }
-
+// dummy (尤指缝制或陈列服装用的) 人体模型; 仿制品; 仿造物; 笨蛋; 蠢货
 function ComponentDummy() {}
 ComponentDummy.prototype = Component.prototype;
 
@@ -399,6 +399,16 @@ _assign(pureComponentPrototype, Component.prototype);
 pureComponentPrototype.isPureReactComponent = true;
 
 // an immutable object with a single mutable value
+/**
+ * Object.seal封闭一个对象，阻止添加新属性并将所有现有属性标记为不可配置。当前属性的值只要可写就可以改变
+ * 通常，一个对象是可扩展的（可以添加新的属性）。密封一个对象会让这个对象变的不能添加新属性，
+ * 且所有已有属性会变的不可配置。属性不可配置的效果就是属性变的不可删除，以及一个数据属性不
+ * 能被重新定义成为访问器属性，或者反之。但属性的值仍然可以修改。尝试删除一个密封对象的属性
+ * 或者将某个密封对象的属性从数据属性转换成访问器属性，结果会静默失败或抛出TypeError（在严
+ * 格模式 中最常见的，但不唯一）。
+ * 不会影响从原型链上继承的属性。但 __proto__ (  ) 属性的值也会不能修改。
+ * 返回被密封对象的引用。
+ */
 function createRef() {
   var refObject = {
     current: null
@@ -1044,7 +1054,7 @@ function traverseAllChildrenImpl(children, nameSoFar, callback, traverseContext)
       subtreeCount += traverseAllChildrenImpl(child, nextName, callback, traverseContext);
     }
   } else {
-    var iteratorFn = getIteratorFn(children);
+    var iteratorFn = getIteratorFn(children);  //获取遍历器生成函数
     if (typeof iteratorFn === 'function') {
       {
         // Warn about using Maps as children
@@ -1054,7 +1064,7 @@ function traverseAllChildrenImpl(children, nameSoFar, callback, traverseContext)
         }
       }
 
-      var iterator = iteratorFn.call(children);
+      var iterator = iteratorFn.call(children); //获取指向children的遍历器
       var step = void 0;
       var ii = 0;
       while (!(step = iterator.next()).done) {
@@ -1101,13 +1111,13 @@ function traverseAllChildren(children, callback, traverseContext) {
 
 /**
  * Generate a key string that identifies a component within a set.
- *
- * @param {*} component A component that could contain a manual key.
+ * 生成标识 集合中组件 的 键字符串
+ * @param {*} component A component that could contain a manual(用手的; 手工的; 体力的; 手动的; 手控的; 用手操作的) key.
  * @param {number} index Index that is used if a manual key is not provided.
  * @return {string}
  */
 function getComponentKey(component, index) {
-  // Do some typechecking here since we call this blindly. We want to ensure
+  // Do some typechecking here since we call this blindly(摸黑地; 在黑暗中; 不加思考地; 盲目地;). We want to ensure
   // that we don't block potential future ES APIs.
   if (typeof component === 'object' && component !== null && component.key != null) {
     // Explicit key
@@ -1260,7 +1270,7 @@ function createContext(defaultValue, calculateChangedBits) {
   var context = {
     $$typeof: REACT_CONTEXT_TYPE,
     _calculateChangedBits: calculateChangedBits,
-    // As a workaround to support multiple concurrent renderers, we categorize
+    // As a workaround(应变方法; 变通方法) to support multiple concurrent(并存的; 同时发生的) renderers, we categorize(将…分类; 把…加以归类)
     // some renderers as primary and others as secondary. We only expect
     // there to be two concurrent renderers at most: React Native (primary) and
     // Fabric (secondary); React DOM (primary) and React ART (secondary).
@@ -1268,7 +1278,7 @@ function createContext(defaultValue, calculateChangedBits) {
     _currentValue: defaultValue,
     _currentValue2: defaultValue,
     // Used to track how many concurrent renderers this context currently
-    // supports within in a single renderer. Such as parallel server rendering.
+    // supports within in a single renderer. Such as parallel(平行的; 极相似的; 同时发生的; 相应的; 对应的; 并行的) server rendering.
     _threadCount: 0,
     // These are circular
     Provider: null,

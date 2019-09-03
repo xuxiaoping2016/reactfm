@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Co from './Components'
 // import './style.css'
 import './style.scss'
 
@@ -7,7 +8,8 @@ export default class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            count: 0
+            count: 0,
+            
         }
     }
 
@@ -18,6 +20,12 @@ export default class Home extends Component {
     }
 
     render(){
+        let eles = [
+            'abcd',
+            'abcd',
+            'abcd',
+            'abcd',
+        ]
         return (
             <div className="container">
                 <p className="scss">测试scss 样式文件!!!!!!!!!!</p>
@@ -25,6 +33,12 @@ export default class Home extends Component {
                 this is home~~fdfkd<br/>
                 当前计数：{this.state.count}<br/>
                 <button onClick={() => this._handleClick()}>自增</button>
+                <Co>
+                    3434
+                    <div>fdfdf</div>
+                    <div>rer</div>
+                    <div>rrere</div>
+                </Co>
             </div>
         )
     }

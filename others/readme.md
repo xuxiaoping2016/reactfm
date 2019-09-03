@@ -19,6 +19,8 @@ https://juejin.im/entry/5c0dd2a56fb9a049ea38c751
 React-源码解析-setState运行机制
 https://blog.csdn.net/weixin_33967071/article/details/88117027
 
+react解析 React.createElement(一)
+https://juejin.im/post/5cd556fb51882535c3542a1e
 
 react解析 React.Children(二)
 https://juejin.im/post/5cd557bbf265da03a97b0780
@@ -33,3 +35,15 @@ https://www.jianshu.com/p/a1f8f983b972
 
 react组件挂载和更新 － React源码浅析
 https://www.jianshu.com/p/45f4b2137878
+
+
+React-防止内存泄漏处理
+Can't perform a React state update on an unmounted component. This is a no-op, but it indicates a memory leak in your application. To fix, cancel all subscriptions and asynchronous tasks in the componentWillUnmount method”
+https://segmentfault.com/a/1190000017186299?utm_source=tag-newest
+
+剖析 React 源码：先热个身
+https://github.com/KieSun/Dream/issues/18
+React系列 --- createElement, ReactElement与Component部分源码解析(五)
+https://segmentfault.com/a/1190000019997460
+React系列 --- createElement, ReactElement与Component部分源码解析(五)
+https://segmentfault.com/a/1190000019997460
