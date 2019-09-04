@@ -1,8 +1,13 @@
-import React, {Component} from 'react';
-import Example from './example'
+import React, {Component, Suspense} from 'react';
+// import Example from './example'
 
 import Theme from './theme'
-import Theme2 from './theme2'
+// import Theme2 from './theme2'
+
+let Example = React.lazy(()=>{
+    return import('./example')
+})
+// console.log(Example)
 
 class ContextDemo extends Component {
 
@@ -10,16 +15,19 @@ class ContextDemo extends Component {
         
         return (
             <div>
-                <Example/>
+                <Suspense fallback={<div>Loading...</div>}>
+                    <Example/>
+                </Suspense>
+                
                 
                 <div style={{paddingTop:"30px"}}>
                     <p>按钮主题</p>
                     <Theme/>
                 </div>
-                <div style={{paddingTop:"30px"}}>
+                {/* <div style={{paddingTop:"30px"}}>
                     <p>按钮主题</p>
                     <Theme2/>
-                </div>
+                </div> */}
             </div>
         )
     }
