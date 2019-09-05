@@ -1180,7 +1180,7 @@ var vendorPrefixes = {
 };
 
 /**
- * Event names that have already been detected and prefixed (if applicable).
+ * Event names that have already been detected(发现;查明;侦察出) and prefixed (if applicable).
  */
 var prefixedEventNames = {};
 

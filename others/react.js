@@ -202,14 +202,14 @@ var warningWithoutStack = function () {};
 
 var warningWithoutStack$1 = warningWithoutStack;
 
-var didWarnStateUpdateForUnmountedComponent = {};
+var didWarnStateUpdateForUnmountedComponent = {}; //即将卸载的组件更新state；
 
 function warnNoop(publicInstance, callerName) {
   {
-    var _constructor = publicInstance.constructor;
+    var _constructor = publicInstance.constructor; //获取实例的构造函数
     var componentName = _constructor && (_constructor.displayName || _constructor.name) || 'ReactClass';
-    var warningKey = componentName + '.' + callerName;
-    if (didWarnStateUpdateForUnmountedComponent[warningKey]) {
+    var warningKey = componentName + '.' + callerName;  //组件名 + 方法名 组成一个key ，判断是否已缓存当前错误，已缓存则不作任何操作  未缓存则提示未挂载组件中更新state报错，并缓存报错。
+    if (didWarnStateUpdateForUnmountedComponent[warningKey]) { 
       return;
     }
     warningWithoutStack$1(false, "Can't call %s on a component that is not yet mounted. " + 'This is a no-op, but it might indicate a bug in your application. ' + 'Instead, assign to `this.state` directly or define a `state = {};` ' + 'class property with the desired state in the %s component.', callerName, componentName);
@@ -270,14 +270,14 @@ var ReactNoopUpdateQueue = {
 
   /**
    * Sets a subset of the state. This only exists because _pendingState is
-   * internal. This provides a merging strategy that is not available to deep
+   * internal(内部的; 里面的; 体内的; (机构) 内部的). This provides a merging strategy that is not available to deep
    * properties which is confusing. TODO: Expose pendingState or don't use it
    * during the merge.
    *
    * @param {ReactClass} publicInstance The instance that should rerender.
    * @param {object} partialState Next partial state to be merged with state.
    * @param {?function} callback Called after component is updated.
-   * @param {?string} Name of the calling function in the public API.
+   * @param {?string} Name of the calling function in the public API. 调用该函数的函数名称
    * @internal
    */
   enqueueSetState: function (publicInstance, partialState, callback, callerName) {
@@ -1525,7 +1525,7 @@ function useDebugValue(value, formatterFn) {
   }
 }
 
-/**
+/** ReactElementValidator 给元素工厂提供一层包裹来校验传递给元素的属性，这个趋向于只在dev环境使用，且可以被语言支持的静态属性校验器所替代
  * ReactElementValidator provides a wrapper around a element factory
  * which validates the props passed to the element. This is intended to be
  * used only in DEV and could be replaced by a static type checker for languages
@@ -1587,6 +1587,15 @@ function getCurrentComponentErrorInfo(parentType) {
  * @internal
  * @param {ReactElement} element Element that requires a key.
  * @param {*} parentType element's parent's type.
+ * var arr =[0,'',false,undefined,null]  
+        for(var i of arr){
+            console.log(i,i != null)
+        }
+
+    结果 0 true
+        '' true
+        false true
+        undefined false  那么 element.key 为空字符串时也能校验通过
  */
 function validateExplicitKey(element, parentType) {
   if (!element._store || element._store.validated || element.key != null) {
@@ -1600,7 +1609,7 @@ function validateExplicitKey(element, parentType) {
   }
   ownerHasKeyUseWarning[currentComponentErrorInfo] = true;
 
-  // Usually the current owner is the offender, but if it accepts children as a
+  // Usually the current owner is the offender(犯罪者; 违法者; 罪犯; 妨害…的人(或事物)), but if it accepts children as a
   // property, it may be the creator of the child that's responsible for
   // assigning it a key.
   var childOwner = '';
@@ -1644,7 +1653,7 @@ function validateChildKeys(node, parentType) {
   } else if (node) {
     var iteratorFn = getIteratorFn(node);
     if (typeof iteratorFn === 'function') {
-      // Entry iterators used to provide implicit keys,
+      // Entry iterators used to provide implicit(含蓄的; 不直接言明的; 成为一部分的; 内含的; 完全的; 无疑问的;) keys,
       // but now we print a separate warning for them later.
       if (iteratorFn !== node.entries) {
         var iterator = iteratorFn.call(node);
@@ -1672,11 +1681,11 @@ function validatePropTypes(element) {
   }
   var name = getComponentName(type);
   var propTypes = void 0;
-  if (typeof type === 'function') {
+  if (typeof type === 'function') {  //函数组件，类组件
     propTypes = type.propTypes;
   } else if (typeof type === 'object' && (type.$$typeof === REACT_FORWARD_REF_TYPE ||
   // Note: Memo only checks outer props here.
-  // Inner props are checked in the reconciler.
+  // Inner props are checked in the reconciler(协调器; 调解人).
   type.$$typeof === REACT_MEMO_TYPE)) {
     propTypes = type.propTypes;
   } else {
@@ -1722,7 +1731,7 @@ function createElementWithValidation(type, props, children) {
   var validType = isValidElementType(type);
 
   // We warn in this case but don't throw. We expect the element creation to
-  // succeed and there will likely be errors in render.
+  // succeed and there will likely be errors in render.  元素校验不通过 warning 可以不看
   if (!validType) {
     var info = '';
     if (type === undefined || typeof type === 'object' && type !== null && Object.keys(type).length === 0) {

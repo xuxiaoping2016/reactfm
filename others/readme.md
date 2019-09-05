@@ -45,5 +45,20 @@ https://segmentfault.com/a/1190000017186299?utm_source=tag-newest
 https://github.com/KieSun/Dream/issues/18
 React系列 --- createElement, ReactElement与Component部分源码解析(五)
 https://segmentfault.com/a/1190000019997460
-React系列 --- createElement, ReactElement与Component部分源码解析(五)
-https://segmentfault.com/a/1190000019997460
+
+
+React源码浅入（一）
+https://juejin.im/post/5a027c9af265da43333dd34e
+
+React路由鉴权
+https://juejin.im/post/5d6352116fb9a06ae8361932
+
+
+React源码解析ReactDOM.render源码
+https://segmentfault.com/a/1190000011571578
+
+浅谈React的createFactory()方法
+https://blog.csdn.net/zhouziyu2011/article/details/70792179
+
+从react源码看Virtual Dom到真实Dom的渲染过程
+https://www.jianshu.com/p/df0b5a009e92

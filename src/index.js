@@ -13,11 +13,12 @@ if (module.hot) {
 }
 
 ReactDom.render(
-    <AppContainer>
-        <Provider store={store}>
-            <App/>
-        </Provider>
-    </AppContainer>, 
+    // <AppContainer>
+    //     <Provider store={store}>
+    //         <App/>
+    //     </Provider>
+    // </AppContainer>, 
+    <div>hello</div>,
     document.getElementById('app')
 );
 
