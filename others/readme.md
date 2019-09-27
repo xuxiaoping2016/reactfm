@@ -62,3 +62,8 @@ https://blog.csdn.net/zhouziyu2011/article/details/70792179
 
 从react源码看Virtual Dom到真实Dom的渲染过程
 https://www.jianshu.com/p/df0b5a009e92
+
+
+浅谈React16框架 - Fiber
+https://www.cnblogs.com/zhuanzhuanfe/p/9567081.html
+https://blog.csdn.net/songshuzhong/article/details/80642651

@@ -22,6 +22,7 @@ var scheduler = require('scheduler');
 var tracing = require('scheduler/tracing');
 
 /**
+ * invariant 不变的; 恒定的;
  * Use invariant() to assert state which your program assumes to be true.
  *
  * Provide sprintf-style format (only %s is supported) and arguments
@@ -106,7 +107,7 @@ var invokeGuardedCallbackImpl = function (name, func, context, a, b, c, d, e, f)
       // If document doesn't exist we know for sure we will crash in this method
       // when we call document.createEvent(). However this can cause confusing
       // errors: https://github.com/facebookincubator/create-react-app/issues/3482
-      // So we preemptively throw with a better message instead.
+      // So we preemptively(先发制人) throw with a better message instead.
       !(typeof document !== 'undefined') ? invariant(false, 'The `document` global was defined when React was initialized, but is not defined anymore. This can happen in a test environment if a component schedules([ˈʃedjuːlz]工作计划; 日程安排; (电视或广播) 节目表; (价格、收费或条款等的) 一览表，明细表，清单;) an update from an asynchronous callback, but the test has already finished running. To solve this, you can either unmount the component at the end of your test (and ensure that any asynchronous operations get canceled in `componentWillUnmount`), or you can change the test itself to be asynchronous.') : void 0;
       var evt = document.createEvent('Event');
 
@@ -126,7 +127,7 @@ var invokeGuardedCallbackImpl = function (name, func, context, a, b, c, d, e, f)
       // Keeps track of the descriptor of window.event to restore it after event
       // dispatching: https://github.com/facebook/react/issues/13688
       var windowEventDescriptor = Object.getOwnPropertyDescriptor(window, 'event');
-
+      // 为虚拟事件创建事件句柄，我们会使用dispatchEvent同步地调用我们的虚拟事件，在事件句柄中，调用用户提供的回调函数
       // Create an event handler for our fake event. We will synchronously
       // dispatch our fake event using `dispatchEvent`. Inside the handler, we
       // call the user-provided callback.
@@ -259,7 +260,7 @@ function invokeGuardedCallback(name, func, context, a, b, c, d, e, f) {
 /**
  * Same as invokeGuardedCallback, but instead of returning an error, it stores
  * it in a global so it can be rethrown by `rethrowCaughtError` later.
- * TODO: See if caughtError and rethrowError can be unified.
+ * TODO: See if caughtError and rethrowError can be unified(统一; 使成一体; 使一元化).
  *
  * @param {String} name of the guard to use for logging or debugging
  * @param {Function} func The function to invoke
@@ -847,7 +848,7 @@ var DehydratedSuspenseComponent = 18;
 var randomKey = Math.random().toString(36).slice(2);
 var internalInstanceKey = '__reactInternalInstance$' + randomKey;
 var internalEventHandlersKey = '__reactEventHandlers$' + randomKey;
-
+//缓存实例
 function precacheFiberNode(hostInst, node) {
   node[internalInstanceKey] = hostInst;
 }
