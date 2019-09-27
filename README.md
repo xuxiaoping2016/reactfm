@@ -105,3 +105,13 @@ https://www.cnblogs.com/fly_dragon/p/9150732.html
 
 React16.6和Typescript高仿B站Web移动端
 https://juejin.im/post/5c455f7ae51d4551e744aad9
+
+typescript文档
+https://www.w3cschool.cn/typescript/typescript-triple-slash-directives.html
+
+
+「React TS3 专题」从创建第一个 React TypeScript3 项目开始
+https://blog.csdn.net/Ed7zgeE9X/article/details/100072928
+
+在React+TS的项目中scss问题
+https://segmentfault.com/q/1010000018813204/

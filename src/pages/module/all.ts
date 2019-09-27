@@ -1,4 +1,4 @@
-// namespace Validation {
+// namespace Validation1 {
 //     export  interface StringValidator {
 //         isAcceptable(s: string): boolean;
 //     }
@@ -24,9 +24,9 @@
 // let strings = ["Hello", "98052", "101"];
 
 // // Validators to use
-// let validators: { [s: string]: Validation.StringValidator; } = {};
-// validators["ZIP code"] = new Validation.ZipCodeValidator();
-// validators["Letters only"] = new Validation.LettersOnlyValidator();
+// let validators: { [s: string]: Validation1.StringValidator; } = {};
+// validators["ZIP code"] = new Validation1.ZipCodeValidator();
+// validators["Letters only"] = new Validation1.LettersOnlyValidator();
 
 // // Show whether each string passed each validator
 // for (let s of strings) {

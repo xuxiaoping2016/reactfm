@@ -23,7 +23,15 @@ let deck = {
     }
 }
 
+interface StringArray {
+    [key:number]:number,
+    name:string
+}
 
+let arr3: StringArray = {
+    name: 'fdfd',
+    0:12
+}
 
 class Functions extends Component {
     componentDidMount(){
