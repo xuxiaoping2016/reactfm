@@ -6,27 +6,50 @@
 </head>
 <body>
     <script type="text/javascript">
-       function makePrefixMap(styleProp, eventName) {
-  var prefixes = {};
+//        function makePrefixMap(styleProp, eventName) {
+//   var prefixes = {};
 
-  prefixes[styleProp.toLowerCase()] = eventName.toLowerCase();
-  prefixes['Webkit' + styleProp] = 'webkit' + eventName;
-  prefixes['Moz' + styleProp] = 'moz' + eventName;
+//   prefixes[styleProp.toLowerCase()] = eventName.toLowerCase();
+//   prefixes['Webkit' + styleProp] = 'webkit' + eventName;
+//   prefixes['Moz' + styleProp] = 'moz' + eventName;
 
-  return prefixes;
-}
+//   return prefixes;
+// }
 
-/**
- * A list of event names to a configurable list of vendor prefixes.
- */
-var vendorPrefixes = {
-  animationend: makePrefixMap('Animation', 'AnimationEnd'),
-  animationiteration: makePrefixMap('Animation', 'AnimationIteration'),
-  animationstart: makePrefixMap('Animation', 'AnimationStart'),
-  transitionend: makePrefixMap('Transition', 'TransitionEnd')
-};
+// var vendorPrefixes = {
+//   animationend: makePrefixMap('Animation', 'AnimationEnd'),
+//   animationiteration: makePrefixMap('Animation', 'AnimationIteration'),
+//   animationstart: makePrefixMap('Animation', 'AnimationStart'),
+//   transitionend: makePrefixMap('Transition', 'TransitionEnd')
+// };
 
-console.log(vendorPrefixes)
+// console.log(vendorPrefixes)
+
+
+    const thunk =  next => action => {
+        console.log(next)
+        console.log(action)
+    };
+    const thunk2 =  next2 => action2 => {
+        console.log(next2)
+        console.log(action2)
+    };
+
+    function compose(...funcs) {
+        if (funcs.length === 0) {
+            return arg => arg
+        }
+
+        if (funcs.length === 1) {
+            return funcs[0]
+        }
+
+        return funcs.reduce((a, b) => (...args) => a(b(...args)))
+    }
+
+    const ret = compose(...[thunk,thunk2])
+    console.log(ret)
+    ret = (...args) => thunk(thunk2(args));
     </script>
 </body>
 </html>

@@ -844,7 +844,7 @@ var SimpleMemoComponent = 15;
 var LazyComponent = 16;
 var IncompleteClassComponent = 17;
 var DehydratedSuspenseComponent = 18;
-
+// internal  内部的; 里面的;
 var randomKey = Math.random().toString(36).slice(2);
 var internalInstanceKey = '__reactInternalInstance$' + randomKey;
 var internalEventHandlersKey = '__reactEventHandlers$' + randomKey;
@@ -2252,7 +2252,7 @@ function getEventTarget(nativeEvent) {
 /**
  * Checks if an event is supported in the current execution environment.
  *
- * NOTE: This will not work correctly for non-generic events such as `change`,
+ * NOTE: This will not work correctly for non-generic(非常规) events such as `change`,
  * `reset`, `load`, `error`, and `select`.
  *
  * Borrows from Modernizr.
@@ -2279,7 +2279,7 @@ function isEventSupported(eventNameSuffix) {
   return isSupported;
 }
 
-function isCheckable(elem) {
+function isCheckable(elem) {  //判断元素能否选中 radio，CheckBox
   var type = elem.type;
   var nodeName = elem.nodeName;
   return nodeName && nodeName.toLowerCase() === 'input' && (type === 'checkbox' || type === 'radio');
@@ -2356,13 +2356,13 @@ function trackValueOnNode(node) {
   };
   return tracker;
 }
-
+// track  getTracker  detachTracker  设置，获取，删除  node._valueTracker
 function track(node) {
   if (getTracker(node)) {
     return;
   }
 
-  // TODO: Once it's just Fiber we can move this to node._wrapperState
+  // TODO: Once it's just Fiber we can move this to node._wrapperState 
   node._valueTracker = trackValueOnNode(node);
 }
 
@@ -2641,7 +2641,7 @@ var warning$1 = warning;
 var RESERVED = 0;
 
 // A simple string attribute.
-// Attributes that aren't in the whitelist are presumed to have this type.
+// Attributes that aren't in the whitelist are presumed(假设; 假定; 推定; 设定; 设想) to have this type.
 var STRING = 1;
 
 // A string attribute that accepts booleans in React. In HTML, these are called
@@ -2652,7 +2652,7 @@ var BOOLEANISH_STRING = 2;
 
 // A real boolean attribute.
 // When true, it should be present (set either to an empty string or its name).
-// When false, it should be omitted.
+// When false, it should be omitted(删除; 忽略; 漏掉; 遗漏; 不做; 未能做).
 var BOOLEAN = 3;
 
 // An attribute that can be used as a flag as well as with a value.
@@ -2661,7 +2661,7 @@ var BOOLEAN = 3;
 // For any other value, should be present with that value.
 var OVERLOADED_BOOLEAN = 4;
 
-// An attribute that must be numeric or parse as a numeric.
+// An attribute that must be numeric or parse(解析) as a numeric(数（字，值）（的）；分数 ；不可通约数).
 // When falsy, it should be removed.
 var NUMERIC = 5;
 
@@ -2681,7 +2681,7 @@ var VALID_ATTRIBUTE_NAME_REGEX = new RegExp('^[' + ATTRIBUTE_NAME_START_CHAR + '
 var hasOwnProperty = Object.prototype.hasOwnProperty;
 var illegalAttributeNameCache = {};
 var validatedAttributeNameCache = {};
-
+// 判断是否是合法属性名，并缓存起来
 function isAttributeNameSafe(attributeName) {
   if (hasOwnProperty.call(validatedAttributeNameCache, attributeName)) {
     return true;
@@ -2699,7 +2699,7 @@ function isAttributeNameSafe(attributeName) {
   }
   return false;
 }
-
+// shouldIgnoreAttribute 是否应该忽略属性，保留属性及事件绑定属性能忽略，其他都不可忽略
 function shouldIgnoreAttribute(name, propertyInfo, isCustomComponentTag) {
   if (propertyInfo !== null) {
     return propertyInfo.type === RESERVED;
@@ -4778,7 +4778,7 @@ function findRootContainerNode(inst) {
   return inst.stateNode.containerInfo;
 }
 
-// Used to store ancestor hierarchy in top level callback
+// Used to store ancestor hierarchy(等级制度(尤指社会或组织); 统治集团; 层次体系) in top level callback
 function getTopLevelCallbackBookKeeping(topLevelType, nativeEvent, targetInst) {
   if (callbackBookkeepingPool.length) {
     var instance = callbackBookkeepingPool.pop();
@@ -4811,7 +4811,7 @@ function handleTopLevel(bookKeeping) {
   // Loop through the hierarchy, in case there's any nested components.
   // It's important that we build the array of ancestors before calling any
   // event handlers, because event handlers can modify the DOM, leading to
-  // inconsistencies with ReactMount's node cache. See #1105.
+  // inconsistencies(反复无常，易变; 前后矛盾; 不一致) with ReactMount's node cache. See #1105.
   var ancestor = targetInst;
   do {
     if (!ancestor) {
