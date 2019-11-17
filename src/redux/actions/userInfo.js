@@ -23,7 +23,9 @@ function getUserInfoFail() {
 
 
 export function getUserInfo() {
+    console.log('outer')
     return function (dispatch) {
+        console.log('......')
         dispatch(getUserInfoRequest());
 
         return fetch('http://localhost:8001/api/user.json')

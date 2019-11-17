@@ -1,5 +1,5 @@
 import { createStore, applyMiddleware} from 'redux';
-import thunkMiddleware from 'redux-thunk';
+import thunkMiddleware from './redux-thunk';
 import combineReducers from './reducers.js'
 
 if (module.hot) {

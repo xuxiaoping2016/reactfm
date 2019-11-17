@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {getUserInfo} from "store/actions/userInfo";
 
 class UserInfo extends Component {
-
+    
     render() {
         const {userInfo, isLoading, errorMsg} = this.props.userInfo;
         return (
@@ -19,7 +19,7 @@ class UserInfo extends Component {
                                 </div>
                         )
                 }
-                <button onClick={() => this.props.getUserInfo()}>请求用户信息</button>
+                <button onClick={this.props.getUserInfo}>请求用户信息</button>
             </div>
         )
     }

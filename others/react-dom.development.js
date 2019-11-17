@@ -2768,7 +2768,7 @@ function shouldRemoveAttribute(name, value, propertyInfo, isCustomComponentTag) 
 function getPropertyInfo(name) {
   return properties.hasOwnProperty(name) ? properties[name] : null;
 }
-
+// name 属性名  type 属性值类型 mustUseProperty是否是必用属性 attributeName属性名对应的原生attr attributeNamespace属性命名空间
 function PropertyInfoRecord(name, type, mustUseProperty, attributeName, attributeNamespace) {
   this.acceptsBooleans = type === BOOLEANISH_STRING || type === BOOLEAN || type === OVERLOADED_BOOLEAN;
   this.attributeName = attributeName;

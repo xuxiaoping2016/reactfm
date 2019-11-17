@@ -25,9 +25,9 @@ const getRouter = () => (
         <Route exact path="/" component={createComponent(Home)}/>
         <Route path="/context" component={createComponent(ContextDemo)}/>
         <Route path="/page1" component={createComponent(Page1)}/>
-        {/* <Route path="/counter" component={createComponent(Counter)}/>
+        <Route path="/counter" component={createComponent(Counter)}/>
         <Route path="/userinfo" component={createComponent(UserInfo)}/>
-        <Route component={createComponent(NotFound)}/> */}
+        <Route component={createComponent(NotFound)}/>
     </Switch>
 );
 
