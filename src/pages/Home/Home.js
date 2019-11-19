@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Co from './Components'
 // import './style.css'
-import './style.scss'
+// import './style.scss'
 
 import im from '../../images/wait.png'
 export default class Home extends Component {

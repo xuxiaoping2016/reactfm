@@ -1,7 +1,8 @@
 // import React from './kkbreact1';
 // import ReactDom from './kkbreact-dom';
 import React from 'react';
-import ReactDom from 'react-dom';
+// import ReactDom from 'react-dom';
+import ReactDom from '../others/react-dom.development2'
 import {AppContainer} from 'react-hot-loader';
 import {Provider} from 'react-redux';
 import store from 'store/store.js'

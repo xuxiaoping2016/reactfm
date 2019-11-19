@@ -1,6 +1,6 @@
 function createThunkMiddleware(extraArgument) {
     return ({ dispatch, getState }) => next => action => {
-      console.log('action',action)
+      // console.log('action',action)
       if (typeof action === 'function') {
         return action(dispatch, getState, extraArgument);
       }

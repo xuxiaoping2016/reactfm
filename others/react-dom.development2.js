@@ -10389,10 +10389,12 @@ function assignFiberPropertiesInDEV(target, source) {
 
 
 function createFiberRoot(containerInfo, isConcurrent, hydrate) {
+    // containerInfo  容器节点及其后代节点
+    console.log('containerInfo',containerInfo)
   // Cyclic construction. This cheats the type system right now because
   // stateNode is any.
   var uninitializedFiber = createHostRootFiber(isConcurrent);
-
+    console.log(uninitializedFiber)
   var root = void 0;
   if (enableSchedulerTracing) {
     root = {
@@ -19929,7 +19931,7 @@ function syncUpdates(fn, a, b, c, d) {
   });
 }
 
-// TODO: Everything below this is written as if it has been lifted（） to the
+// TODO: Everything below this is written as if it has been lifted to the
 // renderers. I'll do this in a follow-up.
 
 // Linked-list of roots
@@ -20036,12 +20038,12 @@ function onCommit(root, expirationTime) {
 }
 
 function requestCurrentTime() {
-  // requestCurrentTime is called by the scheduler(调度程序，日程安排程序) to compute an expiration
+  // requestCurrentTime is called by the scheduler to compute an expiration
   // time.
   //
   // Expiration times are computed by adding to the current time (the start
   // time). However, if two updates are scheduled within the same event, we
-  // should treat their start times as simultaneous(同时发生(或进行)的; 同步的), even if the actual clock
+  // should treat their start times as simultaneous, even if the actual clock
   // time has advanced between the first and second call.
 
   // In other words, because expiration times determine how updates are batched,
@@ -20068,7 +20070,7 @@ function requestCurrentTime() {
     currentSchedulerTime = currentRendererTime;
     return currentSchedulerTime;
   }
-  // There's already pending(待定) work. We might be in the middle of a browser
+  // There's already pending work. We might be in the middle of a browser
   // event. If we were to read the current time, it could cause multiple updates
   // within the same event to receive different expiration times, leading to
   // tearing. Return the last read time. During the next idle callback, the
@@ -20663,7 +20665,10 @@ function updateContainer(element, container, parentComponent, callback) {
   return updateContainerAtExpirationTime(element, container, parentComponent, expirationTime, callback);
 }
 
+// 接受一个container 元素，返回 container.current.child.stateNode
 function getPublicRootInstance(container) {
+    console.log('container',container)
+    // current 字段保存着container对应的fiber
   var containerFiber = container.current;
   if (!containerFiber.child) {
     return null;
@@ -20674,14 +20679,6 @@ function getPublicRootInstance(container) {
     default:
       return containerFiber.child.stateNode;
   }
-}
-
-function findHostInstanceWithNoPortals(fiber) {
-  var hostFiber = findCurrentHostFiberWithNoPortals(fiber);
-  if (hostFiber === null) {
-    return null;
-  }
-  return hostFiber.stateNode;
 }
 
 var overrideProps = null;
@@ -20713,31 +20710,6 @@ var overrideProps = null;
   };
 }
 
-function injectIntoDevTools(devToolsConfig) {
-  var findFiberByHostInstance = devToolsConfig.findFiberByHostInstance;
-  var ReactCurrentDispatcher = ReactSharedInternals.ReactCurrentDispatcher;
-
-
-  return injectInternals(_assign({}, devToolsConfig, {
-    overrideProps: overrideProps,
-    currentDispatcherRef: ReactCurrentDispatcher,
-    findHostInstanceByFiber: function (fiber) {
-      var hostFiber = findCurrentHostFiber(fiber);
-      if (hostFiber === null) {
-        return null;
-      }
-      return hostFiber.stateNode;
-    },
-    findFiberByHostInstance: function (instance) {
-      if (!findFiberByHostInstance) {
-        // Might not be implemented by the renderer.
-        return null;
-      }
-      return findFiberByHostInstance(instance);
-    }
-  }));
-}
-
 // This file intentionally does *not* have the Flow annotation.
 // Don't add it. See `./inline-typed.js` for an explanation.
 
@@ -20765,7 +20737,6 @@ var ReactVersion = '16.8.6';
 
 var ReactCurrentOwner = ReactSharedInternals.ReactCurrentOwner;
 
-var topLevelUpdateWarnings = void 0;
 var warnOnInvalidCallback = void 0;
 var didWarnAboutUnstableCreatePortal = false;
 
@@ -20777,33 +20748,12 @@ var didWarnAboutUnstableCreatePortal = false;
   Set.prototype == null || typeof Set.prototype.clear !== 'function' || typeof Set.prototype.forEach !== 'function') {
     warningWithoutStack$1(false, 'React depends on Map and Set built-in types. Make sure that you load a ' + 'polyfill in older browsers. https://fb.me/react-polyfills');
   }
-
-  topLevelUpdateWarnings = function (container) {
-    if (container._reactRootContainer && container.nodeType !== COMMENT_NODE) {
-      var hostInstance = findHostInstanceWithNoPortals(container._reactRootContainer._internalRoot.current);
-      if (hostInstance) {
-        !(hostInstance.parentNode === container) ? warningWithoutStack$1(false, 'render(...): It looks like the React-rendered content of this ' + 'container was removed without using React. This is not ' + 'supported and will cause errors. Instead, call ' + 'ReactDOM.unmountComponentAtNode to empty a container.') : void 0;
-      }
-    }
-
-    var isRootRenderedBySomeReact = !!container._reactRootContainer;
-    var rootEl = getReactRootElementInContainer(container);
-    var hasNonRootReactChild = !!(rootEl && getInstanceFromNode$1(rootEl));
-
-    !(!hasNonRootReactChild || isRootRenderedBySomeReact) ? warningWithoutStack$1(false, 'render(...): Replacing React-rendered children with a new root ' + 'component. If you intended to update the children of this node, ' + 'you should instead have the existing children update their state ' + 'and render the new components instead of calling ReactDOM.render.') : void 0;
-
-    !(container.nodeType !== ELEMENT_NODE || !container.tagName || container.tagName.toUpperCase() !== 'BODY') ? warningWithoutStack$1(false, 'render(): Rendering components directly into document.body is ' + 'discouraged, since its children are often manipulated by third-party ' + 'scripts and browser extensions. This may lead to subtle ' + 'reconciliation issues. Try rendering into a container element created ' + 'for your app.') : void 0;
-  };
-
   warnOnInvalidCallback = function (callback, callerName) {
     !(callback === null || typeof callback === 'function') ? warningWithoutStack$1(false, '%s(...): Expected the last optional `callback` argument to be a ' + 'function. Instead received: %s.', callerName, callback) : void 0;
   };
 }
 
 setRestoreImplementation(restoreControlledState$1);
-
-
-
 
 function ReactBatch(root) {
   var expirationTime = computeUniqueAsyncExpiration();
@@ -20945,6 +20895,7 @@ ReactWork.prototype._onCommit = function () {
   }
 };
 
+// container 一个fiber  isConcurrent标记同步 异步（并存的; 同时发生的）hydrate是否与已存在的内容合并
 function ReactRoot(container, isConcurrent, hydrate) {
   var root = createContainer(container, isConcurrent, hydrate);
   this._internalRoot = root;
@@ -20953,9 +20904,9 @@ ReactRoot.prototype.render = function (children, callback) {
   var root = this._internalRoot;
   var work = new ReactWork();
   callback = callback === undefined ? null : callback;
-  // {
-  //   warnOnInvalidCallback(callback, 'render');
-  // }
+  {
+    warnOnInvalidCallback(callback, 'render');
+  }
   if (callback !== null) {
     work.then(callback);
   }
@@ -20966,9 +20917,9 @@ ReactRoot.prototype.unmount = function (callback) {
   var root = this._internalRoot;
   var work = new ReactWork();
   callback = callback === undefined ? null : callback;
-  // {
-  //   warnOnInvalidCallback(callback, 'render');
-  // }
+  {
+    warnOnInvalidCallback(callback, 'render');
+  }
   if (callback !== null) {
     work.then(callback);
   }
@@ -21045,10 +20996,10 @@ function shouldHydrateDueToLegacyHeuristic(container) {
 setBatchingImplementation(batchedUpdates$1, interactiveUpdates$1, flushInteractiveUpdates$1);
 
 var warnedAboutHydrateAPI = false;
-
+//  返回一个 new ReactRoot 实例
 function legacyCreateRootFromDOMContainer(container, forceHydrate) {
   var shouldHydrate = forceHydrate || shouldHydrateDueToLegacyHeuristic(container);
-  // First clear any existing content.
+  // First clear any existing content. shouldHydrate == false时，不合成 清除根元素下任何存在的内容
   if (!shouldHydrate) {
     var warned = false;
     var rootSibling = void 0;
@@ -21062,27 +21013,17 @@ function legacyCreateRootFromDOMContainer(container, forceHydrate) {
       container.removeChild(rootSibling);
     }
   }
-  {
-    if (shouldHydrate && !forceHydrate && !warnedAboutHydrateAPI) {
-      warnedAboutHydrateAPI = true;
-      lowPriorityWarning$1(false, 'render(): Calling ReactDOM.render() to hydrate server-rendered markup ' + 'will stop working in React v17. Replace the ReactDOM.render() call ' + 'with ReactDOM.hydrate() if you want React to attach to the server HTML.');
-    }
-  }
-  // Legacy roots are not async by default.
+  // Legacy roots are not async(异步) by default.
   var isConcurrent = false;
   return new ReactRoot(container, isConcurrent, shouldHydrate);
 }
 
 function legacyRenderSubtreeIntoContainer(parentComponent, children, container, forceHydrate, callback) {
-  {
-    topLevelUpdateWarnings(container);
-  }
-
   // TODO: Without `any` type, Flow says "Property cannot be accessed on any
   // member of intersection type." Whyyyyyy.
   var root = container._reactRootContainer;
   if (!root) {
-    // Initial mount
+    // Initial mount  初始化挂在 ReactDOM.render 调用时执行
     root = container._reactRootContainer = legacyCreateRootFromDOMContainer(container, forceHydrate);
     if (typeof callback === 'function') {
       var originalCallback = callback;
@@ -21129,59 +21070,25 @@ var ReactDOM = {
   createPortal: createPortal$$1,
 
   findDOMNode: function (componentOrElement) {
-    {
-      var owner = ReactCurrentOwner.current;
-      if (owner !== null && owner.stateNode !== null) {
-        var warnedAboutRefsInRender = owner.stateNode._warnedAboutRefsInRender;
-        !warnedAboutRefsInRender ? warningWithoutStack$1(false, '%s is accessing findDOMNode inside its render(). ' + 'render() should be a pure function of props and state. It should ' + 'never access something that requires stale data from the previous ' + 'render, such as refs. Move this logic to componentDidMount and ' + 'componentDidUpdate instead.', getComponentName(owner.type) || 'A component') : void 0;
-        owner.stateNode._warnedAboutRefsInRender = true;
-      }
-    }
     if (componentOrElement == null) {
       return null;
     }
     if (componentOrElement.nodeType === ELEMENT_NODE) {
       return componentOrElement;
     }
-    {
-      return findHostInstanceWithWarning(componentOrElement, 'findDOMNode');
-    }
     return findHostInstance(componentOrElement);
   },
   hydrate: function (element, container, callback) {
-    !isValidContainer(container) ? invariant(false, 'Target container is not a DOM element.') : void 0;
-    {
-      !!container._reactHasBeenPassedToCreateRootDEV ? warningWithoutStack$1(false, 'You are calling ReactDOM.hydrate() on a container that was previously ' + 'passed to ReactDOM.%s(). This is not supported. ' + 'Did you mean to call createRoot(container, {hydrate: true}).render(element)?', enableStableConcurrentModeAPIs ? 'createRoot' : 'unstable_createRoot') : void 0;
-    }
-    // TODO: throw or warn if we couldn't hydrate?
     return legacyRenderSubtreeIntoContainer(null, element, container, true, callback);
   },
   render: function (element, container, callback) {
-    !isValidContainer(container) ? invariant(false, 'Target container is not a DOM element.') : void 0;
-    {
-      !!container._reactHasBeenPassedToCreateRootDEV ? warningWithoutStack$1(false, 'You are calling ReactDOM.render() on a container that was previously ' + 'passed to ReactDOM.%s(). This is not supported. ' + 'Did you mean to call root.render(element)?', enableStableConcurrentModeAPIs ? 'createRoot' : 'unstable_createRoot') : void 0;
-    }
     return legacyRenderSubtreeIntoContainer(null, element, container, false, callback);
   },
   unstable_renderSubtreeIntoContainer: function (parentComponent, element, containerNode, callback) {
-    !isValidContainer(containerNode) ? invariant(false, 'Target container is not a DOM element.') : void 0;
-    !(parentComponent != null && has(parentComponent)) ? invariant(false, 'parentComponent must be a valid React Component') : void 0;
     return legacyRenderSubtreeIntoContainer(parentComponent, element, containerNode, false, callback);
   },
   unmountComponentAtNode: function (container) {
-    !isValidContainer(container) ? invariant(false, 'unmountComponentAtNode(...): Target container is not a DOM element.') : void 0;
-
-    {
-      !!container._reactHasBeenPassedToCreateRootDEV ? warningWithoutStack$1(false, 'You are calling ReactDOM.unmountComponentAtNode() on a container that was previously ' + 'passed to ReactDOM.%s(). This is not supported. Did you mean to call root.unmount()?', enableStableConcurrentModeAPIs ? 'createRoot' : 'unstable_createRoot') : void 0;
-    }
-
     if (container._reactRootContainer) {
-      {
-        var rootEl = getReactRootElementInContainer(container);
-        var renderedByDifferentReact = rootEl && !getInstanceFromNode$1(rootEl);
-        !!renderedByDifferentReact ? warningWithoutStack$1(false, "unmountComponentAtNode(): The node you're attempting to unmount " + 'was rendered by another copy of React.') : void 0;
-      }
-
       // Unmount should not be batched.
       unbatchedUpdates(function () {
         legacyRenderSubtreeIntoContainer(null, null, container, false, function () {
@@ -21235,12 +21142,6 @@ var ReactDOM = {
 };
 
 function createRoot(container, options) {
-  var functionName = enableStableConcurrentModeAPIs ? 'createRoot' : 'unstable_createRoot';
-  !isValidContainer(container) ? invariant(false, '%s(...): Target container is not a DOM element.', functionName) : void 0;
-  {
-    !!container._reactRootContainer ? warningWithoutStack$1(false, 'You are calling ReactDOM.%s() on a container that was previously ' + 'passed to ReactDOM.render(). This is not supported.', enableStableConcurrentModeAPIs ? 'createRoot' : 'unstable_createRoot') : void 0;
-    container._reactHasBeenPassedToCreateRootDEV = true;
-  }
   var hydrate = options != null && options.hydrate === true;
   return new ReactRoot(container, true, hydrate);
 }
@@ -21249,28 +21150,6 @@ if (enableStableConcurrentModeAPIs) {
   ReactDOM.createRoot = createRoot;
   ReactDOM.unstable_createRoot = undefined;
 }
-
-var foundDevTools = injectIntoDevTools({
-  findFiberByHostInstance: getClosestInstanceFromNode,
-  bundleType: 1,
-  version: ReactVersion,
-  rendererPackageName: 'react-dom'
-});
-
-{
-  if (!foundDevTools && canUseDOM && window.top === window.self) {
-    // If we're in Chrome or Firefox, provide a download link if not installed.
-    if (navigator.userAgent.indexOf('Chrome') > -1 && navigator.userAgent.indexOf('Edge') === -1 || navigator.userAgent.indexOf('Firefox') > -1) {
-      var protocol = window.location.protocol;
-      // Don't warn in exotic cases like chrome-extension://.
-      if (/^(https?|file):$/.test(protocol)) {
-        console.info('%cDownload the React DevTools ' + 'for a better development experience: ' + 'https://fb.me/react-devtools' + (protocol === 'file:' ? '\nYou might need to use a local HTTP server (instead of file://): ' + 'https://fb.me/react-devtools-faq' : ''), 'font-weight:bold');
-      }
-    }
-  }
-}
-
-
 
 var ReactDOM$2 = Object.freeze({
 	default: ReactDOM

@@ -4,7 +4,6 @@ import {increment, decrement, reset} from 'store/actions/counter';
 import Name from './compo'
 
 const mapStateToProps = (state) => {
-    console.log('state',state)
     return {
         counter: state.counter
     }
