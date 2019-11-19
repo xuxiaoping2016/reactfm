@@ -12,6 +12,10 @@ export default [
         label:'counter'
     },
     {
+        path:'clock',
+        label:'State & 生命周期'
+    },
+    {
         path:'/context',
         label:'上下文 (Context)'
     },
