@@ -16,6 +16,14 @@ export default [
         label:'State & 生命周期'
     },
     {
+        path:'boilingVerdict',
+        label:"状态提升"
+    },
+    {
+        path:'compose',
+        label:"组合与继承"
+    },
+    {
         path:'/context',
         label:'上下文 (Context)'
     },
