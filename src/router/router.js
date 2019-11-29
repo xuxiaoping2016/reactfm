@@ -4,11 +4,6 @@ import Loadable from 'react-loadable';
 import {Route, Switch} from 'react-router-dom';
 
 import Loading from 'components/Loading/Loading.jsx'
-// import Home from 'pages/Home/Home';
-// import Page1 from 'pages/Page1/Page1';
-// import Counter from 'pages/Counter/Counter'
-// import UserInfo from 'pages/UserInfo/UserInfo';
-// import NotFound from 'pages/NotFound/NotFound.jsx';
 
 const Home = Loadable({
     loader: () => import('pages/Home/Home'),
