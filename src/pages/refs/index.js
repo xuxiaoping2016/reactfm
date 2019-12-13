@@ -14,6 +14,8 @@ class ContextDemo extends Component {
         
         return (
             <div>
+                <Demo1/>
+                <p></p>
                 <Demo2 />
                 <Demo3 />
                 <Demo4 />

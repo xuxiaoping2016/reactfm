@@ -8,7 +8,7 @@ class BlogPost extends React.Component {
       blogPost: DataSource.getBlogPost(props.id)
     };
   }
-
+ 
   componentDidMount() {
     DataSource.addChangeListener(this.handleChange);
   }

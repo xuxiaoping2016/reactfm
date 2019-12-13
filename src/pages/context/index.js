@@ -1,5 +1,5 @@
 import React, {Component, Suspense} from 'react';
-// import Example from './example'
+import Parent from './demo1'
 
 import Theme from './theme'
 // import Theme2 from './theme2'
@@ -15,6 +15,8 @@ class ContextDemo extends Component {
         
         return (
             <div>
+                <Parent/>
+                <p></p>
                 <Suspense fallback={<div>Loading...</div>}>
                     <Example/>
                 </Suspense>
