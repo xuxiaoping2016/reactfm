@@ -45,7 +45,7 @@ var validateFormat = function () {};
 
 function invariant(condition, format, a, b, c, d, e, f) {
   validateFormat(format);
-
+  // condition 为false 则报错
   if (!condition) {
     var error = void 0;
     if (format === undefined) {

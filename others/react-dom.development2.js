@@ -73,7 +73,7 @@ var invokeGuardedCallbackImpl = function (name, func, context, a, b, c, d, e, f)
   var funcArgs = Array.prototype.slice.call(arguments, 3);
   try {
     func.apply(context, funcArgs);
-  } catch (error) {
+  } catch (error) { // 捕获 func.apply(context, funcArgs) 抛出的错误 this指向reporter；
     this.onError(error);
   }
 };
@@ -307,7 +307,7 @@ function clearCaughtError() {
 }
 
 /**
- * Injectable ordering of event plugins.
+ * Injectable ordering of event plugins. 事件插件的插入顺序
  */
 var eventPluginOrder = null;
 
@@ -399,17 +399,17 @@ function publishRegistrationName(registrationName, pluginModule, eventName) {
  */
 
 /**
- * Ordered list of injected plugins.
+ * Ordered list of injected plugins.  注入的插件列表
  */
 var plugins = [];
 
 /**
- * Mapping from event name to dispatch config
+ * Mapping from event name to dispatch config  事件名称与事件触发配置的映射
  */
 var eventNameDispatchConfigs = {};
 
 /**
- * Mapping from registration name to plugin module
+ * Mapping from registration name to plugin module 注册名称与插件的映射
  */
 var registrationNameModules = {};
 
@@ -688,11 +688,11 @@ var executeDispatchesAndRelease = function (event) {
 var executeDispatchesAndReleaseTopLevel = function (e) {
   return executeDispatchesAndRelease(e);
 };
-
+// 交互性的
 function isInteractive(tag) {
   return tag === 'button' || tag === 'input' || tag === 'select' || tag === 'textarea';
 }
-
+// 是否应该阻止鼠标事件
 function shouldPreventMouseEvent(name, type, props) {
   switch (name) {
     case 'onClick':
@@ -750,7 +750,7 @@ var injection = {
   injectEventPluginsByName: injectEventPluginsByName
 };
 
-/**
+/**  获取指定实例上指定事件名称的监听器
  * @param {object} inst The instance, which is the source of events.
  * @param {string} registrationName Name of listener (e.g. `onClick`).
  * @return {?function} The stored callback.
@@ -855,7 +855,7 @@ function precacheFiberNode(hostInst, node) {
 
 /**
  * Given a DOM node, return the closest ReactDOMComponent or
- * ReactDOMTextComponent instance ancestor.
+ * ReactDOMTextComponent instance ancestor.  寻找最近(包括自身)的祖先实例
  */
 function getClosestInstanceFromNode(node) {
   if (node[internalInstanceKey]) {
@@ -938,7 +938,7 @@ function getParent(inst) {
 
 /**
  * Return the lowest common ancestor of A and B, or null if they are in
- * different trees.
+ * different trees.  寻找最近的共同祖先
  */
 function getLowestCommonAncestor(instA, instB) {
   var depthA = 0;
