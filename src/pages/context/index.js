@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 // import Example from './example'
 
+import Mul from './multi/index';
 import Theme from './theme'
 import Theme2 from './theme2'
 
@@ -10,6 +11,7 @@ class ContextDemo extends Component {
         
         return (
             <div>
+                <Mul/>
                 {/* <Exampl/> */}
                 
                 <div style={{paddingTop:"30px"}}>

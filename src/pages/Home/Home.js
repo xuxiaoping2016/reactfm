@@ -26,6 +26,7 @@ export default class Home extends Component {
             'abcd',
             'abcd',
         ]
+        const f = () => <div>123457function</div>;
         return (
             <div className="container">
                 <p className="scss">测试scss 样式文件!!!!!!!!!!</p>
@@ -34,10 +35,8 @@ export default class Home extends Component {
                 当前计数：{this.state.count}<br/>
                 <button onClick={() => this._handleClick()}>自增</button>
                 <Co>
-                    3434
-                    <div>fdfdf</div>
-                    <div>rer</div>
                     <div>rrere</div>
+                    <div>123456789</div>
                 </Co>
             </div>
         )

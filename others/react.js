@@ -1041,12 +1041,12 @@ function traverseAllChildrenImpl(children, nameSoFar, callback, traverseContext)
     nameSoFar === '' ? SEPARATOR + getComponentKey(children, 0) : nameSoFar);
     return 1;
   }
-
+// 数组走这里 或者函数
   var child = void 0;
   var nextName = void 0;
   var subtreeCount = 0; // Count of children found in the current subtree.
   var nextNamePrefix = nameSoFar === '' ? SEPARATOR : nameSoFar + SUBSEPARATOR;
-
+  console.log('invokeCallback',invokeCallback,children)
   if (Array.isArray(children)) {
     for (var i = 0; i < children.length; i++) {
       child = children[i];
@@ -1156,6 +1156,7 @@ function forEachChildren(children, forEachFunc, forEachContext) {
 }
 
 function mapSingleChildIntoContext(bookKeeping, child, childKey) {
+  console.log(bookKeeping,child,childKey)
   var result = bookKeeping.result,
       keyPrefix = bookKeeping.keyPrefix,
       func = bookKeeping.func,
@@ -1163,6 +1164,7 @@ function mapSingleChildIntoContext(bookKeeping, child, childKey) {
 
 
   var mappedChild = func.call(context, child, bookKeeping.count++);
+  console.log('mappedChild',mappedChild)
   if (Array.isArray(mappedChild)) {
     mapIntoWithKeyPrefixInternal(mappedChild, result, childKey, function (c) {
       return c;
@@ -1175,6 +1177,7 @@ function mapSingleChildIntoContext(bookKeeping, child, childKey) {
       keyPrefix + (mappedChild.key && (!child || child.key !== mappedChild.key) ? escapeUserProvidedKey(mappedChild.key) + '/' : '') + childKey);
     }
     result.push(mappedChild);
+    console.log('...ret',result)
   }
 }
 //源码解读 地址  https://segmentfault.com/a/1190000019968074
