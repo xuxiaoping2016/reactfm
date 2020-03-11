@@ -3,6 +3,7 @@ import HooksDemo1 from "./demo1";
 // import useDocumentTitle from './demo2'
 // import MouseTracker from './mouseTracker'
 // import MouseTracker2 from './mouseTracker2'
+import UseMemoDemo from './useMemo'
 
 export default function HooksDemo(){
 	// useDocumentTitle('useEffect');
@@ -12,7 +13,9 @@ export default function HooksDemo(){
 			<HooksDemo1 />
 			{/* 
             <MouseTracker/>
-            <MouseTracker2/> */}
+			<MouseTracker2/> */}
+			<br/>
+			<UseMemoDemo/>
 		</div>
 	);
 }

@@ -25,9 +25,12 @@ import PropTypes from 'bundle-loader?lazy&name=propTypes!pages/propTypes';
 import UncontrolledCom from 'bundle-loader?lazy&name=uncontrolledCom!pages/uncontrolledCom';
 import WebComponents from 'bundle-loader?lazy&name=webComponents!pages/webComponents';
 
+import MemoDemo from 'bundle-loader?lazy&name=memo!pages/memo';
+
 import ApiReact from 'bundle-loader?lazy&name=apireact!pages/apiReact';
 
 import Counter from 'bundle-loader?lazy&name=counter!pages/Counter/Counter'
+import TodoList from 'bundle-loader?lazy&name=counter!pages/todoList/index';
 import ContextDemo from 'bundle-loader?lazy&name=context!pages/context';
 import HooksDemo from 'bundle-loader?lazy&name=hooks!pages/hooks';
 import Motions from 'bundle-loader?lazy&name=motions!pages/motion';
@@ -48,6 +51,7 @@ const getRouter = () => (
         <Route exact path="/" component={createComponent(Reactdnd)}/>
         <Route path="/thought" component={createComponent(Thought)}/>
         <Route path="/counter" component={createComponent(Counter)}/>
+        <Route path="/todolist" component={createComponent(TodoList)}/>
         <Route path="/context" component={createComponent(ContextDemo)}/>
         <Route path="/errorBoundaries" component={createComponent(ErrorBoundaries)} />
         <Route path="/refs" component={createComponent(Refs)} />
@@ -67,6 +71,7 @@ const getRouter = () => (
         <Route path="/propTypes" component={createComponent(PropTypes)} />
         <Route path="/uncontrolledcom" component={createComponent(UncontrolledCom)} />
         <Route path="/webcomponents" component={createComponent(WebComponents)} />
+        <Route path="/memo" component={createComponent(MemoDemo)} />
         <Route path="/apireact" component={createComponent(ApiReact)} />
         <Route path="/hooks" component={createComponent(HooksDemo)} />
         <Route path="/motions" component={createComponent(Motions)} />

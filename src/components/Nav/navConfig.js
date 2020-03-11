@@ -12,6 +12,10 @@ export default [
         label:'counter'
     },
     {
+        path:'todolist',
+        label:"todolist demo"
+    },
+    {
         path:'/context',
         label:'上下文 (Context)'
     },
@@ -82,6 +86,10 @@ export default [
     {
         path:'/uncontrolledcom',
         label:'不受控组件'
+    },
+    {
+        path:'/memo',
+        label:'react.memo'
     },
     {
         path:'/webcomponents',
