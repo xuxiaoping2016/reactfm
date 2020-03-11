@@ -15,7 +15,7 @@ class Parent extends Component {
     render() {
       return (
         <div>
-            <p>通过回调函数的形式将ref传递给子组件中的DOM中</p>
+            <p>demo 3 通过回调函数的形式将ref传递给子组件中的DOM中</p>
             <Child inputRef={el => this.textInputRef = el} />
         </div>
       );

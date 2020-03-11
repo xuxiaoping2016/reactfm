@@ -3,24 +3,27 @@ import React, { Component} from 'react';
 export default class NameForm extends Component {
   constructor(props) {
     super(props);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.input = React.createRef();
+    this.state = {
+      name :''
+    }
   }
 
-  handleSubmit(event) {
-    alert('A name was submitted: ' + this.input.current.value);
-    event.preventDefault();
+  handleSubmit = (event) => {
+    this.setState({
+      name: event.target.value
+    })
   }
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <div>
+        <div>input 表单</div>
+        <div>当前输入名字:{this.state.name}</div>
         <label>
           Name:
-          <input type="text" ref={this.input} />
+          <input type="text" value={this.state.name} onChange={this.handleSubmit}/>
         </label>
-        <input type="submit" value="Submit" />
-      </form>
+      </div>
     );
   }
 }

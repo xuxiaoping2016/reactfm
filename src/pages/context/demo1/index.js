@@ -1,12 +1,12 @@
 import React from 'react';
-let {Provider, Consumer} = React.createContext()
+let {Provider, Consumer} = React.createContext('fdf')
 // 父组件
 function Parent (props) {
     return (
-        <div>
+        <Provider value="传值">
             <div>Parent: </div>
            <Son></Son>
-        </div>
+        </Provider>
     )
 }
 // 子组件
@@ -19,7 +19,7 @@ function Son (props) {
 
     )
 }
-// 孙子组件
+// 孙组件
 function Child (props) {
     return (
         <Consumer>
@@ -29,3 +29,5 @@ function Child (props) {
         </Consumer>
     )
 }
+
+export default Parent;

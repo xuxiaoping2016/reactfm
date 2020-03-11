@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import data from './data'
 
 class ProductCategoryRow extends Component {
-    render() {
-      return <tr><th colSpan="2">{this.props.category}</th></tr>;
-    }
+  render() {
+    return <tr><th colSpan="2">{this.props.category}</th></tr>;
   }
+}
   
 class ProductRow extends Component {
     render() {
@@ -32,10 +32,10 @@ class ProductTable extends Component {
           return;
         }
         if (product.category !== lastCategory) {
+          lastCategory = product.category;
           rows.push(<ProductCategoryRow category={product.category} key={product.category} />);
         }
         rows.push(<ProductRow product={product} key={product.name} />);
-        lastCategory = product.category;
       });
       return (
         <table>

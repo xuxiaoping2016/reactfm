@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import NameForm from './nameForm'
+import TextareaForm from './textarea'
+import SelectForm from './select'
 import FileInput from './fileInput'
 
 class ContextDemo extends Component {
@@ -11,6 +13,10 @@ class ContextDemo extends Component {
                 <div style={{marginBottom:"20px"}}>
                     <NameForm />
                 </div>
+
+                <TextareaForm/>
+
+                <SelectForm/>
                 
                 <FileInput/>
             </div>

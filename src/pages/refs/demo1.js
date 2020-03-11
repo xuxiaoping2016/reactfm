@@ -1,13 +1,5 @@
 import React, { Component} from 'react';
 
-// function FancyButton(props) {
-//   return (
-//     <button className="FancyButton">
-//       {props.children}
-//     </button>
-//   );
-// }
-
 const FancyButton = React.forwardRef((props, ref) => (
   <button ref={ref} className="FancyButton">
     {props.children}
