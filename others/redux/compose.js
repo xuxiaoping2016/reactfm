@@ -6,7 +6,7 @@
  * @param {...Function} funcs The functions to compose.
  * @returns {Function} A function obtained by composing the argument functions
  * from right to left. For example, compose(f, g, h) is identical to doing
- * (...args) => f(g(h(...args))).
+ * (...args) => f(g(h(...args))).  从右至左运行，将右边函数的运行结果作为参数传给左边函数
  */
 
 export default function compose(...funcs) {

@@ -14,7 +14,7 @@ import isPlainObject from './utils/isPlainObject'
  * @param {Function} reducer A function that returns the next state tree, given
  * the current state tree and the action to handle.
  *
- * @param {any} [preloadedState] The initial state. You may optionally specify it
+ * @param {any} [preloadedState] The initial state（初始化状态树）. You may optionally specify it
  * to hydrate the state from the server in universal apps, or to restore a
  * previously serialized user session.
  * If you use `combineReducers` to produce the root reducer function, this must be
@@ -39,17 +39,17 @@ export default function createStore(reducer, preloadedState, enhancer) {
         'together to a single function'
     )
   }
-
+  // 没有传递初始化状态对象时；
   if (typeof preloadedState === 'function' && typeof enhancer === 'undefined') {
     enhancer = preloadedState
     preloadedState = undefined
   }
-
+  // 执行enhancer函数，生成store对象；
   if (typeof enhancer !== 'undefined') {
     if (typeof enhancer !== 'function') {
       throw new Error('Expected the enhancer to be a function.')
     }
-
+    
     return enhancer(createStore)(reducer, preloadedState)
   }
 
@@ -87,7 +87,7 @@ export default function createStore(reducer, preloadedState, enhancer) {
   }
 
   /**
-   * Adds a change listener. It will be called any time an action is dispatched,
+   * Adds a change listener（添加数据变化监听器）. It will be called any time an action is dispatched,
    * and some part of the state tree may potentially have changed. You may then
    * call `getState()` to read the current state tree inside the callback.
    *
@@ -124,7 +124,7 @@ export default function createStore(reducer, preloadedState, enhancer) {
     }
 
     let isSubscribed = true
-
+    //   不影响当前listeners
     ensureCanMutateNextListeners()
     nextListeners.push(listener)
 
@@ -212,7 +212,7 @@ export default function createStore(reducer, preloadedState, enhancer) {
    * Replaces the reducer currently used by the store to calculate the state.
    *
    * You might need this if your app implements code splitting and you want to
-   * load some of the reducers dynamically. You might also need this if you
+   * load some of the reducers dynamically(动态). You might also need this if you
    * implement a hot reloading mechanism for Redux.
    *
    * @param {Function} nextReducer The reducer for the store to use instead.
@@ -234,7 +234,7 @@ export default function createStore(reducer, preloadedState, enhancer) {
    * https://github.com/tc39/proposal-observable
    */
   function observable() {
-    const outerSubscribe = subscribe
+    const outerSubscribe = subscribe//添加监听函数的方法；
     return {
       /**
        * The minimal observable subscription method.
