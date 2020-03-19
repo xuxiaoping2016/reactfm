@@ -1,21 +1,44 @@
 import React from "react";
+import { Card } from 'antd';
 import HooksDemo1 from "./demo1";
-// import useDocumentTitle from './demo2'
+import ContextHookDemo from './useContext';
+import ReducerHookDemo from './useReducerDemo';
+import RefHookDemo from './useRefDemo'
 // import MouseTracker from './mouseTracker'
 // import MouseTracker2 from './mouseTracker2'
 import UseMemoDemo from './useMemo'
-
+import './index.scss';
 export default function HooksDemo(){
 	// useDocumentTitle('useEffect');
 	return (
-		<div>
+		<div className="hooks-demo-container">
 			<h1>hooks!</h1>
-			<HooksDemo1 />
+			<Card title="useState 示例" >
+				<HooksDemo1 />
+			</Card>
+
+			<Card title="useMemo 示例">
+				<UseMemoDemo/>
+			</Card>
+
+			<Card title="useContext 示例">
+				<ContextHookDemo/>
+			</Card>
+			
+			<Card title="useReducer 示例">
+				<ReducerHookDemo initialCount={1}/>
+			</Card>
+
+			<Card title="useRef 示例">
+				<RefHookDemo />
+			</Card>
+
+			
 			{/* 
             <MouseTracker/>
 			<MouseTracker2/> */}
 			<br/>
-			<UseMemoDemo/>
+			
 		</div>
 	);
 }

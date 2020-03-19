@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from "react";
 import {Button, Modal} from "antd";
+import useDocumentTitle from './demo2'
 
 function Example() {
 	// 声明一个新的状态变量，我们将其称为 "count"
 	const [count, setCount] = useState(0);
 	const [open, setOpen] = useState(false);
   
-	useEffect(
-		() => {
-			document.title = `you clicked ${count} times`;
-			return () => (document.title = "前端精读");
-		},
-		[count]
-	);
+	// useEffect(
+	// 	() => {
+	// 		document.title = `you clicked ${count} times`;
+	// 		return () => (document.title = "前端精读");
+	// 	},
+	// 	[count]
+	// );
+	useDocumentTitle(`you clicked ${count} times`)
 
 	return (
 		<div>
@@ -22,7 +24,7 @@ function Example() {
 			<Button type="primary" onClick={() => {
 				setOpen(true);
 			}}>
-          Open Modal
+          		Open Modal
 			</Button>
 			<Modal
 				visible={open}

@@ -12,10 +12,10 @@ export default [
         label:'counter'
     },
     {
-<<<<<<< HEAD
         path:'todolist',
         label:"todolist demo"
-=======
+    },
+    {
         path:'clock',
         label:'State & 生命周期'
     },
@@ -26,7 +26,6 @@ export default [
     {
         path:'compose',
         label:"组合与继承"
->>>>>>> 08de77eddc5630fed987f2e6d150065bd2928b8f
     },
     {
         path:'/context',
