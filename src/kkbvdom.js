@@ -1,7 +1,8 @@
+// 创建虚拟元素 vtype 虚拟元素类型，type 元素标签，props 包含children在内的属性；
 function createVnode(vtype,type,props){
     return { vtype,type,props }
 }
-
+// 根据虚拟元素创建真实元素
 function initVnode(vnode){
     console.log("initVnode",vnode)
     const { vtype,type,props } = vnode;
@@ -22,19 +23,21 @@ function initVnode(vnode){
         return initClassComp(vnode)
     }
 }
-
+// 处理函数组件元素
 function initFunComp(vnode){
     const { type, props } = vnode;
     let newNode = type(props); //转换成原生元素
     // console.log(newNode,"newNode")
     return initVnode(newNode)
 }
+// 处理class 组件元素
 function initClassComp(vnode){
     const { type, props} = vnode;
     let component = new type(props);
     let newNode = component.render();
     return initVnode(newNode)
 }
+// 处理原生元素
 function iniVelement(vnode){
     const { vtype,type,props } = vnode;
     const node = document.createElement(type)

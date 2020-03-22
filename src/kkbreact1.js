@@ -2,7 +2,6 @@ import { createVnode } from './kkbvdom'
 
 
 function createElement(type, props, ...children){
-    
     // delete props.__source;
     props = props || {}
 
