@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<div id="app"></div>
+<script type="text/javascript">
+
+const UNIT_SIZE = 10;
+const MAGIC_NUMBER_OFFSET = 2;
+
+function msToExpirationTime(ms){
+  // Always add an offset so that we don't clash with the magic number for NoWork.
+  return ((ms / UNIT_SIZE) | 0) + MAGIC_NUMBER_OFFSET;
+}
+
+function expirationTimeToMs(expirationTime){
+  return (expirationTime - MAGIC_NUMBER_OFFSET) * UNIT_SIZE;
+}
+
+// console.log(msToExpirationTime(57))  // 7
+// console.log(expirationTimeToMs(msToExpirationTime(57))); // 50
+// console.log(ceiling(1,20))
+// console.log(ceiling(19,20))
+// console.log(ceiling(21,20))
+
+function ceiling(num, precision){
+    return (((num / precision) | 0) + 1) * precision;
+}
+
+function computeExpirationBucket(
+  currentTime,
+  expirationInMs,
+  bucketSizeMs,
+) {
+  return (
+    MAGIC_NUMBER_OFFSET +
+    ceiling(
+      currentTime - MAGIC_NUMBER_OFFSET + expirationInMs / UNIT_SIZE,
+      bucketSizeMs / UNIT_SIZE,   //  25
+    )
+  );
+}
+
+
+const LOW_PRIORITY_EXPIRATION = 5000;
+const LOW_PRIORITY_BATCH_SIZE = 250;
+// 计算异步到期时间   相差在25个到期时间精度内 得到相同的到期时间
+function computeAsyncExpiration(currentTime) {
+  return computeExpirationBucket(
+    currentTime,
+    LOW_PRIORITY_EXPIRATION,
+    LOW_PRIORITY_BATCH_SIZE,
+  );
+}
+
+const HIGH_PRIORITY_EXPIRATION = 500;
+const HIGH_PRIORITY_BATCH_SIZE = 100;
+// 计算交互到期时间  相差10个到期时间精度内 得到相同的到期时间
+function computeInteractiveExpiration(currentTime) {
+  return computeExpirationBucket(
+    currentTime,
+    HIGH_PRIORITY_EXPIRATION,
+    HIGH_PRIORITY_BATCH_SIZE,
+  );
+}
+
+for (var i = 2990; i<3000; i++){
+    console.log(i, computeAsyncExpiration(i),computeInteractiveExpiration(i))
+}
+
+// console.log(computeAsyncExpiration(500),computeInteractiveExpiration(500));
+// console.log(computeAsyncExpiration(1000),computeInteractiveExpiration(1000))
+// console.log(computeAsyncExpiration(2000),computeInteractiveExpiration(2000))
+</script>
+</body>
+</html>

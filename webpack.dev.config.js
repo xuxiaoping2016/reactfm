@@ -34,7 +34,7 @@ const devConfig = {
         historyApiFallback: {
             disableDotRule: true
         },
-        port:"8001",
+        port:"3000",
         headers: {
         'X-Custom-Foo': 'bar'
         }
