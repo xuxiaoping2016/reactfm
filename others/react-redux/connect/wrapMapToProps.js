@@ -20,7 +20,7 @@ export function wrapMapToPropsConstant(getConstant) {
 export function getDependsOnOwnProps(mapToProps) {
   return (mapToProps.dependsOnOwnProps !== null && mapToProps.dependsOnOwnProps !== undefined)
     ? Boolean(mapToProps.dependsOnOwnProps)
-    : mapToProps.length !== 1
+    : mapToProps.length !== 1  // 函数的形参个数；
 }
 
 // Used by whenMapStateToPropsIsFunction and whenMapDispatchToPropsIsFunction,
@@ -34,7 +34,7 @@ export function getDependsOnOwnProps(mapToProps) {
 //    
 //  * On first call, verifies the first result is a plain object, in order to warn
 //    the developer that their mapToProps function is not returning a valid result.
-//    
+//    校验方法
 export function wrapMapToPropsFunc(mapToProps, methodName) {
   return function initProxySelector(dispatch, { displayName }) {
     const proxy = function mapToPropsProxy(stateOrDispatch, ownProps) {
@@ -47,7 +47,7 @@ export function wrapMapToPropsFunc(mapToProps, methodName) {
     proxy.dependsOnOwnProps = true
 
     proxy.mapToProps = function detectFactoryAndVerify(stateOrDispatch, ownProps) {
-      proxy.mapToProps = mapToProps
+      proxy.mapToProps = mapToProps // 这里是组件写的mapStateToProps函数；
       proxy.dependsOnOwnProps = getDependsOnOwnProps(mapToProps)
       let props = proxy(stateOrDispatch, ownProps)
 

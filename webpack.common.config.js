@@ -19,6 +19,28 @@ const commonConfig = {
 
     module : {
         rules:[
+            // { 
+            //     test: /\.tsx?$/, 
+            //     loader: "tslint-loader",
+            //     options:{
+            //         "fix": false
+            //     }
+            // },
+            { 
+                test: /\.tsx?$/, 
+                use:[
+                    {
+                        loader: "ts-loader"
+                    },
+                    // {  // 没有配置好，使用不了
+                    //     loader: 'eslint-loader',
+                    //     options: {
+                    //         fix: true,
+                    //         cache: true, // 缓存lint结果，可以减少lint时间
+                    //     }
+                    // }
+                ]
+            },
             {
                 test:/\.(js|jsx)$/,
                 use:{
@@ -58,7 +80,7 @@ const commonConfig = {
     },
 
     resolve:{
-        extensions: [".js","jsx", ".json"],
+        extensions: [".js",".jsx", ".ts", ".tsx", ".json"],
         alias:{
             pages: path.join(__dirname, 'src/pages'),
             components: path.join(__dirname, 'src/components'),

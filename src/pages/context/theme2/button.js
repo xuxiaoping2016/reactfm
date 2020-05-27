@@ -1,15 +1,15 @@
-import React from 'react';
-import {ThemeContext} from './context';
+import React from "react";
+import { ThemeContext } from "./context";
 
 class ThemedButton extends React.Component {
   render() {
     let props = this.props;
-    const {theme, toggleTheme} = this.context;
+    const { theme, toggleTheme } = this.context;
     return (
       <button
         {...props}
         onClick={toggleTheme}
-        style={{backgroundColor: theme.background}}
+        style={{ backgroundColor: theme.background }}
       />
     );
   }

@@ -49,7 +49,7 @@ export default class Subscription {
     this.store = store
     this.parentSub = parentSub
     this.onStateChange = onStateChange
-    this.unsubscribe = null
+    this.unsubscribe = null   // 保存取消监听的函数
     this.listeners = nullListeners
   }
 
@@ -62,7 +62,7 @@ export default class Subscription {
     this.listeners.notify()
   }
 
-  isSubscribed() {
+  isSubscribed() { // 是否监听；
     return Boolean(this.unsubscribe)
   }
 

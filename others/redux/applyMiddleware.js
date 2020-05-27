@@ -1,4 +1,5 @@
 import compose from './compose'
+import { consoleTestResultHandler } from 'tslint/lib/test'
 
 /**
  * Creates a store enhancer that applies middleware to the dispatch method
@@ -19,17 +20,18 @@ import compose from './compose'
 export default function applyMiddleware(...middlewares) {
   return createStore => (...args) => {
     const store = createStore(...args)
-    let dispatch = () => {
+    let dispatch = () => {  
+      
       throw new Error(
         `Dispatching while constructing your middleware is not allowed. ` +
           `Other middleware would not be applied to this dispatch.`
       )
     }
-
     const middlewareAPI = {
       getState: store.getState,
       dispatch: (...args) => dispatch(...args)
     }
+    //  传递的时候尚未调用 dispatch，等click调用的时候 dispatch 已经完成最新赋值
     const chain = middlewares.map(middleware => middleware(middlewareAPI))
     //这里返回的是一个接收action 对象的dispatch函数
     dispatch = compose(...chain)(store.dispatch)

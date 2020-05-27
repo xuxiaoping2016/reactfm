@@ -10,6 +10,8 @@ export default class Nav extends Component {
                 <li><Link to="/page1">Page1</Link></li>
                 <li><Link to="/counter">counter</Link></li>
                 <li><Link to="/userinfo">userinfo</Link></li>
+                <li><Link to="/reduxRelated">reduxRelated</Link></li>
+                <li><Link to="/hooks">hooks</Link></li>
             </ul>
         )
     }

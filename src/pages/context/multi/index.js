@@ -1,12 +1,12 @@
-import React from 'react'
-import { themes, signedInUser} from './context'
+import React from "react";
+import { themes, signedInUser } from "./context";
 
 // Theme context, default to light theme
 const ThemeContext = React.createContext(themes.light);
 
 // Signed-in user context
 const UserContext = React.createContext({
-  name: 'Guest',
+  name: "Guest",
 });
 
 class App extends React.Component {
@@ -33,24 +33,20 @@ function Layout() {
 
 // A component may consume multiple contexts
 function Content() {
-  return (
-    <ThemeContext.Consumer>
-      {theme => (
-        <UserContext.Consumer>
-          {user => (
-            <ProfilePage user={user} theme={theme} />
-          )}
-        </UserContext.Consumer>
-      )}
-    </ThemeContext.Consumer>
-  );
+  return <ThemeContext.Consumer>{InnerApp}</ThemeContext.Consumer>;
 }
 
-const ProfilePage = ({user, theme}) => (
-    <div
-    style={{background:theme.background}}
-    >{user.name}</div>
-)
+const InnerApp = (theme) => {
+  console.log("theme", theme);
+  return (
+    <UserContext.Consumer>
+      {(user) => <ProfilePage user={user} theme={theme} />}
+    </UserContext.Consumer>
+  );
+};
 
+const ProfilePage = ({ user, theme }) => (
+  <div style={{ background: theme.background }}>{user.name}</div>
+);
 
 export default App;

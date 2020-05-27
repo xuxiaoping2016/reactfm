@@ -1,5 +1,5 @@
 import verifySubselectors from './verifySubselectors'
-
+// ownProps优先级最高；
 export function impureFinalPropsSelectorFactory(
   mapStateToProps,
   mapDispatchToProps,

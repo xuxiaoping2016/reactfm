@@ -1,4 +1,4 @@
-import hoistStatics from 'hoist-non-react-statics'
+import hoistStatics from 'hoist-non-react-statics'  // 高阶组件，静态属性的拷贝；
 import invariant from 'invariant'
 import { Component, createElement } from 'react'
 import { isValidElementType } from 'react-is'
@@ -7,7 +7,7 @@ import Subscription from '../utils/Subscription'
 import { storeShape, subscriptionShape } from '../utils/PropTypes'
 
 let hotReloadingVersion = 0
-const dummyState = {}
+const dummyState = {}  //dummy  假的；
 function noop() {}
 function makeSelectorStateful(sourceSelector, store) {
   // wrap the selector in an object that tracks its results between runs.

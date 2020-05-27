@@ -1,12 +1,12 @@
-import React from 'react';
-import { Button } from 'antd';
+import React from "react";
+import { Button } from "antd";
 
 // class App extends React.Component {
 //     render() {
 //       return <Toolbar theme="primary" />;
 //     }
 //   }
-  
+
 //   function Toolbar(props) {
 //     // The Toolbar component must take an extra "theme" prop
 //     // and pass it to the ThemedButton. This can become painful
@@ -18,15 +18,14 @@ import { Button } from 'antd';
 //       </div>
 //     );
 //   }
-  
+
 //   class ThemedButton extends React.Component {
 //     render() {
 //       return <Button type={this.props.theme} >anniu</Button>;
 //     }
 //   }
 
-
-const ThemeContext = React.createContext('primary');
+const ThemeContext = React.createContext("primary");
 
 class App extends React.Component {
   render() {
@@ -57,8 +56,8 @@ class ThemedButton extends React.Component {
   // In this example, the current theme is "dark".
   static contextType = ThemeContext;
   render() {
-      console.log(this.context)
+    console.log(this.context);
     return <Button type={this.context}>context 按钮</Button>;
   }
 }
-  export default App;
+export default App;

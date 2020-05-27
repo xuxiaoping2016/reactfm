@@ -1,3 +1,5 @@
+从零搭建React全家桶框架教程
+https://github.com/brickspert/blog/issues/1
 
 WARNING in configuration
 The 'mode' option has not been set, webpack will fallback to 'production' for this value.
@@ -103,5 +105,90 @@ https://www.w3cplus.com/blog/tags/555.html
 https://www.cnblogs.com/fly_dragon/p/9150732.html
 
 
-React Hook 不完全指南
+十六、React Hook 不完全指南
 https://segmentfault.com/a/1190000019223106
+
+十七、添加typescript
+npm i typescript ts-loader --save-dev
+tsc --init
+
+配置webpack
+module.exports = {
+    entry: "./src/index.tsx",
+    output: {
+        filename: "bundle.js"
+    },
+    resolve: {
+        // Add '.ts' and '.tsx' as a resolvable extension.
+        extensions: ["", ".webpack.js", ".web.js", ".ts", ".tsx", ".js"]
+    },
+    module: {
+        loaders: [
+            // all files with a '.ts' or '.tsx' extension will be handled by 'ts-loader'
+            { test: /\.tsx?$/, loader: "ts-loader" }
+        ]
+    }
+};
+
+
+相关报错
+    1、Cannot use JSX unless the '--jsx' flag is provided
+    解决方案  "jsx": "react",  
+
+
+十八、eslint 配置
+https://eslint.bootcss.com/docs/user-guide/getting-started
+vscode安装和配置ESLint
+https://blog.csdn.net/Gabriel_wei/article/details/90269165
+1、安装与配置
+    npm install eslint --save-dev
+    ./node_modules/.bin/eslint --init
+    按步骤回答问题
+    How would you like to use ESLint? To check syntax, find problems, and enforce code style
+? What type of modules does your project use? JavaScript modules (import/export)
+? Which framework does your project use? React
+? Does your project use TypeScript? Yes
+? Where does your code run? Browser
+? How would you like to define a style for your project? Answer questions about your style
+? What format do you want your config file to be in? JavaScript
+? What style of indentation do you use? Tabs
+? What quotes do you use for strings? Double
+? What line endings do you use? Unix
+? Do you require semicolons? Yes
+    
+
+2、遇到的问题
+1、Error: Failed to load plugin 'react' declared in 'BaseConfig': Cannot find module 'eslint-plugin-react'
+解决方法：
+npm i eslint-plugin-react@latest @typescript-eslint/eslint-plugin@latest @typescript-eslint/parser@latest --save-dev
+
+2、Warning: React version not specified in eslint-plugin-react settings. See https://github.com/yannickcr/eslint-plugin-react#configuration 
+解决方法：https://blog.csdn.net/keepfriend/article/details/100858645
+在 eslintrc.js 添加以下配置；
+"settings": {
+        "react": {
+            "version": "detect"
+        }
+    },
+
+
+
+十九、
+参考地址  https://segmentfault.com/a/1190000020332804?utm_source=tag-newest
+npm i -D husky
+npm i -D @commitlint/cli
+
+
+
+
+
+
+
+
+
+
+从零搭建webpack4+react+typescript+eslint脚手架(一)
+前端工程化
+https://segmentfault.com/a/1190000020332804
+
+
