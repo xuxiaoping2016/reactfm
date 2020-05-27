@@ -192,3 +192,10 @@ npm i -D @commitlint/cli
 https://segmentfault.com/a/1190000020332804
 
 
+"husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+
+
