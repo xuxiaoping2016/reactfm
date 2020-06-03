@@ -50,9 +50,9 @@
     "webpack-merge": "^4.1.4"
   },
   "dependencies": {
+    "@ant-design/charts": "^0.9.4",
     "antd": "^3.10.9",
     "axios": "^0.18.0",
-    "echarts": "^4.8.0",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-redux": "^5.1.1",

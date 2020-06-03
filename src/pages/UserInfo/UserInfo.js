@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {getUserInfo} from "store/actions/userInfo";
+import Page from './tu'
+import G2Page from './tu2';
 
 class UserInfo extends Component {
 
@@ -20,6 +22,10 @@ class UserInfo extends Component {
                         )
                 }
                 <button onClick={() => this.props.getUserInfo()}>请求用户信息</button>
+                <Page/>
+
+                <br/>
+                {/* <G2Page /> */}
             </div>
         )
     }
