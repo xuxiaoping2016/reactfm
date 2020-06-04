@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {getUserInfo} from "store/actions/userInfo";
+import Tu from './tu'
 
 class UserInfo extends Component {
 
@@ -20,6 +21,8 @@ class UserInfo extends Component {
                         )
                 }
                 <button onClick={() => this.props.getUserInfo()}>请求用户信息</button>
+
+                <Tu />
             </div>
         )
     }
