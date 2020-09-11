@@ -5,10 +5,8 @@ export default class Nav extends Component {
     render(){
         return (
             <ul>
-                <li><Link to="/">首页</Link></li>
+                <li><Link to="/">flex布局</Link></li>
                 <li><Link to="/page1">Page1</Link></li>
-                <li><Link to="/counter">counter</Link></li>
-                <li><Link to="/userinfo">userinfo</Link></li>
             </ul>
         )
     }
