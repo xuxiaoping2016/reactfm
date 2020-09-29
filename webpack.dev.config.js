@@ -24,7 +24,24 @@ const devConfig = {
 			},
 			{
 				test:/\.scss$/,
-				use:["style-loader","css-loader","sass-loader","postcss-loader"]
+				use:[
+					"style-loader",
+					{
+						loader: 'css-loader',
+						// options: { 
+						// 	modules: {
+						// 		localIdentName: '[path][name]_[local]_[hash:base64:5]'
+						// 	},
+						// 	importLoaders: 1 
+						// }
+					},"postcss-loader",{
+						loader: "sass-loader",
+						// options: {
+                        //     sassOptions:{
+                        //         javascriptEnabled: true
+                        //     }
+                        // }
+					}]
 			}
 		]
 	},

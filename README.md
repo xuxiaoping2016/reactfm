@@ -199,3 +199,13 @@ https://segmentfault.com/a/1190000020332804
   },
 
 
+
+
+  TS2307: Cannot find module './index.scss' or its corresponding type declarations
+  https://www.cnblogs.com/chen-cong/p/10445635.html
+
+
+tab切换
+npm i react-swipeable-views --save
+npm i @types/react-swipeable-views --save-dev
+

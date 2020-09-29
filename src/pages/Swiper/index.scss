@@ -1,0 +1,53 @@
+.tabs{
+    margin:0;
+    display: flex;
+    list-style-type: none;
+    background: #fff;
+    .tab{
+        flex: 1;
+
+        // background: #;
+    }
+    .active{
+        color: #f50f50;
+    }
+}
+
+.slide{
+    padding: 15px;
+    min-height:100px;
+    color: #fff;
+  }
+.slide1{
+    background: #FEA900;
+}
+.slide2{
+    background: #B3DC4A;
+}
+.slide3{
+    background: #6AC0FF;
+}
+
+
+// Animate height start
+.slide2a{
+    min-height: 150px;
+    overflow-y: auto;
+    background-color: #B3DC4A;
+}
+.slide4{
+    background-color:#FEA900;
+}
+.button{
+    margin-top: 14px;
+}
+// Animate height end
+
+//nested start
+.slideContainerY {
+    height: 100px,
+}
+.divider {
+    height: 50px;
+}
+//nested end
