@@ -32,11 +32,12 @@ module.exports = {
         "prettier"
     ],
     "rules": {
+        "react/display-name": "off",
         "prettier/prettier": "error",
-        "indent": [
-            "error",
-            "tab"
-        ],
+        // "indent": [
+        //     "error",
+        //     "tab"
+        // ],
         "linebreak-style": [
             "error",
             "unix"
