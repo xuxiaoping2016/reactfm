@@ -70,6 +70,7 @@ class AppStore {
 
     //添加
     @action AddTodo = () => {
+        console.log(this.todos)
         this._key += 1;
         this.fetchTodoAdd();
     };
