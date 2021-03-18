@@ -29,8 +29,20 @@ const commonConfig = {
                         // presets:['@babel/preset-env']
                     }
                 },
-                exclude: /(node_modules|bower_components)/,
-                include: path.join(__dirname, 'src')
+                exclude: /(bower_components)/,
+                include: [path.join(__dirname, 'src'),path.join(__dirname, 'node_modules/mobx')]
+            },
+            {
+                test:/\.(ts|tsx)$/,
+                use:{
+                    loader:"ts-loader",
+                    // options:{
+                    //     cacheDirectory:true,
+                    //     // presets:['@babel/preset-env']
+                    // }
+                },
+                // exclude: /(node_modules|bower_components)/,
+                // include: path.join(__dirname, 'src')
             },
             {
                 test: /\.(png|svg|jpg|gif)$/,

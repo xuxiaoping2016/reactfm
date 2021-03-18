@@ -23,9 +23,13 @@ import CascaderDemo from '../pages/cascader/index.jsx'
 import MobxDemo from '../pages/mobxDemo'
 import MobxDemoChild1 from '../pages/mobxDemo/mobxDemo'
 import MobxDemoChild2 from '../pages/mobxDemo/observerInfo'
+import MobxDemoProxy from '../pages/mobxDemo/proxy'
 
 import InputCount from 'bundle-loader?&name=inputcount!pages/inputCount'
 import CountDown from 'bundle-loader?&name=countdown!pages/statistic'
+
+
+import Algorithm from 'bundle-loader?&name=algorithm!pages/algorithm'
 // import Todo from '../../component/todolists/index'
 // import Hello from '../../component/todolists/index2'
 const Loading = function () {
@@ -59,6 +63,7 @@ const getRouter = () => (
                 <li><Link to="/mobxdemo">mobx使用示例</Link></li>
                 <li><Link to="/inputcount">输入框计数</Link></li>
                 <li><Link to="/countdown">倒计时</Link></li>
+                <li><Link to="/algorithm/bubbleSort">算法</Link></li>
             </ul>
             <div style={{flex:1}}>
             <Switch >
@@ -79,10 +84,12 @@ const getRouter = () => (
                     <MobxDemo>
                         <Route path="/mobxdemo/child1" component={MobxDemoChild1}/>
                         <Route path="/mobxdemo/child2" component={MobxDemoChild2}/>
+                        <Route path="/mobxdemo/proxy" component={MobxDemoProxy}/>
                     </MobxDemo>
                 }/>
                 <Route path="/inputcount" component={createComponent(InputCount)}/>
                 <Route path="/countdown" component={createComponent(CountDown)}/>
+                <Route path="/algorithm" component={createComponent(Algorithm)} />
             </Switch>
             </div>
         </div>
