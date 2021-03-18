@@ -352,7 +352,7 @@ function createDecoratorAnnotation(annotation) {
 
 function storeAnnotation(prototype, key, annotation) {
   if (!hasProp(prototype, storedAnnotationsSymbol)) {
-    // addHiddenProp(prototype, storedAnnotationsSymbol, _extends({}, prototype[storedAnnotationsSymbol]));
+    addHiddenProp(prototype, storedAnnotationsSymbol, _extends({}, prototype[storedAnnotationsSymbol]));
   } // @override must override something
 
 
@@ -475,7 +475,7 @@ function createAtom(name, onBecomeObservedHandler, onBecomeUnobservedHandler) {
   }
 
   var atom = new Atom(name); // default `noop` listener will not initialize the hook Set
-
+  console.log('atom',atom)
   if (onBecomeObservedHandler !== noop) {
     onBecomeObserved(atom, onBecomeObservedHandler);
   }
@@ -956,10 +956,8 @@ function getEnhancerFromAnnotation(annotation) {
  */
 
 function createObservable(v, arg2, arg3) {
-  console.log('observable',v, arg2, arg3)
   // @observable someProp;
   if (isStringish(arg2)) {
-    console.log('storeAnnotation')
     storeAnnotation(v, arg2, observableAnnotation);
     return;
   } // already observable - ignore
@@ -1724,7 +1722,6 @@ function checkIfStateReadsAreAllowed(observable) {
  */
 
 function trackDerivedFunction(derivation, f, context) {
-  console.log('trackDerivedFunction')
   var prevAllowStateReads = allowStateReadsStart(true); // pre allocate array allocation + room for variation in deps
   // array will be trimmed by bindDependencies
 
@@ -2034,9 +2031,9 @@ function endBatch() {
     runReactions(); // the batch is actually about to finish, all unobserving should happen here.
 
     var list = globalState.pendingUnobservations;
+
     for (var i = 0; i < list.length; i++) {
       var observable = list[i];
-      console.log('endBatch')
       observable.isPendingUnobservation_ = false;
 
       if (observable.observers_.size === 0) {
@@ -2057,18 +2054,10 @@ function endBatch() {
     globalState.pendingUnobservations = [];
   }
 }
-
-/**
- * 1、当前运行的衍生存在  更新observable的lastAccessedBy_，将observable添加到衍生的的临时存放依赖的数组中，如果第一次被观察执行更新isBeingObserved_并执行onBO
- * 
- */
 function reportObserved(observable) {
-  console.log('reportObserved')
   checkIfStateReadsAreAllowed(observable);
   var derivation = globalState.trackingDerivation;
-  // console.log('reportObserved observable',observable)
-  // console.log('reportObserved derivation',derivation)
-  // console.log(derivation.runId_ ,observable.lastAccessedBy_)
+
   if (derivation !== null) {
     /**
      * Simple optimization, give each derivation run an unique id (runId)
@@ -2079,9 +2068,7 @@ function reportObserved(observable) {
       observable.lastAccessedBy_ = derivation.runId_; // Tried storing newObserving, or observing, or both as Set, but performance didn't come close...
 
       derivation.newObserving_[derivation.unboundDepsCount_++] = observable;
-      // 第一次被监听，更改isBeingObserved_并且执行onBOL
-      // console.log('observable.isBeingObserved_',observable.isBeingObserved_,globalState.trackingContext,globalState)
-      // globalState.trackingContext Reaction
+
       if (!observable.isBeingObserved_ && globalState.trackingContext) {
         observable.isBeingObserved_ = true;
         observable.onBO();
@@ -2119,7 +2106,7 @@ function reportObserved(observable) {
 
 function propagateChanged(observable) {
   // invariantLOS(observable, "changed start");
-  console.log('propagateChanged')
+  // console.log('propagateChanged',observable.lowestObserverState_ , IDerivationState_.STALE_)
   if (observable.lowestObserverState_ === IDerivationState_.STALE_) return;
   observable.lowestObserverState_ = IDerivationState_.STALE_; // Ideally we use for..of here, but the downcompiled version is really slow...
 
@@ -2128,7 +2115,7 @@ function propagateChanged(observable) {
       if ( d.isTracing_ !== TraceMode.NONE) {
         logTraceInfo(d, observable);
       }
-
+      console.log('propagateChanged fn',d)
       d.onBecomeStale_();
     }
 
@@ -2272,7 +2259,6 @@ var Reaction = /*#__PURE__*/function () {
   };
 
   _proto.track = function track(fn) {
-    console.log('reaction track')
     if (this.isDisposed_) {
       return; // console.warn("Reaction already disposed") // Note: Not a warning / error in mobx 4 either
     }
@@ -2541,7 +2527,6 @@ function isAction(thing) {
  */
 
 function autorun(view, opts) {
-  console.log('autorun')
   var _opts$name, _opts;
 
   if (opts === void 0) {
@@ -2675,7 +2660,7 @@ function interceptHook(hook, thing, arg2, arg3) {
   } else {
     atom[listenersKey] = new Set([cb]);
   }
-
+  // console.log('interceptHook',atom[listenersKey])
   return function () {
     var hookListeners = atom[listenersKey];
 
@@ -5518,7 +5503,7 @@ function getAtom(thing, property) {
       if (!_observable) die(27, property, getDebugName(thing));
       return _observable;
     }
-
+    console.log('...........isAtom',thing)
     if (isAtom(thing) || isComputedValue(thing) || isReaction(thing)) {
       return thing;
     }

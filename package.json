@@ -66,7 +66,7 @@
     "js-cookie": "^2.2.0",
     "lodash": "^4.17.11",
     "mobx": "^6.1.8",
-    "mobx-react": "^6.3.1",
+    "mobx-react": "^7.1.0",
     "mongoose": "^5.4.14",
     "nodemon": "^1.18.10",
     "react": "^16.6.3",

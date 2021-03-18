@@ -8,19 +8,40 @@ const MenuItem = Menu.Item;
 
 const mn = require('./mobx.cjs.development')
 
-const {createAtom, autorun, observable, action} = mn
+const {createAtom, autorun, observable, action, Reaction} = mn
 
-class N {
-    @observable name= 'fdfdfdf'
-    @action change  = () => {
-        this.name = Math.random()*10000
-        console.log('name',this.name)
-    }
-}
-const ob = new N()
-autorun(() => {
-    console.log('....',ob.name)
+// class N {
+//     @observable name= 'fdfdfdf'
+//     @action change = ()=>{
+//         this.name = Math.random()*10000
+//         console.log('name',this.name)
+//     }
+// }
+// const ob = new N()
+// autorun(() => {
+//     console.log('....',ob.name)
+// })
+
+
+// new Reaction(name, onInvalidate)
+const reaction = new Reaction('name', () => {
+    // do something，即响应函数，发生副作用的地方
+    console.log('excuted!')
 })
+ 
+const ob2 = observable.object({
+    name: 'laji',
+    key: '9527'
+})
+ 
+reaction.track(() => {
+    // 注册需要被追踪的变量，这里访问了已经被观察的ob对象，所以当ob.name或ob.key发生改变时，上面的响应函数会执行
+    console.log(`my name is ${ob2.name}`)
+    console.log(`${ob2.key} hey hey hey!`)
+})
+ 
+ob2.name = 'mike' 
+
 @observer
 export default class MobxDemo extends Component {
     state ={
@@ -38,7 +59,7 @@ export default class MobxDemo extends Component {
 
                 {/* <button onClick={clock.startTicking}>开始</button><button onClick={clock.stopTicking}>停止</button> */}
                 <button onClick={this.hide}>隐藏</button>
-                <button onClick={ob.change}>更新</button>
+                {/* <button onClick={ob.change}>更新</button> */}
                 {/* {this.state.show ? (
                     <div>{ob.name}</div>
                 ) : null} */}
