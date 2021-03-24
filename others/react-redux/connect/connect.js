@@ -21,7 +21,22 @@ import defaultSelectorFactory from './selectorFactory'
   The resulting final props selector is called by the Connect component instance whenever
   it receives new props or store state.
  */
-
+/**
+ * 
+ * @param {*} arg 
+ * @param {*} factories 
+ * @param {*} name 
+ * 
+  以下面的参数为例
+  arg=mapStateToProps
+  factories =[
+    whenMapStateToPropsIsFunction,
+    whenMapStateToPropsIsMissing
+  ]
+  name ="mapStateToProps"
+  1、遍历factories 执行函数  whenMapStateToPropsIsFunction 若result有效 则直接返回result，否则跳步骤2
+  2、执行whenMapStateToPropsIsMissing 若result有效 则直接返回result，否则返回一个错误提示函数
+ */
 function match(arg, factories, name) {
   for (let i = factories.length - 1; i >= 0; i--) {
     const result = factories[i](arg)
@@ -57,11 +72,10 @@ export function createConnect({
       ...extraOptions
     } = {}
   ) {
-    // 获取
+    // 相当于wrapMapToProps.js  initProxySelector(dispatch, { displayName })
     const initMapStateToProps = match(mapStateToProps, mapStateToPropsFactories, 'mapStateToProps')
     const initMapDispatchToProps = match(mapDispatchToProps, mapDispatchToPropsFactories, 'mapDispatchToProps')
     const initMergeProps = match(mergeProps, mergePropsFactories, 'mergeProps')
-
     return connectHOC(selectorFactory, {
       // used in error messages
       methodName: 'connect',

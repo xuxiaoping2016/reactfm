@@ -1,6 +1,6 @@
 import hoistStatics from 'hoist-non-react-statics'  // 高阶组件，静态属性的拷贝；
 import invariant from 'invariant'
-import { Component, createElement } from 'react'
+import React,{ Component, createElement } from 'react'
 import { isValidElementType } from 'react-is'
 
 import Subscription from '../utils/Subscription'
@@ -14,7 +14,9 @@ function makeSelectorStateful(sourceSelector, store) {
   const selector = {
     run: function runComponentSelector(props) {
       try {
+        // 获取最新的传入组件的属性
         const nextProps = sourceSelector(store.getState(), props)
+        // console.log('this.selector.run',nextProps)
         if (nextProps !== selector.props || selector.error) {
           selector.shouldComponentUpdate = true
           selector.props = nextProps
@@ -29,7 +31,7 @@ function makeSelectorStateful(sourceSelector, store) {
 
   return selector
 }
-
+// 
 export default function connectAdvanced(
   /*
     selectorFactory is a func that is responsible for returning the selector function used to
@@ -40,6 +42,8 @@ export default function connectAdvanced(
         saveThing: fields => dispatch(actionCreators.saveThing(props.thingId, fields)),
       }))(YourComponent)
 
+      export default connectAdvanced((dispatch, options) => (state, props) => ())(YourComponent)
+
     Access to dispatch is provided to the factory so selectorFactories can bind actionCreators
     outside of their selector as an optimization. Options passed to connectAdvanced are passed to
     the selectorFactory, along with displayName and WrappedComponent, as the second argument.
@@ -47,6 +51,7 @@ export default function connectAdvanced(
     Note that selectorFactory is responsible for all caching/memoization of inbound and outbound
     props. Do not use connectAdvanced directly without memoizing results between calls to your
     selector, otherwise the Connect component will re-render on every state or props change.
+    selectorFactory  选择器函数，返回最终要传递给Connect component 组件的属性对象
   */
   selectorFactory,
   // options object:
@@ -124,6 +129,7 @@ export default function connectAdvanced(
         this.state = {}
         this.renderCount = 0
         this.store = props[storeKey] || context[storeKey]
+        // store是否挂载在props上
         this.propsMode = Boolean(props[storeKey])
         this.setWrappedInstance = this.setWrappedInstance.bind(this)
 
@@ -138,6 +144,8 @@ export default function connectAdvanced(
       }
 
       getChildContext() {
+        // 指定子组件可以使用的信息
+        // 如果组件通过prop接受store
         // If this component received store from props, its subscription should be transparent
         // to any descendants receiving store+subscription from context; it passes along
         // subscription passed to it. Otherwise, it shadows the parent subscription, which allows
@@ -155,12 +163,14 @@ export default function connectAdvanced(
         // To handle the case where a child component may have triggered a state change by
         // dispatching an action in its componentWillMount, we have to re-run the select and maybe
         // re-render.
+        console.log('componentDidMount')
         this.subscription.trySubscribe()
         this.selector.run(this.props)
         if (this.selector.shouldComponentUpdate) this.forceUpdate()
       }
 
       componentWillReceiveProps(nextProps) {
+        console.log('componentWillReceiveProps')
         this.selector.run(nextProps)
       }
 
@@ -169,6 +179,7 @@ export default function connectAdvanced(
       }
 
       componentWillUnmount() {
+        console.log('componentWillUnmount')
         if (this.subscription) this.subscription.tryUnsubscribe()
         this.subscription = null
         this.notifyNestedSubs = noop
@@ -190,6 +201,21 @@ export default function connectAdvanced(
       }
 
       initSelector() {
+        console.log('selectorFactory')
+        // sourceSelector 是以下2个函数之一  sourceSelector(store.getState(), props)
+        // function impureFinalPropsSelector(state, ownProps) {
+        //   return mergeProps(
+        //     mapStateToProps(state, ownProps),
+        //     mapDispatchToProps(dispatch, ownProps),
+        //     ownProps
+        //   )
+        // }
+        // function pureFinalPropsSelector(nextState, nextOwnProps) {
+        //   return hasRunAtLeastOnce
+        //     ? handleSubsequentCalls(nextState, nextOwnProps)
+        //     : handleFirstCall(nextState, nextOwnProps)
+        // }
+        // sourceSelector  一个返回传递给wrappedComponent组件props对象的函数  接受state和ownProps2个参数
         const sourceSelector = selectorFactory(this.store.dispatch, selectorFactoryOptions)
         this.selector = makeSelectorStateful(sourceSelector, this.store)
         this.selector.run(this.props)
@@ -208,18 +234,20 @@ export default function connectAdvanced(
         // extra null check every change can be avoided by copying the method onto `this` and then
         // replacing it with a no-op on unmount. This can probably be avoided if Subscription's
         // listeners logic is changed to not call listeners that have been unsubscribed in the
-        // middle of the notification loop.
+        // middle of the notification loop. 这个函数触发subscription中的listeners的执行
         this.notifyNestedSubs = this.subscription.notifyNestedSubs.bind(this.subscription)
       }
-
+      // 更新 this.selector
+      // 组件不应该更新
+      // 组件应该更新
       onStateChange() {
         this.selector.run(this.props)
-
-        if (!this.selector.shouldComponentUpdate) {
+        console.log('onStateChange 相应state状态变化',this.selector.props,this.props)
+        if (!this.selector.shouldComponentUpdate) { // 组件自身不该更新，但是嵌套的子级组件的onStateChange函数
           this.notifyNestedSubs()
-        } else {
+        } else { // 组件自身需要更新，则嵌套的子级组件的onStateChange函数需要放在“componentDidUpdate”中执行，父级更新后再更新子级
           this.componentDidUpdate = this.notifyNestedSubsOnComponentDidUpdate
-          this.setState(dummyState)
+          this.setState(dummyState)  // 这一行用来触发ui更新
         }
       }
 

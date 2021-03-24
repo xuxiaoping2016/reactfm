@@ -33,7 +33,7 @@ export default function applyMiddleware(...middlewares) {
     }
     //  传递的时候尚未调用 dispatch，等click调用的时候 dispatch 已经完成最新赋值
     const chain = middlewares.map(middleware => middleware(middlewareAPI))
-    //这里返回的是一个接收action 对象的dispatch函数
+    //这里返回的是一个接收action 对象的dispatch函数   redux中间件其本质是对dispatch的增强
     dispatch = compose(...chain)(store.dispatch)
 
     return {

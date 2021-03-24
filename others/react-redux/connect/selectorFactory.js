@@ -22,6 +22,10 @@ export function pureFinalPropsSelectorFactory(
   dispatch,
   { areStatesEqual, areOwnPropsEqual, areStatePropsEqual }
 ) {
+  // 这三个函数的功能都是返回最终的props值
+  // console.log(mapStateToProps) 
+  // console.log(mapDispatchToProps)
+  // console.log(mergeProps)
   let hasRunAtLeastOnce = false
   let state
   let ownProps
@@ -96,13 +100,14 @@ export function pureFinalPropsSelectorFactory(
 // allowing connectAdvanced's shouldComponentUpdate to return false if final
 // props have not changed. If false, the selector will always return a new
 // object and shouldComponentUpdate will always return true.
-
+// initMapStateToProps, initMapDispatchToProps, initMergeProps返回一个可以获取props值的函数
 export default function finalPropsSelectorFactory(dispatch, {
   initMapStateToProps,
   initMapDispatchToProps,
   initMergeProps,
   ...options
 }) {
+  // 返回的是返回props对象的函数
   const mapStateToProps = initMapStateToProps(dispatch, options)
   const mapDispatchToProps = initMapDispatchToProps(dispatch, options)
   const mergeProps = initMergeProps(dispatch, options)
@@ -110,11 +115,11 @@ export default function finalPropsSelectorFactory(dispatch, {
   if (process.env.NODE_ENV !== 'production') {
     verifySubselectors(mapStateToProps, mapDispatchToProps, mergeProps, options.displayName)
   }
-
+  
   const selectorFactory = options.pure
     ? pureFinalPropsSelectorFactory
     : impureFinalPropsSelectorFactory
-
+// 返回一个函数， 该函数返回最终的需要传递给Connect链接组件的最终props
   return selectorFactory(
     mapStateToProps,
     mapDispatchToProps,

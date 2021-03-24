@@ -649,7 +649,6 @@ function applyMiddleware() {
       var middlewareAPI = {
         getState: store.getState,
         dispatch: function dispatch() {
-          console.log('自定义dispatch');
           return _dispatch.apply(void 0, arguments);
         }
       };
@@ -657,6 +656,7 @@ function applyMiddleware() {
         console.log(middlewareAPI.dispatch)
         return middleware(middlewareAPI);
       });
+      console.log('chain',chain)
       _dispatch = compose.apply(void 0, chain)(store.dispatch);
       return _objectSpread({}, store, {
         dispatch: _dispatch

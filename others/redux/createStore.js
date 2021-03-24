@@ -110,6 +110,7 @@ export default function createStore(reducer, preloadedState, enhancer) {
    * @returns {Function} A function to remove this change listener.
    */
   function subscribe(listener) {
+    console.log('redux store subscribe log listener',listener)
     if (typeof listener !== 'function') {
       throw new Error('Expected the listener to be a function.')
     }
