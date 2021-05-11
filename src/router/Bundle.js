@@ -1,3 +1,10 @@
+/*
+ * @Author: xiaoping.xu
+ * @Date: 2021-05-08 11:17:14
+ * @LastEditors: xiaoping.xu
+ * @LastEditTime: 2021-05-10 10:43:49
+ * @Desc: 
+ */
 import React, {Component} from 'react'
 
 class Bundle extends Component {
@@ -20,6 +27,7 @@ class Bundle extends Component {
         this.setState({
             mod: null
         });
+        console.log(props)
         props.load((mod) => {
             this.setState({
                 // handle both es imports and cjs

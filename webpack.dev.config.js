@@ -1,3 +1,10 @@
+/*
+ * @Author: xiaoping.xu
+ * @Date: 2021-05-08 11:17:14
+ * @LastEditors: xiaoping.xu
+ * @LastEditTime: 2021-05-08 16:06:21
+ * @Desc: 
+ */
 const path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
@@ -34,7 +41,8 @@ module.exports = {
         {
             test:/\.scss$/,
             use:[{
-                loader:MiniCssExtractPlugin.loader,
+                // loader:MiniCssExtractPlugin.loader,
+                loader:'style-loader'
             },'css-loader','sass-loader','postcss-loader']
         }]
     },

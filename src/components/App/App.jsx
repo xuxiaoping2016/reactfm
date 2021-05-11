@@ -4,13 +4,14 @@ import { Layout } from 'antd';
 import Nav from 'components/Nav/Nav.jsx';
 // import getRouter from 'router/router';
 // import getRouter from 'router/routerBF2'
-import getRouter from 'router/router3'
+import getRouter from 'router/routerBF2'
 const { Header, Content, Footer, Sider } = Layout;
 
 export default class App extends Component {
     render(){
         return (
             <Router>
+                <div>
                 <Sider
                 style={{
                     overflow: 'auto',
@@ -29,6 +30,7 @@ export default class App extends Component {
                     </Content>
                     <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
                 </Layout>
+                </div>
             </Router>
         )
     }
