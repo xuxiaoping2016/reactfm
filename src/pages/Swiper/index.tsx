@@ -1,5 +1,12 @@
+/*
+ * @Author: xiaoping.xu
+ * @Date: 2021-05-11 14:22:00
+ * @LastEditors: xiaoping.xu
+ * @LastEditTime: 2021-05-17 15:04:45
+ * @Desc: 
+ */
 import React, { useState } from 'react';
-import classNames from 'classnames';
+// import classNames from 'classnames';
 import SwipeableViews from 'react-swipeable-views';
 import TabSwiper from './tabSwiper';
 import ScrollerSwiper from './scroll';

@@ -9,16 +9,17 @@
 // }
 
 function createThunkMiddleware(extraArgument) {
-  return ({ dispatch, getState }) => (next) => {
-    console.log('返回 thunk')
-    return (action) => {
-      console.log('thunk middleware')
-      if (typeof action === "function") {
-        return action(dispatch, getState, extraArgument);
-      }
-      return next(action);
+  return ({ dispatch, getState }) =>
+    (next) => {
+      console.log("返回 thunk");
+      return (action) => {
+        console.log("thunk middleware");
+        if (typeof action === "function") {
+          return action(dispatch, getState, extraArgument);
+        }
+        return next(action);
+      };
     };
-  }
 }
 
 const thunk = createThunkMiddleware();

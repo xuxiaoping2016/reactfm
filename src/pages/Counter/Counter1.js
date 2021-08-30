@@ -1,13 +1,20 @@
+/*
+ * @Author: xiaoping.xu
+ * @Date: 2021-05-11 14:22:00
+ * @LastEditors: xiaoping.xu
+ * @LastEditTime: 2021-08-25 11:26:04
+ * @Desc:
+ */
 import React, { Component } from "react";
-import { bindActionCreators } from 'redux'
+import { bindActionCreators } from "redux";
 import { connect } from "../../../others/react-redux";
 import { increment, decrement, reset } from "store/actions/counter";
 import Nest from "./nestedC";
 
-const mapStateToProps = (state,ownprops) => {
+const mapStateToProps = (state, ownprops) => {
   // ownprops 是组件自身接受的属性
   // console.log('ownprops',ownprops)
-  console.log('执行了传入的mapStateToProps函数')
+  console.log("执行了传入的mapStateToProps函数");
   return {
     counter: state.counter,
   };
@@ -29,17 +36,19 @@ const mapDispatchToProps = (dispatch) => {
   //   increment,decrement,reset
   // },dispatch)
 };
-// {increment,decrement,reset}   
+// {increment,decrement,reset}
 // (state,props,me)=>{
 //   return {...state,...props, ...me}
 // }
-@connect(mapStateToProps, {increment,decrement,reset},undefined,{withRef: true})
+@connect(mapStateToProps, { increment, decrement, reset }, undefined, {
+  withRef: true,
+})
 export default class Counter extends Component {
   state = {
     name: "xuxia",
   };
   render() {
-    console.log('this.props',this.props)
+    console.log("this.props", this.props);
     const { increment, decrement, reset, counter } = this.props;
     return (
       <div>
@@ -68,9 +77,9 @@ export default class Counter extends Component {
           }}
         >
           重置
-  			</button>
-        <Nest nestName="nest"/>
-  		</div>
+        </button>
+        <Nest nestName="nest" />
+      </div>
     );
   }
 }

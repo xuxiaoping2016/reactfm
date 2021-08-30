@@ -1,5 +1,12 @@
-import compose from './compose'
-import { consoleTestResultHandler } from 'tslint/lib/test'
+/*
+ * @Author: xiaoping.xu
+ * @Date: 2021-05-11 14:22:00
+ * @LastEditors: xiaoping.xu
+ * @LastEditTime: 2021-08-25 18:06:32
+ * @Desc:
+ */
+import compose from "./compose";
+import { consoleTestResultHandler } from "tslint/lib/test";
 
 /**
  * Creates a store enhancer that applies middleware to the dispatch method
@@ -18,27 +25,27 @@ import { consoleTestResultHandler } from 'tslint/lib/test'
  * @returns {Function} A store enhancer applying the middleware.
  */
 export default function applyMiddleware(...middlewares) {
-  return createStore => (...args) => {
-    const store = createStore(...args)
-    let dispatch = () => {  
-      
-      throw new Error(
-        `Dispatching while constructing your middleware is not allowed. ` +
-          `Other middleware would not be applied to this dispatch.`
-      )
-    }
-    const middlewareAPI = {
-      getState: store.getState,
-      dispatch: (...args) => dispatch(...args)
-    }
-    //  传递的时候尚未调用 dispatch，等click调用的时候 dispatch 已经完成最新赋值
-    const chain = middlewares.map(middleware => middleware(middlewareAPI))
-    //这里返回的是一个接收action 对象的dispatch函数   redux中间件其本质是对dispatch的增强
-    dispatch = compose(...chain)(store.dispatch)
+  return (createStore) =>
+    (...args) => {
+      const store = createStore(...args);
+      let dispatch = () => {
+        throw new Error(
+          "Dispatching while constructing your middleware is not allowed. " +
+            "Other middleware would not be applied to this dispatch."
+        );
+      };
+      const middlewareAPI = {
+        getState: store.getState,
+        dispatch: (...args) => dispatch(...args),
+      };
+      //  传递的时候尚未调用 dispatch，等click调用的时候 dispatch 已经完成最新赋值
+      const chain = middlewares.map((middleware) => middleware(middlewareAPI));
+      //这里返回的是一个接收action 对象的dispatch函数   redux中间件其本质是对dispatch的增强
+      dispatch = compose(...chain)(store.dispatch);
 
-    return {
-      ...store,
-      dispatch
-    }
-  }
+      return {
+        ...store,
+        dispatch,
+      };
+    };
 }

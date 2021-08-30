@@ -1,7 +1,7 @@
-import $$observable from 'symbol-observable'
+import $$observable from "symbol-observable";
 
-import ActionTypes from './utils/actionTypes'
-import isPlainObject from './utils/isPlainObject'
+import ActionTypes from "./utils/actionTypes";
+import isPlainObject from "./utils/isPlainObject";
 
 /**
  * Creates a Redux store that holds the state tree.
@@ -30,42 +30,42 @@ import isPlainObject from './utils/isPlainObject'
  */
 export default function createStore(reducer, preloadedState, enhancer) {
   if (
-    (typeof preloadedState === 'function' && typeof enhancer === 'function') ||
-    (typeof enhancer === 'function' && typeof arguments[3] === 'function')
+    (typeof preloadedState === "function" && typeof enhancer === "function") ||
+    (typeof enhancer === "function" && typeof arguments[3] === "function")
   ) {
     throw new Error(
-      'It looks like you are passing several store enhancers to ' +
-        'createStore(). This is not supported. Instead, compose them ' +
-        'together to a single function'
-    )
+      "It looks like you are passing several store enhancers to " +
+        "createStore(). This is not supported. Instead, compose them " +
+        "together to a single function"
+    );
   }
   // 没有传递初始化状态对象时；
-  if (typeof preloadedState === 'function' && typeof enhancer === 'undefined') {
-    enhancer = preloadedState
-    preloadedState = undefined
+  if (typeof preloadedState === "function" && typeof enhancer === "undefined") {
+    enhancer = preloadedState;
+    preloadedState = undefined;
   }
   // 执行enhancer函数，生成store对象；
-  if (typeof enhancer !== 'undefined') {
-    if (typeof enhancer !== 'function') {
-      throw new Error('Expected the enhancer to be a function.')
+  if (typeof enhancer !== "undefined") {
+    if (typeof enhancer !== "function") {
+      throw new Error("Expected the enhancer to be a function.");
     }
-    
-    return enhancer(createStore)(reducer, preloadedState)
+
+    return enhancer(createStore)(reducer, preloadedState);
   }
 
-  if (typeof reducer !== 'function') {
-    throw new Error('Expected the reducer to be a function.')
+  if (typeof reducer !== "function") {
+    throw new Error("Expected the reducer to be a function.");
   }
 
-  let currentReducer = reducer
-  let currentState = preloadedState
-  let currentListeners = []
-  let nextListeners = currentListeners
-  let isDispatching = false
+  let currentReducer = reducer;
+  let currentState = preloadedState;
+  let currentListeners = [];
+  let nextListeners = currentListeners;
+  let isDispatching = false;
   //  mutate 变异，突变; 转变; 转换
   function ensureCanMutateNextListeners() {
     if (nextListeners === currentListeners) {
-      nextListeners = currentListeners.slice()
+      nextListeners = currentListeners.slice();
     }
   }
 
@@ -77,13 +77,13 @@ export default function createStore(reducer, preloadedState, enhancer) {
   function getState() {
     if (isDispatching) {
       throw new Error(
-        'You may not call store.getState() while the reducer is executing. ' +
-          'The reducer has already received the state as an argument. ' +
-          'Pass it down from the top reducer instead of reading it from the store.'
-      )
+        "You may not call store.getState() while the reducer is executing. " +
+          "The reducer has already received the state as an argument. " +
+          "Pass it down from the top reducer instead of reading it from the store."
+      );
     }
 
-    return currentState
+    return currentState;
   }
 
   /**
@@ -110,43 +110,43 @@ export default function createStore(reducer, preloadedState, enhancer) {
    * @returns {Function} A function to remove this change listener.
    */
   function subscribe(listener) {
-    console.log('redux store subscribe log listener',listener)
-    if (typeof listener !== 'function') {
-      throw new Error('Expected the listener to be a function.')
+    console.log("redux store subscribe log listener", listener);
+    if (typeof listener !== "function") {
+      throw new Error("Expected the listener to be a function.");
     }
 
     if (isDispatching) {
       throw new Error(
-        'You may not call store.subscribe() while the reducer is executing. ' +
-          'If you would like to be notified after the store has been updated, subscribe from a ' +
-          'component and invoke store.getState() in the callback to access the latest state. ' +
-          'See https://redux.js.org/api-reference/store#subscribe(listener) for more details.'
-      )
+        "You may not call store.subscribe() while the reducer is executing. " +
+          "If you would like to be notified after the store has been updated, subscribe from a " +
+          "component and invoke store.getState() in the callback to access the latest state. " +
+          "See https://redux.js.org/api-reference/store#subscribe(listener) for more details."
+      );
     }
 
-    let isSubscribed = true
+    let isSubscribed = true;
     //   不影响当前listeners
-    ensureCanMutateNextListeners()
-    nextListeners.push(listener)
+    ensureCanMutateNextListeners();
+    nextListeners.push(listener);
 
     return function unsubscribe() {
       if (!isSubscribed) {
-        return
+        return;
       }
 
       if (isDispatching) {
         throw new Error(
-          'You may not unsubscribe from a store listener while the reducer is executing. ' +
-            'See https://redux.js.org/api-reference/store#subscribe(listener) for more details.'
-        )
+          "You may not unsubscribe from a store listener while the reducer is executing. " +
+            "See https://redux.js.org/api-reference/store#subscribe(listener) for more details."
+        );
       }
 
-      isSubscribed = false
+      isSubscribed = false;
 
-      ensureCanMutateNextListeners()
-      const index = nextListeners.indexOf(listener)
-      nextListeners.splice(index, 1)
-    }
+      ensureCanMutateNextListeners();
+      const index = nextListeners.indexOf(listener);
+      nextListeners.splice(index, 1);
+    };
   }
 
   /**
@@ -173,40 +173,41 @@ export default function createStore(reducer, preloadedState, enhancer) {
    *
    * Note that, if you use a custom middleware, it may wrap `dispatch()` to
    * return something else (for example, a Promise you can await).
+   * 执行currentReducer 得到currentState，并执行监听回调函数
    */
   function dispatch(action) {
     if (!isPlainObject(action)) {
       throw new Error(
-        'Actions must be plain objects. ' +
-          'Use custom middleware for async actions.'
-      )
+        "Actions must be plain objects. " +
+          "Use custom middleware for async actions."
+      );
     }
 
-    if (typeof action.type === 'undefined') {
+    if (typeof action.type === "undefined") {
       throw new Error(
         'Actions may not have an undefined "type" property. ' +
-          'Have you misspelled a constant?'
-      )
+          "Have you misspelled a constant?"
+      );
     }
 
     if (isDispatching) {
-      throw new Error('Reducers may not dispatch actions.')
+      throw new Error("Reducers may not dispatch actions.");
     }
 
     try {
-      isDispatching = true
-      currentState = currentReducer(currentState, action)
+      isDispatching = true;
+      currentState = currentReducer(currentState, action);
     } finally {
-      isDispatching = false
+      isDispatching = false;
     }
 
-    const listeners = (currentListeners = nextListeners)
+    const listeners = (currentListeners = nextListeners);
     for (let i = 0; i < listeners.length; i++) {
-      const listener = listeners[i]
-      listener()
+      const listener = listeners[i];
+      listener();
     }
 
-    return action
+    return action;
   }
 
   /**
@@ -220,12 +221,12 @@ export default function createStore(reducer, preloadedState, enhancer) {
    * @returns {void}
    */
   function replaceReducer(nextReducer) {
-    if (typeof nextReducer !== 'function') {
-      throw new Error('Expected the nextReducer to be a function.')
+    if (typeof nextReducer !== "function") {
+      throw new Error("Expected the nextReducer to be a function.");
     }
 
-    currentReducer = nextReducer
-    dispatch({ type: ActionTypes.REPLACE })
+    currentReducer = nextReducer;
+    dispatch({ type: ActionTypes.REPLACE });
   }
 
   /**
@@ -235,7 +236,7 @@ export default function createStore(reducer, preloadedState, enhancer) {
    * https://github.com/tc39/proposal-observable
    */
   function observable() {
-    const outerSubscribe = subscribe//添加监听函数的方法；
+    const outerSubscribe = subscribe; //添加监听函数的方法；
     return {
       /**
        * The minimal observable subscription method.
@@ -246,37 +247,37 @@ export default function createStore(reducer, preloadedState, enhancer) {
        * emission of values from the observable.
        */
       subscribe(observer) {
-        if (typeof observer !== 'object' || observer === null) {
-          throw new TypeError('Expected the observer to be an object.')
+        if (typeof observer !== "object" || observer === null) {
+          throw new TypeError("Expected the observer to be an object.");
         }
 
         function observeState() {
           if (observer.next) {
-            observer.next(getState())
+            observer.next(getState());
           }
         }
 
-        observeState()
-        const unsubscribe = outerSubscribe(observeState)
-        return { unsubscribe }
+        observeState();
+        const unsubscribe = outerSubscribe(observeState);
+        return { unsubscribe };
       },
 
       [$$observable]() {
-        return this
-      }
-    }
+        return this;
+      },
+    };
   }
 
   // When a store is created, an "INIT" action is dispatched so that every
   // reducer returns their initial state. This effectively populates
   // the initial state tree.
-  dispatch({ type: ActionTypes.INIT })
+  dispatch({ type: ActionTypes.INIT });
 
   return {
     dispatch,
     subscribe,
     getState,
     replaceReducer,
-    [$$observable]: observable
-  }
+    [$$observable]: observable,
+  };
 }
